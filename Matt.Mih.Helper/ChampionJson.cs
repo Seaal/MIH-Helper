@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Matt_Mih_Helper
+namespace Matt.Mih.Helper
 {
     public class ChampionJson
     {
-        public Dictionary<string,ChampionData> data { get; set; }
+        public Dictionary<string,Champion> data { get; set; }
 
         public string type { get; set; }
 

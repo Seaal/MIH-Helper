@@ -1,4 +1,4 @@
-﻿namespace Matt_Mih_Helper
+﻿namespace Matt.Mih.Helper
 {
     partial class Main
     {

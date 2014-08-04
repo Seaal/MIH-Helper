@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Matt_Mih_Helper
+namespace Matt.Mih.Helper
 {
     static class Program
     {

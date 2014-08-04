@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Matt_Mih_Helper
+namespace Matt.Mih.Helper
 {
-    public class Champion
+    class BalancingStrategy
     {
-       
+
     }
+
 }

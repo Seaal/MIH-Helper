@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 using System.Web.Script.Serialization;
 using System.Windows.Forms;
 
-namespace Matt_Mih_Helper
+namespace Matt.Mih.Helper
 {
     public partial class Main : Form
     {
@@ -26,6 +26,7 @@ namespace Matt_Mih_Helper
             string[] Ranks = { "Unranked", "Bronze V", "Bronze IV", "Bronze III", "Bronze II", "Bronze I" };
 
             cbElo1.DataSource = Ranks;
+            cbElo1.DropDownStyle = ComboBoxStyle.DropDownList;
 
             string json = MakeRequest();
 
@@ -34,6 +35,7 @@ namespace Matt_Mih_Helper
             cbChampions1.DataSource = new BindingSource(champList.data, null);
             cbChampions1.DisplayMember = "Value";
             cbChampions1.ValueMember = "Key";
+            cbChampions1.DropDownStyle = ComboBoxStyle.DropDownList;
 
         }
 

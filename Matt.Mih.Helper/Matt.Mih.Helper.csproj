@@ -7,8 +7,8 @@
     <ProjectGuid>{1D96BA43-3F10-4119-8D3E-1CF22217D6DD}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Matt_Mih_Helper</RootNamespace>
-    <AssemblyName>Matt-Mih-Helper</AssemblyName>
+    <RootNamespace>Matt.Mih.Helper</RootNamespace>
+    <AssemblyName>Matt.Mih.Helper</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -51,7 +51,6 @@
   <ItemGroup>
     <Compile Include="BalancingStrategy.cs" />
     <Compile Include="Champion.cs" />
-    <Compile Include="ChampionData.cs" />
     <Compile Include="ChampionJson.cs" />
     <Compile Include="Main.cs">
       <SubType>Form</SubType>
@@ -72,6 +71,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
