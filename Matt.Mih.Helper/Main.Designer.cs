@@ -35,12 +35,13 @@
             this.tbPlayer1 = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.btnBalance = new System.Windows.Forms.Button();
+            this.lNameError1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // cbChampions1
             // 
             this.cbChampions1.FormattingEnabled = true;
-            this.cbChampions1.Location = new System.Drawing.Point(95, 49);
+            this.cbChampions1.Location = new System.Drawing.Point(95, 69);
             this.cbChampions1.Name = "cbChampions1";
             this.cbChampions1.Size = new System.Drawing.Size(121, 21);
             this.cbChampions1.Sorted = true;
@@ -49,7 +50,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(35, 53);
+            this.label1.Location = new System.Drawing.Point(35, 73);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(57, 13);
             this.label1.TabIndex = 1;
@@ -58,7 +59,7 @@
             // cbElo1
             // 
             this.cbElo1.FormattingEnabled = true;
-            this.cbElo1.Location = new System.Drawing.Point(95, 77);
+            this.cbElo1.Location = new System.Drawing.Point(95, 97);
             this.cbElo1.Name = "cbElo1";
             this.cbElo1.Size = new System.Drawing.Size(121, 21);
             this.cbElo1.TabIndex = 2;
@@ -66,7 +67,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(26, 81);
+            this.label2.Location = new System.Drawing.Point(26, 101);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(66, 13);
             this.label2.TabIndex = 3;
@@ -97,11 +98,21 @@
             this.btnBalance.Text = "Balance Teams";
             this.btnBalance.UseVisualStyleBackColor = true;
             // 
+            // lNameError1
+            // 
+            this.lNameError1.AutoSize = true;
+            this.lNameError1.ForeColor = System.Drawing.Color.Red;
+            this.lNameError1.Location = new System.Drawing.Point(95, 49);
+            this.lNameError1.Name = "lNameError1";
+            this.lNameError1.Size = new System.Drawing.Size(0, 13);
+            this.lNameError1.TabIndex = 7;
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 462);
+            this.Controls.Add(this.lNameError1);
             this.Controls.Add(this.btnBalance);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.tbPlayer1);
@@ -126,6 +137,7 @@
         private System.Windows.Forms.TextBox tbPlayer1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btnBalance;
+        private System.Windows.Forms.Label lNameError1;
     }
 }
 

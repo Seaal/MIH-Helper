@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Matt.Mih.Helper
 {
-    public class ChampionJson
+    public class ChampionDTO
     {
         public Dictionary<string,Champion> data { get; set; }
 
