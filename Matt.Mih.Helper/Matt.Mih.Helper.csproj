@@ -53,6 +53,8 @@
     <Compile Include="Champion.cs" />
     <Compile Include="ChampionDTO.cs" />
     <Compile Include="LeagueApiDAO.cs" />
+    <Compile Include="LeagueEntry.cs" />
+    <Compile Include="LeagueInfo.cs" />
     <Compile Include="Main.cs">
       <SubType>Form</SubType>
     </Compile>

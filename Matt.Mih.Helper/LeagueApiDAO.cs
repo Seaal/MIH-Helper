@@ -29,6 +29,14 @@ namespace Matt.Mih.Helper
             return sumDto.FirstOrDefault().Value;
         }
 
+        public LeagueInfo GetLeagueInfo(int id)
+        {
+            string json = MakeRequest("na/v2.4/league/by-summoner/" + id + "/entry");
+
+            Dictionary<string, List<LeagueInfo>> leagueDto = JsonConvert.DeserializeObject<Dictionary<string, List<LeagueInfo>>>(json);
+
+            return leagueDto.FirstOrDefault().Value.FirstOrDefault();
+        }
 
         private string MakeRequest(string resource)
         {

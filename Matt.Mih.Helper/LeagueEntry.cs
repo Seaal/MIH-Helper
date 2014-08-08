@@ -6,12 +6,10 @@ using System.Threading.Tasks;
 
 namespace Matt.Mih.Helper
 {
-    class Summoner
+    class LeagueEntry
     {
-        public int id { get; set; }
+        public string division { get; set; }
 
-        public string name { get; set; }
-
-        public int summonerLevel { get; set; }
+        public int leaguePoints { get; set; }
     }
 }
