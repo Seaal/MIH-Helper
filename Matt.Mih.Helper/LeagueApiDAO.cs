@@ -32,10 +32,27 @@ namespace Matt.Mih.Helper
         public LeagueInfo GetLeagueInfo(int id)
         {
             string json = MakeRequest("na/v2.4/league/by-summoner/" + id + "/entry");
-
+            
             Dictionary<string, List<LeagueInfo>> leagueDto = JsonConvert.DeserializeObject<Dictionary<string, List<LeagueInfo>>>(json);
 
             return leagueDto.FirstOrDefault().Value.FirstOrDefault();
+        }
+
+        public Runepage GetCurrentRunepage(int id)
+        {
+            string json = MakeRequest("na/v1.4/summoner/" + id + "/runes");
+
+            Dictionary<string, RunepageDTO> runeDto = JsonConvert.DeserializeObject<Dictionary<string, RunepageDTO>>(json);
+
+            foreach(Runepage page in runeDto.FirstOrDefault().Value.pages)
+            {
+                if(page.current)
+                {
+                    return page;
+                }
+            }
+
+            return null;
         }
 
         private string MakeRequest(string resource)

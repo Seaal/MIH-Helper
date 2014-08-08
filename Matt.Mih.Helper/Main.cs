@@ -48,6 +48,8 @@ namespace Matt.Mih.Helper
                 LeagueInfo league = leagueDao.GetLeagueInfo(sum.id);
 
                 tbElo1.Text = league.tier + " " + league.entries.FirstOrDefault().division;
+
+                Runepage runes = leagueDao.GetCurrentRunepage(sum.id);
             }
         }
     }
