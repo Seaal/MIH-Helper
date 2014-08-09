@@ -1,6 +1,6 @@
 ﻿namespace Matt.Mih.Helper
 {
-    partial class Main
+    partial class MainForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,29 +28,30 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.cbChampions1 = new System.Windows.Forms.ComboBox();
+            this.cbChampions0 = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.tbPlayer1 = new System.Windows.Forms.TextBox();
+            this.tbPlayer0 = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.btnBalance = new System.Windows.Forms.Button();
-            this.lNameError1 = new System.Windows.Forms.Label();
-            this.tbElo1 = new System.Windows.Forms.TextBox();
+            this.lError0 = new System.Windows.Forms.Label();
+            this.tbElo0 = new System.Windows.Forms.TextBox();
+            this.btnGameToggle = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // cbChampions1
+            // cbChampions0
             // 
-            this.cbChampions1.FormattingEnabled = true;
-            this.cbChampions1.Location = new System.Drawing.Point(95, 69);
-            this.cbChampions1.Name = "cbChampions1";
-            this.cbChampions1.Size = new System.Drawing.Size(121, 21);
-            this.cbChampions1.Sorted = true;
-            this.cbChampions1.TabIndex = 0;
+            this.cbChampions0.FormattingEnabled = true;
+            this.cbChampions0.Location = new System.Drawing.Point(95, 49);
+            this.cbChampions0.Name = "cbChampions0";
+            this.cbChampions0.Size = new System.Drawing.Size(121, 21);
+            this.cbChampions0.Sorted = true;
+            this.cbChampions0.TabIndex = 0;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(35, 73);
+            this.label1.Location = new System.Drawing.Point(35, 53);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(57, 13);
             this.label1.TabIndex = 1;
@@ -59,19 +60,19 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(26, 101);
+            this.label2.Location = new System.Drawing.Point(26, 81);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(66, 13);
             this.label2.TabIndex = 3;
             this.label2.Text = "Ranked Elo:";
             // 
-            // tbPlayer1
+            // tbPlayer0
             // 
-            this.tbPlayer1.Location = new System.Drawing.Point(95, 23);
-            this.tbPlayer1.Name = "tbPlayer1";
-            this.tbPlayer1.Size = new System.Drawing.Size(100, 20);
-            this.tbPlayer1.TabIndex = 4;
-            this.tbPlayer1.Leave += new System.EventHandler(this.tbPlayer1_Leave);
+            this.tbPlayer0.Location = new System.Drawing.Point(95, 23);
+            this.tbPlayer0.Name = "tbPlayer0";
+            this.tbPlayer0.Size = new System.Drawing.Size(100, 20);
+            this.tbPlayer0.TabIndex = 4;
+            this.tbPlayer0.Leave += new System.EventHandler(this.tbPlayer1_Leave);
             // 
             // label3
             // 
@@ -84,44 +85,56 @@
             // 
             // btnBalance
             // 
-            this.btnBalance.Location = new System.Drawing.Point(331, 351);
+            this.btnBalance.Location = new System.Drawing.Point(342, 351);
             this.btnBalance.Name = "btnBalance";
-            this.btnBalance.Size = new System.Drawing.Size(75, 23);
+            this.btnBalance.Size = new System.Drawing.Size(100, 23);
             this.btnBalance.TabIndex = 6;
             this.btnBalance.Text = "Balance Teams";
             this.btnBalance.UseVisualStyleBackColor = true;
             // 
-            // lNameError1
+            // lError0
             // 
-            this.lNameError1.AutoSize = true;
-            this.lNameError1.ForeColor = System.Drawing.Color.Red;
-            this.lNameError1.Location = new System.Drawing.Point(95, 49);
-            this.lNameError1.Name = "lNameError1";
-            this.lNameError1.Size = new System.Drawing.Size(0, 13);
-            this.lNameError1.TabIndex = 7;
+            this.lError0.AutoSize = true;
+            this.lError0.ForeColor = System.Drawing.Color.Red;
+            this.lError0.Location = new System.Drawing.Point(95, 104);
+            this.lError0.Name = "lError0";
+            this.lError0.Size = new System.Drawing.Size(0, 13);
+            this.lError0.TabIndex = 7;
             // 
-            // tbElo1
+            // tbElo0
             // 
-            this.tbElo1.Location = new System.Drawing.Point(95, 97);
-            this.tbElo1.Name = "tbElo1";
-            this.tbElo1.ReadOnly = true;
-            this.tbElo1.Size = new System.Drawing.Size(100, 20);
-            this.tbElo1.TabIndex = 8;
+            this.tbElo0.Location = new System.Drawing.Point(95, 77);
+            this.tbElo0.Name = "tbElo0";
+            this.tbElo0.ReadOnly = true;
+            this.tbElo0.Size = new System.Drawing.Size(100, 20);
+            this.tbElo0.TabIndex = 8;
+            this.tbElo0.TextChanged += new System.EventHandler(this.tbElo1_TextChanged);
             // 
-            // Main
+            // btnGameToggle
+            // 
+            this.btnGameToggle.Location = new System.Drawing.Point(342, 380);
+            this.btnGameToggle.Name = "btnGameToggle";
+            this.btnGameToggle.Size = new System.Drawing.Size(100, 23);
+            this.btnGameToggle.TabIndex = 9;
+            this.btnGameToggle.Text = "Game Started";
+            this.btnGameToggle.UseVisualStyleBackColor = true;
+            this.btnGameToggle.Click += new System.EventHandler(this.btnGameToggle_Click);
+            // 
+            // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 462);
-            this.Controls.Add(this.tbElo1);
-            this.Controls.Add(this.lNameError1);
-            this.Controls.Add(this.btnBalance);
+            this.Controls.Add(this.tbElo0);
+            this.Controls.Add(this.lError0);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.tbPlayer1);
+            this.Controls.Add(this.tbPlayer0);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.cbChampions1);
-            this.Name = "Main";
+            this.Controls.Add(this.cbChampions0);
+            this.Controls.Add(this.btnGameToggle);
+            this.Controls.Add(this.btnBalance);
+            this.Name = "MainForm";
             this.Text = "Mentored Inhouse Helper";
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -130,14 +143,15 @@
 
         #endregion
 
-        private System.Windows.Forms.ComboBox cbChampions1;
+        private System.Windows.Forms.ComboBox cbChampions0;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox tbPlayer1;
+        private System.Windows.Forms.TextBox tbPlayer0;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btnBalance;
-        private System.Windows.Forms.Label lNameError1;
-        private System.Windows.Forms.TextBox tbElo1;
+        private System.Windows.Forms.Label lError0;
+        private System.Windows.Forms.TextBox tbElo0;
+        private System.Windows.Forms.Button btnGameToggle;
     }
 }
 

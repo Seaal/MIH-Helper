@@ -49,17 +49,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App.cs" />
     <Compile Include="BalancingStrategy.cs" />
     <Compile Include="Champion.cs" />
     <Compile Include="ChampionDTO.cs" />
     <Compile Include="LeagueApiDAO.cs" />
-    <Compile Include="LeagueEntry.cs" />
-    <Compile Include="LeagueInfo.cs" />
-    <Compile Include="Main.cs">
+    <Compile Include="LeagueEntryDTO.cs" />
+    <Compile Include="LeagueInfoDTO.cs" />
+    <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Main.Designer.cs">
-      <DependentUpon>Main.cs</DependentUpon>
+    <Compile Include="MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -67,8 +68,9 @@
     <Compile Include="Runepage.cs" />
     <Compile Include="RunepageDTO.cs" />
     <Compile Include="Summoner.cs" />
-    <EmbeddedResource Include="Main.resx">
-      <DependentUpon>Main.cs</DependentUpon>
+    <Compile Include="SummonerDTO.cs" />
+    <EmbeddedResource Include="MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

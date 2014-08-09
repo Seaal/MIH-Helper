@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Matt.Mih.Helper
 {
-    class LeagueEntry
+    class LeagueEntryDTO
     {
         public string division { get; set; }
 

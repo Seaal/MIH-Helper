@@ -20,20 +20,20 @@ namespace Matt.Mih.Helper
             return JsonConvert.DeserializeObject<ChampionDTO>(json);
         }
 
-        public Summoner GetSummoner(string summonerName)
+        public SummonerDTO GetSummoner(string summonerName)
         {
             string json = MakeRequest("na/v1.4/summoner/by-name/"+summonerName);
 
-            Dictionary<string, Summoner> sumDto = JsonConvert.DeserializeObject<Dictionary<string, Summoner>>(json);
+            Dictionary<string, SummonerDTO> sumDto = JsonConvert.DeserializeObject<Dictionary<string, SummonerDTO>>(json);
 
             return sumDto.FirstOrDefault().Value;
         }
 
-        public LeagueInfo GetLeagueInfo(int id)
+        public LeagueInfoDTO GetLeagueInfo(int id)
         {
             string json = MakeRequest("na/v2.4/league/by-summoner/" + id + "/entry");
             
-            Dictionary<string, List<LeagueInfo>> leagueDto = JsonConvert.DeserializeObject<Dictionary<string, List<LeagueInfo>>>(json);
+            Dictionary<string, List<LeagueInfoDTO>> leagueDto = JsonConvert.DeserializeObject<Dictionary<string, List<LeagueInfoDTO>>>(json);
 
             return leagueDto.FirstOrDefault().Value.FirstOrDefault();
         }
@@ -52,8 +52,8 @@ namespace Matt.Mih.Helper
                 }
             }
 
-            return null;
-        }
+            throw new Exception();
+        } 
 
         private string MakeRequest(string resource)
         {
