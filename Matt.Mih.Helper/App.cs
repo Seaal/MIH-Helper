@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -34,16 +35,32 @@ namespace Matt.Mih.Helper
         {
             if(name == "")
             {
-                throw new ArgumentException("Summoner Name Can't Be Empty");
+                throw new ArgumentException("Player Name Cannot Be Empty");
+            }
+
+            if (players[playerNumber] != null && players[playerNumber].Name.ToLower() == name.ToLower())
+            {
+                return players[playerNumber];
             }
 
             LeagueApiDAO leagueDao = new LeagueApiDAO();
 
             SummonerDTO summonerDto = leagueDao.GetSummoner(name);
 
-            LeagueInfoDTO leagueDto = leagueDao.GetLeagueInfo(summonerDto.id);
+            try
+            {
+                LeagueInfoDTO leagueDto = leagueDao.GetLeagueInfo(summonerDto.id);
 
-            players[playerNumber] = new Summoner(summonerDto, leagueDto);
+                players[playerNumber] = new Summoner(summonerDto, leagueDto);
+            }
+            catch(WebException exception)
+            {
+                if(exception.Status == WebExceptionStatus.ProtocolError)
+                {
+                    players[playerNumber] = new Summoner(summonerDto);
+                }
+            }
+            
 
             return players[playerNumber];
         }

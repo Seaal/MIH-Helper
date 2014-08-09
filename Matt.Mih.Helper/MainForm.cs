@@ -18,6 +18,8 @@ namespace Matt.Mih.Helper
     {
         private readonly App app;
 
+        public bool GameInProgress { get; set; }
+
         public MainForm()
         {
             InitializeComponent();
@@ -25,6 +27,8 @@ namespace Matt.Mih.Helper
             app = new App();
 
             setChampDropDowns();
+
+            GameInProgress = false;
         }
 
         private void setChampDropDowns()
@@ -38,31 +42,56 @@ namespace Matt.Mih.Helper
             cbChampions0.DropDownStyle = ComboBoxStyle.DropDownList;
         }
 
-        private void tbPlayer1_Leave(object sender, EventArgs e)
+        private void tbPlayer0_Leave(object sender, EventArgs e)
         {
             try
             {
                 Summoner summoner = app.GetSummoner(tbPlayer0.Text, 0);
 
-                tbElo0.Text = summoner.Tier + " " + summoner.Division;
+                tbElo0.Text = summoner.Tier + " " + summoner.Division + " " + summoner.GetRating();
+
+                if(summoner.Level < 30)
+                {
+                    lError0.Text = "Warning: Player is level " + summoner.Level;
+                }
+                else
+                {
+                    lError0.Text = "";
+                }
             }
             catch(WebException exception)
             {
                 if(exception.Status == WebExceptionStatus.ProtocolError)
                 {
                     lError0.Text = "Player not found";
+                    tbElo0.Text = "";
                 }
+            }
+            catch(ArgumentException exception)
+            {
+                lError0.Text = exception.Message;
+                tbElo0.Text = "";
             }
         }
 
         private void btnGameToggle_Click(object sender, EventArgs e)
         {
-
-        }
-
-        private void tbElo1_TextChanged(object sender, EventArgs e)
-        {
-            
+            if(GameInProgress == false)
+            {
+                btnGameToggle.Text = "Game Ended";
+                btnBalance.Enabled = false;
+                tbPlayer0.Enabled = false;
+                cbChampions0.Enabled = false;
+                GameInProgress = true;
+            }
+            else
+            {
+                btnGameToggle.Text = "Game Started";
+                btnBalance.Enabled = true;
+                tbPlayer0.Enabled = true;
+                cbChampions0.Enabled = true;
+                GameInProgress = false;
+            }
         }
     }
 }

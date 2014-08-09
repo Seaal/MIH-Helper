@@ -34,9 +34,9 @@
             this.tbPlayer0 = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.btnBalance = new System.Windows.Forms.Button();
-            this.lError0 = new System.Windows.Forms.Label();
             this.tbElo0 = new System.Windows.Forms.TextBox();
             this.btnGameToggle = new System.Windows.Forms.Button();
+            this.lError0 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // cbChampions0
@@ -72,7 +72,7 @@
             this.tbPlayer0.Name = "tbPlayer0";
             this.tbPlayer0.Size = new System.Drawing.Size(100, 20);
             this.tbPlayer0.TabIndex = 4;
-            this.tbPlayer0.Leave += new System.EventHandler(this.tbPlayer1_Leave);
+            this.tbPlayer0.Leave += new System.EventHandler(this.tbPlayer0_Leave);
             // 
             // label3
             // 
@@ -92,15 +92,6 @@
             this.btnBalance.Text = "Balance Teams";
             this.btnBalance.UseVisualStyleBackColor = true;
             // 
-            // lError0
-            // 
-            this.lError0.AutoSize = true;
-            this.lError0.ForeColor = System.Drawing.Color.Red;
-            this.lError0.Location = new System.Drawing.Point(95, 104);
-            this.lError0.Name = "lError0";
-            this.lError0.Size = new System.Drawing.Size(0, 13);
-            this.lError0.TabIndex = 7;
-            // 
             // tbElo0
             // 
             this.tbElo0.Location = new System.Drawing.Point(95, 77);
@@ -108,7 +99,6 @@
             this.tbElo0.ReadOnly = true;
             this.tbElo0.Size = new System.Drawing.Size(100, 20);
             this.tbElo0.TabIndex = 8;
-            this.tbElo0.TextChanged += new System.EventHandler(this.tbElo1_TextChanged);
             // 
             // btnGameToggle
             // 
@@ -119,6 +109,15 @@
             this.btnGameToggle.Text = "Game Started";
             this.btnGameToggle.UseVisualStyleBackColor = true;
             this.btnGameToggle.Click += new System.EventHandler(this.btnGameToggle_Click);
+            // 
+            // lError0
+            // 
+            this.lError0.AutoSize = true;
+            this.lError0.ForeColor = System.Drawing.Color.Red;
+            this.lError0.Location = new System.Drawing.Point(95, 104);
+            this.lError0.Name = "lError0";
+            this.lError0.Size = new System.Drawing.Size(0, 13);
+            this.lError0.TabIndex = 7;
             // 
             // MainForm
             // 
@@ -149,9 +148,9 @@
         private System.Windows.Forms.TextBox tbPlayer0;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btnBalance;
-        private System.Windows.Forms.Label lError0;
         private System.Windows.Forms.TextBox tbElo0;
         private System.Windows.Forms.Button btnGameToggle;
+        private System.Windows.Forms.Label lError0;
     }
 }
 

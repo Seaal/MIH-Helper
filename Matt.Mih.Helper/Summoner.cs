@@ -12,7 +12,7 @@ namespace Matt.Mih.Helper
 
         public string Name { get; set; }
 
-        public int SummonerLevel { get; set; }
+        public int Level { get; set; }
 
         public string Tier { get; set; }
 
@@ -24,10 +24,79 @@ namespace Matt.Mih.Helper
         {
             Id = summonerDto.id;
             Name = summonerDto.name;
-            SummonerLevel = summonerDto.summonerLevel;
+            Level = summonerDto.summonerLevel;
             Tier = leagueDto.tier;
             Division = leagueDto.entries[0].division;
             LeaguePoints = leagueDto.entries[0].leaguePoints;
+        }
+
+        public Summoner(SummonerDTO summonerDto)
+        {
+            Id = summonerDto.id;
+            Name = summonerDto.name;
+            Level = summonerDto.summonerLevel;
+            Tier = "Unranked";
+            Division = "";
+            LeaguePoints = 0;
+        }
+
+        public int GetRating()
+        {
+            int rating;
+
+            switch(Tier)
+            {
+                case "BRONZE":
+                    rating = 0;
+                    break;
+                case "SILVER":
+                    rating = 500;
+                    break;
+                case "GOLD":
+                    rating = 1000;
+                    break;
+                case "PLATINUM":
+                    rating = 1500;
+                    break;
+                case "DIAMOND":
+                    rating = 2000;
+                    break;
+                case "CHALLENGER":
+                    rating = 2500;
+                    break;
+                case "UNRANKED":
+                    rating = 500;
+                    break;
+                default:
+                    rating = 0;
+                    break;
+            }
+
+            switch(Division)
+            {
+                case "V":
+                    rating += 0;
+                    break;
+                case "IV":
+                    rating += 100;
+                    break;
+                case "III":
+                    rating += 200;
+                    break;
+                case "II":
+                    rating += 300;
+                    break;
+                case "I":
+                    rating += 400;
+                    break;
+                default:
+                    rating += 0;
+                    break;
+            }
+
+            rating += LeaguePoints;
+
+            return rating;
         }
     }
 }
