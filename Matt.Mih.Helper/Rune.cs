@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Matt.Mih.Helper
 {
-    class Rune
+    public class Rune
     {
         public int runeId { get; set; }
 

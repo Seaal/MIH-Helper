@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Matt.Mih.Helper
 {
-    class LeagueInfoDTO
+    public class LeagueInfoDTO
     {
         public string queue { get; set; }
 

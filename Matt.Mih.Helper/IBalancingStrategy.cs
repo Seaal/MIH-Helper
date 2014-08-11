@@ -1,7 +1,7 @@
 ﻿using System;
 namespace Matt.Mih.Helper
 {
-    interface IBalancingStrategy
+    public interface IBalancingStrategy
     {
         BalanceResult balance(Summoner[] players);
     }

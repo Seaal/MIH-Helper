@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Matt.Mih.Helper
 {
-    class RunepageDTO
+    public class RunepageDTO
     {
         public List<Runepage> pages { get; set; }
 

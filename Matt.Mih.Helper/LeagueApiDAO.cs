@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Matt.Mih.Helper
 {
-    class LeagueApiDAO
+    public class LeagueApiDAO
     {
         static readonly string API_KEY = "63965c03-965b-4cfb-bb3e-e8b0a0601bd1";
 

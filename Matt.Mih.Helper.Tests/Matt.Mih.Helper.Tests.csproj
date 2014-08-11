@@ -52,6 +52,13 @@
   <ItemGroup>
     <Compile Include="TestBalancingStrategy.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestSummonerRating.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Matt.Mih.Helper\Matt.Mih.Helper.csproj">
+      <Project>{1d96ba43-3f10-4119-8d3e-1cf22217d6dd}</Project>
+      <Name>Matt.Mih.Helper</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

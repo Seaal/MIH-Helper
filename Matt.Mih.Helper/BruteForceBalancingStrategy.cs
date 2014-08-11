@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace Matt.Mih.Helper
 {
-    class BalancingStrategy : Matt.Mih.Helper.IBalancingStrategy
+    public class BruteForceBalancingStrategy : Matt.Mih.Helper.IBalancingStrategy
     {
         public BalanceResult balance(Summoner[] players)
         {
-
+            return new BalanceResult();
         }
     }
 

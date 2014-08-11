@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Matt.Mih.Helper
 {
-    class App
+    public class App
     {
         public Summoner[] players { get; set; }
 
@@ -65,9 +65,9 @@ namespace Matt.Mih.Helper
             return players[playerNumber];
         }
 
-        public BalanceResult balanceTeams()
+        public BalanceResult BalanceTeams()
         {
-            IBalancingStrategy strat = new BalancingStrategy();
+            IBalancingStrategy strat = new BruteForceBalancingStrategy();
 
             return new BalanceResult();
         }

@@ -76,7 +76,7 @@ namespace Matt.Mih.Helper
 
         private void btnBalance_Click(object sender, EventArgs e)
         {
-            BalanceResult result = app.balanceTeams();
+            BalanceResult result = app.BalanceTeams();
         }
 
         private void btnGameToggle_Click(object sender, EventArgs e)

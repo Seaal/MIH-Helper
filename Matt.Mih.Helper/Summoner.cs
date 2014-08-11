@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Matt.Mih.Helper
 {
-    class Summoner
+    public class Summoner
     {
         public int Id { get; set; }
 
@@ -35,9 +35,23 @@ namespace Matt.Mih.Helper
             Id = summonerDto.id;
             Name = summonerDto.name;
             Level = summonerDto.summonerLevel;
-            Tier = "Unranked";
+            Tier = "UNRANKED";
             Division = "";
             LeaguePoints = 0;
+        }
+
+        public Summoner(string name, int rating)
+        {
+            Id = 0;
+            Name = name;
+            Level = 30;
+            LeaguePoints = rating;
+            Tier = "BRONZE";
+            Division = "V";
+        }
+
+        public Summoner()
+        {
         }
 
         public int GetRating()
@@ -62,7 +76,7 @@ namespace Matt.Mih.Helper
                     rating = 2000;
                     break;
                 case "CHALLENGER":
-                    rating = 2500;
+                    rating = 2100;
                     break;
                 case "UNRANKED":
                     rating = 500;

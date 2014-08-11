@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Matt.Mih.Helper
 {
-    class SummonerDTO
+    public class SummonerDTO
     {
         public int id { get; set; }
 
