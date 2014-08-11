@@ -91,6 +91,7 @@
             this.btnBalance.TabIndex = 6;
             this.btnBalance.Text = "Balance Teams";
             this.btnBalance.UseVisualStyleBackColor = true;
+            this.btnBalance.Click += new System.EventHandler(this.btnBalance_Click);
             // 
             // tbElo0
             // 

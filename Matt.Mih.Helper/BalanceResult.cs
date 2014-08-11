@@ -6,13 +6,7 @@ using System.Threading.Tasks;
 
 namespace Matt.Mih.Helper
 {
-    class BalancingStrategy : Matt.Mih.Helper.IBalancingStrategy
+    public class BalanceResult
     {
-        public BalanceResult balance(Summoner[] players)
-        {
-
-        }
     }
-
-    
 }

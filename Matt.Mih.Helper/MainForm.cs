@@ -48,7 +48,7 @@ namespace Matt.Mih.Helper
             {
                 Summoner summoner = app.GetSummoner(tbPlayer0.Text, 0);
 
-                tbElo0.Text = summoner.Tier + " " + summoner.Division + " " + summoner.GetRating();
+                tbElo0.Text = summoner.Tier + " " + summoner.Division;
 
                 if(summoner.Level < 30)
                 {
@@ -72,6 +72,11 @@ namespace Matt.Mih.Helper
                 lError0.Text = exception.Message;
                 tbElo0.Text = "";
             }
+        }
+
+        private void btnBalance_Click(object sender, EventArgs e)
+        {
+            BalanceResult result = app.balanceTeams();
         }
 
         private void btnGameToggle_Click(object sender, EventArgs e)

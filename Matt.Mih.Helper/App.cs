@@ -33,7 +33,7 @@ namespace Matt.Mih.Helper
 
         public Summoner GetSummoner(string name, int playerNumber)
         {
-            if(name == "")
+            if (name == "")
             {
                 throw new ArgumentException("Player Name Cannot Be Empty");
             }
@@ -53,18 +53,23 @@ namespace Matt.Mih.Helper
 
                 players[playerNumber] = new Summoner(summonerDto, leagueDto);
             }
-            catch(WebException exception)
+            catch (WebException exception)
             {
-                if(exception.Status == WebExceptionStatus.ProtocolError)
+                if (exception.Status == WebExceptionStatus.ProtocolError)
                 {
                     players[playerNumber] = new Summoner(summonerDto);
                 }
             }
-            
+
 
             return players[playerNumber];
         }
 
+        public BalanceResult balanceTeams()
+        {
+            IBalancingStrategy strat = new BalancingStrategy();
 
+            return new BalanceResult();
+        }
     }
 }

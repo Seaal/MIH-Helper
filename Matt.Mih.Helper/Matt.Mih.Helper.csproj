@@ -50,9 +50,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.cs" />
+    <Compile Include="BalanceResult.cs" />
     <Compile Include="BalancingStrategy.cs" />
     <Compile Include="Champion.cs" />
     <Compile Include="ChampionDTO.cs" />
+    <Compile Include="IBalancingStrategy.cs" />
     <Compile Include="LeagueApiDAO.cs" />
     <Compile Include="LeagueEntryDTO.cs" />
     <Compile Include="LeagueInfoDTO.cs" />
@@ -82,6 +84,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="ClassDiagram1.cd" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
