@@ -19,7 +19,7 @@ namespace Matt.Mih.Helper.Tests
             {
                 IBalancingStrategy strategy = new BruteForceBalancingStrategy();
 
-                BalanceResult result = strategy.balance(summoners);
+                BalanceResult result = strategy.Balance(summoners);
             }
             catch(ArgumentException e)
             {
@@ -36,9 +36,10 @@ namespace Matt.Mih.Helper.Tests
 
             IBalancingStrategy strategy = new BruteForceBalancingStrategy();
 
-            BalanceResult result = strategy.balance(summoners);
+            BalanceResult result = strategy.Balance(summoners);
 
-            Assert.IsTrue(result.GetSwaps().Count == 0);
+            Assert.IsTrue(result.Swaps.Count == 0);
+            Assert.IsTrue(result.RatingDifference == 0);
         }
 
         [TestMethod]
@@ -48,22 +49,23 @@ namespace Matt.Mih.Helper.Tests
 
             IBalancingStrategy strategy = new BruteForceBalancingStrategy();
 
-            BalanceResult result = strategy.balance(summoners);
+            BalanceResult result = strategy.Balance(summoners);
 
-            Assert.IsTrue(result.GetSwaps().Count == 1);
-            Assert.Equals(result.GetSwaps()[0], new Tuple<int, int>(0, 5));
+            Assert.IsTrue(result.Swaps.Count == 1);
+            Assert.IsTrue(result.RatingDifference == 0);
         }
 
         [TestMethod]
         public void TestBruteForceAllDifferentRatingBalanced()
         {
-            Summoner[] summoners = summonerHelper(100, 300, 500, 700, 900, 200, 400, 600, 800, 1000);
+            Summoner[] summoners = summonerHelper(100, 300, 500, 700, 900, 150, 250, 600, 750, 750);
 
             IBalancingStrategy strategy = new BruteForceBalancingStrategy();
 
-            BalanceResult result = strategy.balance(summoners);
+            BalanceResult result = strategy.Balance(summoners);
 
-            Assert.IsTrue(result.GetSwaps().Count == 0);
+            Assert.IsTrue(result.Swaps.Count == 0);
+            Assert.IsTrue(result.RatingDifference == 0);
         }
 
         [TestMethod]
@@ -73,11 +75,23 @@ namespace Matt.Mih.Helper.Tests
 
             IBalancingStrategy strategy = new BruteForceBalancingStrategy();
 
-            BalanceResult result = strategy.balance(summoners);
+            BalanceResult result = strategy.Balance(summoners);
 
-            Assert.IsTrue(result.GetSwaps().Count == 0);
-            Assert.Equals(result.GetSwaps()[0], new Tuple<int, int>(1, 6));
-            Assert.Equals(result.GetSwaps()[1], new Tuple<int, int>(3, 8));
+            Assert.IsTrue(result.Swaps.Count == 2);
+            Assert.IsTrue(result.RatingDifference == 100);
+        }
+
+        [TestMethod]
+        public void TestBruteForce1DifferentRatingNoSwaps()
+        {
+            Summoner[] summoners = summonerHelper(100, 100, 100, 100, 100, 100, 100, 100, 100, 105);
+
+            IBalancingStrategy strategy = new BruteForceBalancingStrategy();
+
+            BalanceResult result = strategy.Balance(summoners);
+
+            Assert.IsTrue(result.Swaps.Count == 0);
+            Assert.IsTrue(result.RatingDifference == 5);
         }
 
         private Summoner[] summonerHelper(int rating0, int rating1, int rating2, int rating3, int rating4, int rating5, int rating6, int rating7, int rating8, int rating9)
