@@ -11,7 +11,9 @@ namespace Matt.Mih.Helper
 {
     public class Helper
     {
-        public Summoner[] players { get; set; }
+        public Summoner[] Players { get; set; }
+
+        public bool GameInProgress { get; set; }
 
         private Dictionary<string, Champion> _champions;
         public Dictionary<string, Champion> Champions
@@ -30,19 +32,28 @@ namespace Matt.Mih.Helper
 
         public Helper()
         {
-            players = new Summoner[10];
+            Players = new Summoner[10];
+            GameInProgress = false;
         }
 
         public Summoner GetSummoner(string name, int playerNumber)
         {
             if (name == "")
             {
-                throw new ArgumentException("Player Name Cannot Be Empty");
+                throw new ArgumentException("Player name cannot be empty");
             }
 
-            if (players[playerNumber] != null && players[playerNumber].Name.ToLower() == name.ToLower())
+            if (Players[playerNumber] != null && Players[playerNumber].Name.ToLower() == name.ToLower())
             {
-                return players[playerNumber];
+                return Players[playerNumber];
+            }
+
+            for(int i=0;i<10;i++)
+            {
+                if(i != playerNumber && Players[i] != null && Players[i].Name.ToLower() == name.ToLower())
+                {
+                    throw new ArgumentException("Player already exists");
+                }
             }
 
             LeagueApiDAO leagueDao = new LeagueApiDAO();
@@ -53,46 +64,26 @@ namespace Matt.Mih.Helper
             {
                 LeagueInfoDTO leagueDto = leagueDao.GetLeagueInfo(summonerDto.id);
 
-                players[playerNumber] = new Summoner(summonerDto, leagueDto);
+                Players[playerNumber] = new Summoner(summonerDto, leagueDto);
             }
             catch (WebException exception)
             {
                 if (exception.Status == WebExceptionStatus.ProtocolError)
                 {
-                    players[playerNumber] = new Summoner(summonerDto);
+                    Players[playerNumber] = new Summoner(summonerDto);
                 }
             }
 
-            XDocument namesList;
+            NameHandler.GetInstance().Add(Players[playerNumber].Name);
 
-            try
-            {
-                namesList = XDocument.Load("names.xml");
-            }
-            catch (FileNotFoundException)
-            {
-                namesList = new XDocument(new XDeclaration("1.0", "utf-8", "yes"), new XElement("SummonerNames"));
-            }
-
-            if (!namesList.Descendants("Name").Where(x => x.Value == players[playerNumber].Name).Any())
-            {
-                XElement newName = new XElement("Name");
-
-                newName.Add(players[playerNumber].Name);
-
-                namesList.Element("SummonerNames").Add(newName);
-
-                namesList.Save("names.xml");
-            }
-
-            return players[playerNumber];
+            return Players[playerNumber];
         }
 
         public BalanceResult BalanceTeams()
         {
             IBalancingStrategy strat = new BruteForceBalancingStrategy();
 
-            return strat.Balance(players);
+            return strat.Balance(Players);
         }
     }
 }

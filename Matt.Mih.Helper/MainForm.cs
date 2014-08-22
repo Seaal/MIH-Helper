@@ -19,8 +19,6 @@ namespace Matt.Mih.Helper
     {
         private readonly Helper helper;
 
-        public bool GameInProgress { get; set; }
-
         public List<PlayerPanel> PlayerPanels { get; set; }
 
         public MainForm()
@@ -33,22 +31,9 @@ namespace Matt.Mih.Helper
 
             Dictionary<string, Champion> champList = helper.Champions;
 
-            GameInProgress = false;
-            
-            AutoCompleteStringCollection summonerNamesAutoComplete = new AutoCompleteStringCollection();
-
-            XDocument summonerNames = XDocument.Load("names.xml");
-
-            String[] names = (from name in summonerNames.Descendants("Name")
-                              select (string)name).ToArray();
-
-            summonerNamesAutoComplete.AddRange(names);
-
-            
-
             for(int i=0;i<5;i++)
             {
-                PlayerPanel panel = new PlayerPanel(i, helper, champList, summonerNamesAutoComplete);
+                PlayerPanel panel = new PlayerPanel(i, helper, champList, NameHandler.GetInstance().AutoCompleteNames);
                 panel.Location = new System.Drawing.Point(20, i * 100 + 20);
                 panel.AutoSize = true;
                 panel.ResumeLayout(false);
@@ -60,7 +45,7 @@ namespace Matt.Mih.Helper
 
             for (int i = 5; i < 10; i++)
             {
-                PlayerPanel panel = new PlayerPanel(i, helper, champList, summonerNamesAutoComplete);
+                PlayerPanel panel = new PlayerPanel(i, helper, champList, NameHandler.GetInstance().AutoCompleteNames);
                 panel.Location = new System.Drawing.Point(580, i * 100 - 480);
                 panel.AutoSize = true;
                 panel.ResumeLayout(false);
@@ -97,13 +82,13 @@ namespace Matt.Mih.Helper
 
         private void btnGameToggle_Click(object sender, EventArgs e)
         {
-            if(GameInProgress == false)
+            if (helper.GameInProgress == false)
             {
                 btnGameToggle.Text = "Game Ended";
                 lSwap1.Text = "";
                 lSwap2.Text = "";
                 btnBalance.Enabled = false;
-                GameInProgress = true;
+                helper.GameInProgress = true;
 
                 foreach(PlayerPanel ppanel in PlayerPanels)
                 {
@@ -115,7 +100,7 @@ namespace Matt.Mih.Helper
             {
                 btnGameToggle.Text = "Game Started";
                 btnBalance.Enabled = true;
-                GameInProgress = false;
+                helper.GameInProgress = false;
 
                 foreach (PlayerPanel ppanel in PlayerPanels)
                 {
