@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web.Script.Serialization;
 using System.Windows.Forms;
+using System.Xml.Linq;
 
 namespace Matt.Mih.Helper
 {
@@ -29,6 +30,22 @@ namespace Matt.Mih.Helper
             setChampDropDowns();
 
             GameInProgress = false;
+            
+            AutoCompleteStringCollection summonerNamesAutoComplete = new AutoCompleteStringCollection();
+
+            XDocument summonerNames = XDocument.Load("names.xml");
+
+            String[] names = (from name in summonerNames.Descendants("Name")
+                              select (string)name).ToArray();
+
+            summonerNamesAutoComplete.AddRange(names);
+
+            tbPlayer0.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            tbPlayer0.AutoCompleteSource = AutoCompleteSource.CustomSource;
+            tbPlayer0.AutoCompleteCustomSource = summonerNamesAutoComplete;
+
+            this.ResumeLayout(false);
+            this.PerformLayout();
         }
 
         private void setChampDropDowns()
@@ -77,6 +94,22 @@ namespace Matt.Mih.Helper
         private void btnBalance_Click(object sender, EventArgs e)
         {
             BalanceResult result = app.BalanceTeams();
+
+            if(result.Swaps.Count == 0)
+            {
+                lSwap1.Text = "Teams are Balanced";
+            }
+            else if (result.Swaps.Count == 1)
+            {
+                lSwap1.Text = "Swap " + result.Swaps[0].Item1.Name + " and " + result.Swaps[0].Item2.Name;
+            }
+            else
+            {
+                lSwap1.Text = "Swap " + result.Swaps[0].Item1.Name + " and " + result.Swaps[0].Item2.Name;
+                lSwap2.Text = "Swap " + result.Swaps[1].Item1.Name + " and " + result.Swaps[1].Item2.Name;
+            }
+
+            lRatingDifference.Text = "Rating Difference: " + result.RatingDifference;
         }
 
         private void btnGameToggle_Click(object sender, EventArgs e)
@@ -84,6 +117,8 @@ namespace Matt.Mih.Helper
             if(GameInProgress == false)
             {
                 btnGameToggle.Text = "Game Ended";
+                lSwap1.Text = "";
+                lSwap2.Text = "";
                 btnBalance.Enabled = false;
                 tbPlayer0.Enabled = false;
                 cbChampions0.Enabled = false;

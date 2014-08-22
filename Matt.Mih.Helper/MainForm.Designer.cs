@@ -37,6 +37,9 @@
             this.tbElo0 = new System.Windows.Forms.TextBox();
             this.btnGameToggle = new System.Windows.Forms.Button();
             this.lError0 = new System.Windows.Forms.Label();
+            this.lSwap1 = new System.Windows.Forms.Label();
+            this.lSwap2 = new System.Windows.Forms.Label();
+            this.lRatingDifference = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // cbChampions0
@@ -120,11 +123,38 @@
             this.lError0.Size = new System.Drawing.Size(0, 13);
             this.lError0.TabIndex = 7;
             // 
+            // lSwap1
+            // 
+            this.lSwap1.AutoSize = true;
+            this.lSwap1.Location = new System.Drawing.Point(342, 23);
+            this.lSwap1.Name = "lSwap1";
+            this.lSwap1.Size = new System.Drawing.Size(0, 13);
+            this.lSwap1.TabIndex = 10;
+            // 
+            // lSwap2
+            // 
+            this.lSwap2.AutoSize = true;
+            this.lSwap2.Location = new System.Drawing.Point(342, 49);
+            this.lSwap2.Name = "lSwap2";
+            this.lSwap2.Size = new System.Drawing.Size(0, 13);
+            this.lSwap2.TabIndex = 11;
+            // 
+            // lRatingDifference
+            // 
+            this.lRatingDifference.AutoSize = true;
+            this.lRatingDifference.Location = new System.Drawing.Point(342, 80);
+            this.lRatingDifference.Name = "lRatingDifference";
+            this.lRatingDifference.Size = new System.Drawing.Size(0, 13);
+            this.lRatingDifference.TabIndex = 12;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 462);
+            this.Controls.Add(this.lRatingDifference);
+            this.Controls.Add(this.lSwap2);
+            this.Controls.Add(this.lSwap1);
             this.Controls.Add(this.tbElo0);
             this.Controls.Add(this.lError0);
             this.Controls.Add(this.label3);
@@ -152,6 +182,9 @@
         private System.Windows.Forms.TextBox tbElo0;
         private System.Windows.Forms.Button btnGameToggle;
         private System.Windows.Forms.Label lError0;
+        private System.Windows.Forms.Label lSwap1;
+        private System.Windows.Forms.Label lSwap2;
+        private System.Windows.Forms.Label lRatingDifference;
     }
 }
 

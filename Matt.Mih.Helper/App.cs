@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace Matt.Mih.Helper
 {
@@ -52,6 +54,29 @@ namespace Matt.Mih.Helper
                 LeagueInfoDTO leagueDto = leagueDao.GetLeagueInfo(summonerDto.id);
 
                 players[playerNumber] = new Summoner(summonerDto, leagueDto);
+
+
+                XDocument namesList;
+
+                try
+                {
+                    namesList = XDocument.Load("names.xml");
+                }
+                catch(FileNotFoundException)
+                {
+                    namesList = new XDocument(new XDeclaration("1.0", "utf-8", "yes"), new XElement("SummonerNames"));
+                }
+
+                if(!namesList.Descendants("Name").Where(x => x.Value == players[playerNumber].Name).Any())
+                {
+                    XElement newName = new XElement("Name");
+
+                    newName.Add(players[playerNumber].Name);
+
+                    namesList.Element("SummonerNames").Add(newName);
+
+                    namesList.Save("names.xml");
+                }
             }
             catch (WebException exception)
             {
