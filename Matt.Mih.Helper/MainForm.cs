@@ -17,17 +17,21 @@ namespace Matt.Mih.Helper
 {
     public partial class MainForm : Form
     {
-        private readonly App app;
+        private readonly Helper helper;
 
         public bool GameInProgress { get; set; }
+
+        public List<PlayerPanel> PlayerPanels { get; set; }
 
         public MainForm()
         {
             InitializeComponent();
 
-            app = new App();
+            helper = new Helper();
 
-            setChampDropDowns();
+            PlayerPanels = new List<PlayerPanel>(10);
+
+            Dictionary<string, Champion> champList = helper.Champions;
 
             GameInProgress = false;
             
@@ -40,60 +44,39 @@ namespace Matt.Mih.Helper
 
             summonerNamesAutoComplete.AddRange(names);
 
-            tbPlayer0.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            tbPlayer0.AutoCompleteSource = AutoCompleteSource.CustomSource;
-            tbPlayer0.AutoCompleteCustomSource = summonerNamesAutoComplete;
+            
+
+            for(int i=0;i<5;i++)
+            {
+                PlayerPanel panel = new PlayerPanel(i, helper, champList, summonerNamesAutoComplete);
+                panel.Location = new System.Drawing.Point(20, i * 100 + 20);
+                panel.AutoSize = true;
+                panel.ResumeLayout(false);
+                panel.PerformLayout();
+
+                Controls.Add(panel);
+                PlayerPanels.Add(panel);
+            }
+
+            for (int i = 5; i < 10; i++)
+            {
+                PlayerPanel panel = new PlayerPanel(i, helper, champList, summonerNamesAutoComplete);
+                panel.Location = new System.Drawing.Point(580, i * 100 - 480);
+                panel.AutoSize = true;
+                panel.ResumeLayout(false);
+                panel.PerformLayout();
+
+                Controls.Add(panel);
+                PlayerPanels.Add(panel);
+            }
 
             this.ResumeLayout(false);
             this.PerformLayout();
         }
 
-        private void setChampDropDowns()
-        {
-
-            Dictionary<string, Champion> champList = app.Champions;
-
-            cbChampions0.DataSource = new BindingSource(champList, null);
-            cbChampions0.DisplayMember = "Value";
-            cbChampions0.ValueMember = "Key";
-            cbChampions0.DropDownStyle = ComboBoxStyle.DropDownList;
-        }
-
-        private void tbPlayer0_Leave(object sender, EventArgs e)
-        {
-            try
-            {
-                Summoner summoner = app.GetSummoner(tbPlayer0.Text, 0);
-
-                tbElo0.Text = summoner.Tier + " " + summoner.Division;
-
-                if(summoner.Level < 30)
-                {
-                    lError0.Text = "Warning: Player is level " + summoner.Level;
-                }
-                else
-                {
-                    lError0.Text = "";
-                }
-            }
-            catch(WebException exception)
-            {
-                if(exception.Status == WebExceptionStatus.ProtocolError)
-                {
-                    lError0.Text = "Player not found";
-                    tbElo0.Text = "";
-                }
-            }
-            catch(ArgumentException exception)
-            {
-                lError0.Text = exception.Message;
-                tbElo0.Text = "";
-            }
-        }
-
         private void btnBalance_Click(object sender, EventArgs e)
         {
-            BalanceResult result = app.BalanceTeams();
+            BalanceResult result = helper.BalanceTeams();
 
             if(result.Swaps.Count == 0)
             {
@@ -120,17 +103,24 @@ namespace Matt.Mih.Helper
                 lSwap1.Text = "";
                 lSwap2.Text = "";
                 btnBalance.Enabled = false;
-                tbPlayer0.Enabled = false;
-                cbChampions0.Enabled = false;
                 GameInProgress = true;
+
+                foreach(PlayerPanel ppanel in PlayerPanels)
+                {
+                    ppanel.Enabled = false;
+                }
+                
             }
             else
             {
                 btnGameToggle.Text = "Game Started";
                 btnBalance.Enabled = true;
-                tbPlayer0.Enabled = true;
-                cbChampions0.Enabled = true;
                 GameInProgress = false;
+
+                foreach (PlayerPanel ppanel in PlayerPanels)
+                {
+                    ppanel.Enabled = true;
+                }
             }
         }
     }

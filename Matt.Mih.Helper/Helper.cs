@@ -9,7 +9,7 @@ using System.Xml.Linq;
 
 namespace Matt.Mih.Helper
 {
-    public class App
+    public class Helper
     {
         public Summoner[] players { get; set; }
 
@@ -28,7 +28,7 @@ namespace Matt.Mih.Helper
             }
         }
 
-        public App()
+        public Helper()
         {
             players = new Summoner[10];
         }
@@ -54,29 +54,6 @@ namespace Matt.Mih.Helper
                 LeagueInfoDTO leagueDto = leagueDao.GetLeagueInfo(summonerDto.id);
 
                 players[playerNumber] = new Summoner(summonerDto, leagueDto);
-
-
-                XDocument namesList;
-
-                try
-                {
-                    namesList = XDocument.Load("names.xml");
-                }
-                catch(FileNotFoundException)
-                {
-                    namesList = new XDocument(new XDeclaration("1.0", "utf-8", "yes"), new XElement("SummonerNames"));
-                }
-
-                if(!namesList.Descendants("Name").Where(x => x.Value == players[playerNumber].Name).Any())
-                {
-                    XElement newName = new XElement("Name");
-
-                    newName.Add(players[playerNumber].Name);
-
-                    namesList.Element("SummonerNames").Add(newName);
-
-                    namesList.Save("names.xml");
-                }
             }
             catch (WebException exception)
             {
@@ -86,35 +63,36 @@ namespace Matt.Mih.Helper
                 }
             }
 
+            XDocument namesList;
+
+            try
+            {
+                namesList = XDocument.Load("names.xml");
+            }
+            catch (FileNotFoundException)
+            {
+                namesList = new XDocument(new XDeclaration("1.0", "utf-8", "yes"), new XElement("SummonerNames"));
+            }
+
+            if (!namesList.Descendants("Name").Where(x => x.Value == players[playerNumber].Name).Any())
+            {
+                XElement newName = new XElement("Name");
+
+                newName.Add(players[playerNumber].Name);
+
+                namesList.Element("SummonerNames").Add(newName);
+
+                namesList.Save("names.xml");
+            }
 
             return players[playerNumber];
         }
 
         public BalanceResult BalanceTeams()
         {
-            Summoner[] test = summonerHelper(100, 200, 300, 400, 500, 600, 700, 800, 900, 1000);
-
             IBalancingStrategy strat = new BruteForceBalancingStrategy();
 
-            return strat.Balance(test);
-        }
-
-        private Summoner[] summonerHelper(int rating0, int rating1, int rating2, int rating3, int rating4, int rating5, int rating6, int rating7, int rating8, int rating9)
-        {
-            Summoner[] summoners = new Summoner[10];
-
-            summoners[0] = new Summoner("Sum0", rating0);
-            summoners[1] = new Summoner("Sum1", rating1);
-            summoners[2] = new Summoner("Sum2", rating2);
-            summoners[3] = new Summoner("Sum3", rating3);
-            summoners[4] = new Summoner("Sum4", rating4);
-            summoners[5] = new Summoner("Sum5", rating5);
-            summoners[6] = new Summoner("Sum6", rating6);
-            summoners[7] = new Summoner("Sum7", rating7);
-            summoners[8] = new Summoner("Sum8", rating8);
-            summoners[9] = new Summoner("Sum9", rating9);
-
-            return summoners;
+            return strat.Balance(players);
         }
     }
 }
