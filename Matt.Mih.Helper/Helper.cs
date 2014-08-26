@@ -17,6 +17,8 @@ namespace Matt.Mih.Helper
 
         public ILeagueDAO LeagueDao { get; private set; }
 
+        public NameHandler Names { get; set; }
+
         private Dictionary<string, Champion> _champions;
         public Dictionary<string, Champion> Champions
         {
@@ -31,11 +33,12 @@ namespace Matt.Mih.Helper
             }
         }
 
-        public Helper(ILeagueDAO leagueDao)
+        public Helper(ILeagueDAO leagueDao, NameHandler names)
         {
             Players = new Summoner[10];
             GameInProgress = false;
             LeagueDao = leagueDao;
+            Names = names;
         }
 
         public Summoner GetSummoner(string name, int playerNumber)
@@ -74,7 +77,7 @@ namespace Matt.Mih.Helper
                 }
             }
 
-            NameHandler.GetInstance().Add(Players[playerNumber].Name);
+            Names.Add(Players[playerNumber].Name);
 
             return Players[playerNumber];
         }

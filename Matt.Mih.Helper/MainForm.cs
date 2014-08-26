@@ -27,7 +27,9 @@ namespace Matt.Mih.Helper
 
             LeagueApiDAO leagueApi = new LeagueApiDAO();
 
-            helper = new Helper(leagueApi);
+            NameHandler names = new NameHandler();
+
+            helper = new Helper(leagueApi, names);
 
             PlayerPanels = new List<PlayerPanel>(10);
 
@@ -35,7 +37,7 @@ namespace Matt.Mih.Helper
 
             for(int i=0;i<5;i++)
             {
-                PlayerPanel panel = new PlayerPanel(i, helper, champList, NameHandler.GetInstance().AutoCompleteNames);
+                PlayerPanel panel = new PlayerPanel(i, helper, champList, names.AutoCompleteNames);
                 panel.Location = new System.Drawing.Point(20, i * 100 + 20);
                 panel.AutoSize = true;
                 panel.ResumeLayout(false);
@@ -47,7 +49,7 @@ namespace Matt.Mih.Helper
 
             for (int i = 5; i < 10; i++)
             {
-                PlayerPanel panel = new PlayerPanel(i, helper, champList, NameHandler.GetInstance().AutoCompleteNames);
+                PlayerPanel panel = new PlayerPanel(i, helper, champList, names.AutoCompleteNames);
                 panel.Location = new System.Drawing.Point(580, i * 100 - 480);
                 panel.AutoSize = true;
                 panel.ResumeLayout(false);
