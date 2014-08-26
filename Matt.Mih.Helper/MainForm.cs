@@ -65,23 +65,32 @@ namespace Matt.Mih.Helper
 
         private void btnBalance_Click(object sender, EventArgs e)
         {
-            BalanceResult result = helper.BalanceTeams();
+            try
+            {
+                BalanceResult result = helper.BalanceTeams();
 
-            if(result.Swaps.Count == 0)
-            {
-                lSwap1.Text = "Teams are Balanced";
-            }
-            else if (result.Swaps.Count == 1)
-            {
-                lSwap1.Text = "Swap " + result.Swaps[0].Item1.Name + " and " + result.Swaps[0].Item2.Name;
-            }
-            else
-            {
-                lSwap1.Text = "Swap " + result.Swaps[0].Item1.Name + " and " + result.Swaps[0].Item2.Name;
-                lSwap2.Text = "Swap " + result.Swaps[1].Item1.Name + " and " + result.Swaps[1].Item2.Name;
-            }
+                if (result.Swaps.Count == 0)
+                {
+                    lSwap1.Text = "Teams are Balanced";
+                }
+                else if (result.Swaps.Count == 1)
+                {
+                    lSwap1.Text = "Swap " + result.Swaps[0].Item1.Name + " and " + result.Swaps[0].Item2.Name;
+                }
+                else
+                {
+                    lSwap1.Text = "Swap " + result.Swaps[0].Item1.Name + " and " + result.Swaps[0].Item2.Name;
+                    lSwap2.Text = "Swap " + result.Swaps[1].Item1.Name + " and " + result.Swaps[1].Item2.Name;
+                }
 
-            lRatingDifference.Text = "Rating Difference: " + result.RatingDifference;
+                lRatingDifference.ForeColor = System.Drawing.Color.Black;
+                lRatingDifference.Text = "Rating Difference: " + result.RatingDifference;
+            }
+            catch(ArgumentException ex)
+            {
+                lRatingDifference.ForeColor = System.Drawing.Color.Red;
+                lRatingDifference.Text = ex.Message;
+            }
         }
 
         private void btnGameToggle_Click(object sender, EventArgs e)
@@ -94,9 +103,9 @@ namespace Matt.Mih.Helper
                 btnBalance.Enabled = false;
                 helper.GameInProgress = true;
 
-                foreach(PlayerPanel ppanel in PlayerPanels)
+                foreach(PlayerPanel pPanel in PlayerPanels)
                 {
-                    ppanel.Enabled = false;
+                    pPanel.Enabled = false;
                 }
                 
             }
@@ -106,9 +115,9 @@ namespace Matt.Mih.Helper
                 btnBalance.Enabled = true;
                 helper.GameInProgress = false;
 
-                foreach (PlayerPanel ppanel in PlayerPanels)
+                foreach (PlayerPanel pPanel in PlayerPanels)
                 {
-                    ppanel.Enabled = true;
+                    pPanel.Enabled = true;
                 }
             }
         }
