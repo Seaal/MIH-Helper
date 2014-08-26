@@ -25,7 +25,9 @@ namespace Matt.Mih.Helper
         {
             InitializeComponent();
 
-            helper = new Helper();
+            LeagueApiDAO leagueApi = new LeagueApiDAO();
+
+            helper = new Helper(leagueApi);
 
             PlayerPanels = new List<PlayerPanel>(10);
 

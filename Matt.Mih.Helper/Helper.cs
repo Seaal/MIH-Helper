@@ -15,6 +15,8 @@ namespace Matt.Mih.Helper
 
         public bool GameInProgress { get; set; }
 
+        public ILeagueDAO LeagueDao { get; private set; }
+
         private Dictionary<string, Champion> _champions;
         public Dictionary<string, Champion> Champions
         {
@@ -22,18 +24,18 @@ namespace Matt.Mih.Helper
             {
                 if (_champions == null)
                 {
-                    LeagueApiDAO leagueDao = new LeagueApiDAO();
-                    _champions = leagueDao.GetChampions().data;
+                    _champions = LeagueDao.GetChampions().data;
                 }
 
                 return _champions;
             }
         }
 
-        public Helper()
+        public Helper(ILeagueDAO leagueDao)
         {
             Players = new Summoner[10];
             GameInProgress = false;
+            LeagueDao = leagueDao;
         }
 
         public Summoner GetSummoner(string name, int playerNumber)
@@ -56,13 +58,11 @@ namespace Matt.Mih.Helper
                 }
             }
 
-            LeagueApiDAO leagueDao = new LeagueApiDAO();
-
-            SummonerDTO summonerDto = leagueDao.GetSummoner(name);
+            SummonerDTO summonerDto = LeagueDao.GetSummoner(name);
 
             try
             {
-                LeagueInfoDTO leagueDto = leagueDao.GetLeagueInfo(summonerDto.id);
+                LeagueInfoDTO leagueDto = LeagueDao.GetLeagueInfo(summonerDto.id);
 
                 Players[playerNumber] = new Summoner(summonerDto, leagueDto);
             }

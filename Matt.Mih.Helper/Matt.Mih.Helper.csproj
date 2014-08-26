@@ -58,6 +58,7 @@
     <Compile Include="Champion.cs" />
     <Compile Include="ChampionDTO.cs" />
     <Compile Include="IBalancingStrategy.cs" />
+    <Compile Include="ILeagueDAO.cs" />
     <Compile Include="LeagueApiDAO.cs" />
     <Compile Include="LeagueEntryDTO.cs" />
     <Compile Include="LeagueInfoDTO.cs" />
