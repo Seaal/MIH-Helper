@@ -18,6 +18,7 @@ namespace Matt.Mih.Helper
             Label lRankedElo = new System.Windows.Forms.Label();
             this.tbElo = new System.Windows.Forms.TextBox();
             this.lError = new System.Windows.Forms.Label();
+            this.btnSwap = new System.Windows.Forms.Button();
             this.SuspendLayout();
 
             // Player Name Label
@@ -31,7 +32,7 @@ namespace Matt.Mih.Helper
             this.tbPlayer.Location = new System.Drawing.Point(73, 0);
             this.tbPlayer.Name = "tbPlayer";
             this.tbPlayer.Size = new System.Drawing.Size(100, 20);
-            this.tbPlayer.TabIndex = PlayerNumber * 2;
+            this.tbPlayer.TabIndex = 0;
             this.tbPlayer.Leave += new System.EventHandler(this.getPlayerSummoner);
             this.tbPlayer.AutoCompleteMode = AutoCompleteMode.Append;
             this.tbPlayer.AutoCompleteSource = AutoCompleteSource.CustomSource;
@@ -50,7 +51,7 @@ namespace Matt.Mih.Helper
             this.cbChampions.Name = "cbChampions";
             this.cbChampions.Size = new System.Drawing.Size(121, 21);
             this.cbChampions.Sorted = true;
-            this.cbChampions.TabIndex = PlayerNumber * 2 + 1;
+            this.cbChampions.TabStop = false;
             this.cbChampions.DataSource = new BindingSource(champsList, null);
             this.cbChampions.DisplayMember = "Value";
             this.cbChampions.ValueMember = "Key";
@@ -77,6 +78,17 @@ namespace Matt.Mih.Helper
             this.lError.Name = "lError";
             this.lError.Size = new System.Drawing.Size(0, 13);
 
+            // Swap Button
+            this.btnSwap.Location = new System.Drawing.Point(73, 81);
+            this.btnSwap.Name = "btnSwap";
+            this.btnSwap.Size = new System.Drawing.Size(100, 23);
+            this.btnSwap.TabIndex = 20;
+            this.btnSwap.Text = "Swap";
+            this.btnSwap.UseVisualStyleBackColor = true;
+            this.btnSwap.TabStop = false;
+            this.btnSwap.Hide();
+            //this.btnSwap.Click += new System.EventHandler(this.btnBalance_Click);
+
             //Add to Controls
             Controls.Add(lPlayerName);
             Controls.Add(tbPlayer);
@@ -85,6 +97,7 @@ namespace Matt.Mih.Helper
             Controls.Add(lRankedElo);
             Controls.Add(tbElo);
             Controls.Add(lError);
+            Controls.Add(btnSwap);
 
             this.ResumeLayout(false);
         }

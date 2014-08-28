@@ -38,7 +38,7 @@ namespace Matt.Mih.Helper
             for(int i=0;i<5;i++)
             {
                 PlayerPanel panel = new PlayerPanel(i, helper, champList, names.AutoCompleteNames);
-                panel.Location = new System.Drawing.Point(20, i * 100 + 20);
+                panel.Location = new System.Drawing.Point(20, i * 115 + 20);
                 panel.AutoSize = true;
                 panel.ResumeLayout(false);
                 panel.PerformLayout();
@@ -50,7 +50,7 @@ namespace Matt.Mih.Helper
             for (int i = 5; i < 10; i++)
             {
                 PlayerPanel panel = new PlayerPanel(i, helper, champList, names.AutoCompleteNames);
-                panel.Location = new System.Drawing.Point(580, i * 100 - 480);
+                panel.Location = new System.Drawing.Point(580, i * 115 - 555);
                 panel.AutoSize = true;
                 panel.ResumeLayout(false);
                 panel.PerformLayout();
