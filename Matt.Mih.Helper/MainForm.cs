@@ -21,6 +21,8 @@ namespace Matt.Mih.Helper
 
         public List<PlayerPanel> PlayerPanels { get; set; }
 
+        public BalanceResult Swaps { get; set; }
+
         public MainForm()
         {
             InitializeComponent();
@@ -81,11 +83,13 @@ namespace Matt.Mih.Helper
                 else if (result.Swaps.Count == 1)
                 {
                     lSwap1.Text = "Swap " + result.Swaps[0].Item1.Name + " and " + result.Swaps[0].Item2.Name;
+                    Swaps = result;
                 }
                 else
                 {
                     lSwap1.Text = "Swap " + result.Swaps[0].Item1.Name + " and " + result.Swaps[0].Item2.Name;
                     lSwap2.Text = "Swap " + result.Swaps[1].Item1.Name + " and " + result.Swaps[1].Item2.Name;
+                    Swaps = result;
                 }
 
                 lRatingDifference.ForeColor = System.Drawing.Color.Black;
@@ -102,6 +106,7 @@ namespace Matt.Mih.Helper
         {
             if (helper.GameInProgress == false)
             {
+                //Disable UI Parts
                 btnGameToggle.Text = "Game Ended";
                 lSwap1.Text = "";
                 lSwap2.Text = "";
@@ -113,6 +118,13 @@ namespace Matt.Mih.Helper
                     pPanel.Enabled = false;
                 }
                 
+                //Swap players
+                List<Tuple<int, int>> uiSwaps = helper.PerformSwaps(Swaps);
+
+                foreach(Tuple<int,int> swap in uiSwaps)
+                {
+                    PlayerPanels[swap.Item1].Swap(PlayerPanels[swap.Item2]);
+                }
             }
             else
             {

@@ -18,7 +18,6 @@ namespace Matt.Mih.Helper
             Label lRankedElo = new System.Windows.Forms.Label();
             this.tbElo = new System.Windows.Forms.TextBox();
             this.lError = new System.Windows.Forms.Label();
-            this.btnSwap = new System.Windows.Forms.Button();
             this.SuspendLayout();
 
             // Player Name Label
@@ -78,17 +77,6 @@ namespace Matt.Mih.Helper
             this.lError.Size = new System.Drawing.Size(200, 13);
             this.lError.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 
-            // Swap Button
-            this.btnSwap.Location = new System.Drawing.Point(73, 81);
-            this.btnSwap.Name = "btnSwap";
-            this.btnSwap.Size = new System.Drawing.Size(100, 23);
-            this.btnSwap.TabIndex = 20;
-            this.btnSwap.Text = "Swap";
-            this.btnSwap.UseVisualStyleBackColor = true;
-            this.btnSwap.TabStop = false;
-            this.btnSwap.Hide();
-            this.btnSwap.Click += new System.EventHandler(this.swapPlayer);
-
             //Add to Controls
             Controls.Add(lPlayerName);
             Controls.Add(tbPlayer);
@@ -97,7 +85,6 @@ namespace Matt.Mih.Helper
             Controls.Add(lRankedElo);
             Controls.Add(tbElo);
             Controls.Add(lError);
-            Controls.Add(btnSwap);
 
             this.ResumeLayout(false);
         }

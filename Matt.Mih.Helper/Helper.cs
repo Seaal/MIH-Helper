@@ -88,5 +88,24 @@ namespace Matt.Mih.Helper
 
             return strat.Balance(Players);
         }
+
+        public List<Tuple<int, int>> PerformSwaps(BalanceResult swaps)
+        {
+            List<Tuple<int, int>> uiSwaps = new List<Tuple<int, int>>(2);
+
+            foreach(Tuple<Summoner,Summoner> swap in swaps.Swaps)
+            {
+                int player1Index = Array.IndexOf(Players, swap.Item1);
+                int player2Index = Array.IndexOf(Players, swap.Item2);
+
+                Summoner tempPlayer = Players[player2Index];
+                Players[player2Index] = Players[player1Index];
+                Players[player1Index] = tempPlayer;
+
+                uiSwaps.Add(new Tuple<int, int>(player1Index, player2Index));
+            }
+
+            return uiSwaps;
+        }
     }
 }

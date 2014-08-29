@@ -14,7 +14,6 @@ namespace Matt.Mih.Helper
         private Label lError;
         private TextBox tbPlayer;
         private ComboBox cbChampions;
-        private Button btnSwap;
         private readonly Helper helper;
 
         public int PlayerNumber { get; set; }
@@ -59,9 +58,22 @@ namespace Matt.Mih.Helper
             }
         }
 
-        private void swapPlayer(object sender, EventArgs e)
+        public void Swap(PlayerPanel otherPanel)
         {
+            string tempName = otherPanel.tbPlayer.Text;
+            string tempElo = otherPanel.tbElo.Text;
+            string tempError = otherPanel.lError.Text;
+            int tempChampIndex = otherPanel.cbChampions.SelectedIndex;
 
+            otherPanel.tbPlayer.Text = tbPlayer.Text;
+            otherPanel.tbElo.Text = tbElo.Text;
+            otherPanel.lError.Text = lError.Text;
+            otherPanel.cbChampions.SelectedIndex = cbChampions.SelectedIndex;
+
+            tbPlayer.Text = tempName;
+            tbElo.Text = tempElo;
+            lError.Text = tempError;
+            cbChampions.SelectedIndex = tempChampIndex;
         }
     }
 }
