@@ -24,7 +24,7 @@ namespace Matt.Mih.Helper
             InitializeComponent(champsList, summonerNamesAutoComplete);
             PlayerNumber = playerNumber;
             this.helper = helper;
-            lError.Text = "API Limit reached, try again in a few seconds.";
+            BorderStyle = BorderStyle.FixedSingle;
         }
 
         private void getPlayerSummoner(object sender, EventArgs e)

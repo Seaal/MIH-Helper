@@ -52,7 +52,7 @@ namespace Matt.Mih.Helper
             for (int i = 5; i < 10; i++)
             {
                 PlayerPanel panel = new PlayerPanel(i, helper, champList, names.AutoCompleteNames);
-                panel.Location = new System.Drawing.Point(580, i * 115 - 555);
+                panel.Location = new System.Drawing.Point(560, i * 115 - 555);
                 panel.AutoSize = true;
                 panel.ResumeLayout(false);
                 panel.PerformLayout();
