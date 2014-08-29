@@ -13,7 +13,7 @@ namespace Matt.Mih.Helper
         {
             if(players.Length != 10)
             {
-                throw new ArgumentException("10 Players required to balance the teams.");
+                throw new ArgumentException("10 players required to balance the teams.");
             }
             else
             {
@@ -21,7 +21,7 @@ namespace Matt.Mih.Helper
                 {
                     if(players[i] == null)
                     {
-                        throw new ArgumentException("10 Players required to balance the teams.");
+                        throw new ArgumentException("10 players required to balance the teams.");
                     }
                 }
             }

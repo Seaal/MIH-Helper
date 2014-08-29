@@ -72,11 +72,11 @@ namespace Matt.Mih.Helper
             this.tbElo.TabStop = false;
 
             // Error Label
-            this.lError.AutoSize = true;
             this.lError.ForeColor = System.Drawing.Color.Red;
-            this.lError.Location = new System.Drawing.Point(73, 81);
+            this.lError.Location = new System.Drawing.Point(0, 81);
             this.lError.Name = "lError";
-            this.lError.Size = new System.Drawing.Size(0, 13);
+            this.lError.Size = new System.Drawing.Size(200, 13);
+            this.lError.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 
             // Swap Button
             this.btnSwap.Location = new System.Drawing.Point(73, 81);
@@ -87,7 +87,7 @@ namespace Matt.Mih.Helper
             this.btnSwap.UseVisualStyleBackColor = true;
             this.btnSwap.TabStop = false;
             this.btnSwap.Hide();
-            //this.btnSwap.Click += new System.EventHandler(this.btnBalance_Click);
+            this.btnSwap.Click += new System.EventHandler(this.swapPlayer);
 
             //Add to Controls
             Controls.Add(lPlayerName);

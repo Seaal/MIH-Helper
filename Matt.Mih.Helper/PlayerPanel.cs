@@ -37,7 +37,7 @@ namespace Matt.Mih.Helper
 
                 if (summoner.Level < 30)
                 {
-                    lError.Text = "Warning: Player is level " + summoner.Level;
+                    lError.Text = "Warning: Player is level " + summoner.Level + ".";
                 }
                 else
                 {
@@ -48,7 +48,7 @@ namespace Matt.Mih.Helper
             {
                 if (exception.Status == WebExceptionStatus.ProtocolError)
                 {
-                    lError.Text = "Player not found";
+                    lError.Text = "Player not found.";
                     tbElo.Text = "";
                 }
             }
@@ -57,6 +57,11 @@ namespace Matt.Mih.Helper
                 lError.Text = exception.Message;
                 tbElo.Text = "";
             }
+        }
+
+        private void swapPlayer(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -59,6 +59,11 @@ namespace Matt.Mih.Helper
                 PlayerPanels.Add(panel);
             }
 
+            lSwap1.SendToBack();
+            lSwap2.SendToBack();
+            lRatingDifference.SendToBack();
+            
+
             this.ResumeLayout(false);
             this.PerformLayout();
         }

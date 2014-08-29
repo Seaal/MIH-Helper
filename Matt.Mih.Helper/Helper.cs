@@ -45,7 +45,7 @@ namespace Matt.Mih.Helper
         {
             if (name == "")
             {
-                throw new ArgumentException("Player name cannot be empty");
+                throw new ArgumentException("Player name cannot be empty.");
             }
 
             if (Players[playerNumber] != null && Players[playerNumber].Name.ToLower() == name.ToLower())
@@ -57,7 +57,7 @@ namespace Matt.Mih.Helper
             {
                 if(i != playerNumber && Players[i] != null && Players[i].Name.ToLower() == name.ToLower())
                 {
-                    throw new ArgumentException("Player already exists");
+                    throw new ArgumentException("Player already exists.");
                 }
             }
 

@@ -57,39 +57,41 @@
             // 
             // lSwap1
             // 
-            this.lSwap1.AutoSize = true;
-            this.lSwap1.Location = new System.Drawing.Point(342, 23);
+            this.lSwap1.Location = new System.Drawing.Point(0, 23);
             this.lSwap1.Name = "lSwap1";
-            this.lSwap1.Size = new System.Drawing.Size(0, 13);
+            this.lSwap1.Size = new System.Drawing.Size(784, 13);
+            this.lSwap1.TabIndex = 2;
+            this.lSwap1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lSwap2
             // 
-            this.lSwap2.AutoSize = true;
-            this.lSwap2.Location = new System.Drawing.Point(342, 49);
+            this.lSwap2.Location = new System.Drawing.Point(0, 49);
             this.lSwap2.Name = "lSwap2";
-            this.lSwap2.Size = new System.Drawing.Size(0, 13);
+            this.lSwap2.Size = new System.Drawing.Size(784, 13);
+            this.lSwap2.TabIndex = 1;
+            this.lSwap2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lRatingDifference
             // 
-            this.lRatingDifference.AutoSize = true;
-            this.lRatingDifference.Location = new System.Drawing.Point(342, 505);
+            this.lRatingDifference.Location = new System.Drawing.Point(0, 505);
             this.lRatingDifference.Name = "lRatingDifference";
-            this.lRatingDifference.Size = new System.Drawing.Size(0, 13);
+            this.lRatingDifference.Size = new System.Drawing.Size(784, 13);
+            this.lRatingDifference.TabIndex = 0;
+            this.lRatingDifference.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 602);
-            this.Controls.Add(this.lRatingDifference);
             this.Controls.Add(this.lSwap2);
             this.Controls.Add(this.lSwap1);
             this.Controls.Add(this.btnGameToggle);
             this.Controls.Add(this.btnBalance);
+            this.Controls.Add(this.lRatingDifference);
             this.Name = "MainForm";
             this.Text = "Mentored Inhouse Helper";
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
