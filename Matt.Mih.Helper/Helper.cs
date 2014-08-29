@@ -45,6 +45,8 @@ namespace Matt.Mih.Helper
         {
             if (name == "")
             {
+                Players[playerNumber] = null;
+
                 throw new ArgumentException("Player name cannot be empty.");
             }
 
@@ -71,9 +73,13 @@ namespace Matt.Mih.Helper
             }
             catch (WebException exception)
             {
-                if (exception.Status == WebExceptionStatus.ProtocolError)
+                if (exception.Status == WebExceptionStatus.ProtocolError && ((HttpWebResponse)exception.Response).StatusCode == HttpStatusCode.NotFound)
                 {
                     Players[playerNumber] = new Summoner(summonerDto);
+                }
+                else
+                {
+                    throw;
                 }
             }
 

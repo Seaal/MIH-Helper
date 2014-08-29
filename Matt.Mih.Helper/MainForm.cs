@@ -106,10 +106,8 @@ namespace Matt.Mih.Helper
         {
             if (helper.GameInProgress == false)
             {
-                //Disable UI Parts
+                //Disable UI parts
                 btnGameToggle.Text = "Game Ended";
-                lSwap1.Text = "";
-                lSwap2.Text = "";
                 btnBalance.Enabled = false;
                 helper.GameInProgress = true;
 
@@ -117,14 +115,24 @@ namespace Matt.Mih.Helper
                 {
                     pPanel.Enabled = false;
                 }
-                
-                //Swap players
-                List<Tuple<int, int>> uiSwaps = helper.PerformSwaps(Swaps);
 
-                foreach(Tuple<int,int> swap in uiSwaps)
+                //Swap players and remove swap messages
+
+                lSwap1.Text = "";
+                lSwap2.Text = "";
+
+                if(Swaps != null)
                 {
-                    PlayerPanels[swap.Item1].Swap(PlayerPanels[swap.Item2]);
+                    List<Tuple<int, int>> uiSwaps = helper.PerformSwaps(Swaps);
+
+                    foreach (Tuple<int, int> swap in uiSwaps)
+                    {
+                        PlayerPanels[swap.Item1].Swap(PlayerPanels[swap.Item2]);
+                    }
+
+                    Swaps = null;
                 }
+                
             }
             else
             {

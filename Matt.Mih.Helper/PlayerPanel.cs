@@ -24,6 +24,7 @@ namespace Matt.Mih.Helper
             InitializeComponent(champsList, summonerNamesAutoComplete);
             PlayerNumber = playerNumber;
             this.helper = helper;
+            lError.Text = "API Limit reached, try again in a few seconds.";
         }
 
         private void getPlayerSummoner(object sender, EventArgs e)
@@ -47,9 +48,35 @@ namespace Matt.Mih.Helper
             {
                 if (exception.Status == WebExceptionStatus.ProtocolError)
                 {
-                    lError.Text = "Player not found.";
-                    tbElo.Text = "";
+                    switch(((HttpWebResponse)exception.Response).StatusCode)
+                    {
+                        case HttpStatusCode.NotFound :
+                            lError.Text = "Player not found.";
+                            break;
+                        case HttpStatusCode.Unauthorized :
+                            lError.Text = "Unauthorized, check your API key.";
+                            break;
+                        case HttpStatusCode.BadRequest :
+                            lError.Text = "Bad Request, try again later.";
+                            break;
+                        case HttpStatusCode.ServiceUnavailable :
+                        case HttpStatusCode.InternalServerError :
+                            lError.Text = "API unavailable, try again later.";
+                            break;
+                        case (HttpStatusCode)429:
+                            lError.Text = "API limit reached, try again.";
+                            break;
+                        default:
+                            lError.Text = "An error has occurred.";
+                            break;
+                    }    
                 }
+                else
+                {
+                    lError.Text = "An error has occurred.";
+                }
+
+                tbElo.Text = "";
             }
             catch (ArgumentException exception)
             {
