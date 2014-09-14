@@ -113,5 +113,13 @@ namespace Matt.Mih.Helper
 
             return uiSwaps;
         }
+
+        public void ClearPlayers()
+        {
+            for(int i=0;i<10;i++)
+            {
+                Players[i] = null;
+            }
+        }
     }
 }

@@ -146,5 +146,18 @@ namespace Matt.Mih.Helper
                 }
             }
         }
+
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            foreach (PlayerPanel pPanel in PlayerPanels)
+            {
+                lSwap1.Text = "";
+                lSwap2.Text = "";
+                lRatingDifference.Text = "";
+                Swaps = null;
+                pPanel.Clear();
+                helper.ClearPlayers();
+            }
+        }
     }
 }

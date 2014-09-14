@@ -102,5 +102,13 @@ namespace Matt.Mih.Helper
             lError.Text = tempError;
             cbChampions.SelectedIndex = tempChampIndex;
         }
+
+        public void Clear()
+        {
+            tbPlayer.Text = "";
+            tbElo.Text = "";
+            cbChampions.SelectedIndex = 0;
+            lError.Text = "";
+        }
     }
 }
