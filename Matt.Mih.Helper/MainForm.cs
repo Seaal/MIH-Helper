@@ -23,6 +23,8 @@ namespace Matt.Mih.Helper
 
         public BalanceResult Swaps { get; set; }
 
+        public bool Balancing { get; set; }
+
         public MainForm()
         {
             InitializeComponent();
@@ -32,6 +34,8 @@ namespace Matt.Mih.Helper
             NameHandler names = new NameHandler();
 
             helper = new Helper(leagueApi, names);
+
+            Balancing = true;
 
             PlayerPanels = new List<PlayerPanel>(10);
 
@@ -72,34 +76,63 @@ namespace Matt.Mih.Helper
 
         private void btnBalance_Click(object sender, EventArgs e)
         {
-            try
+            if(Balancing == true)
             {
-                BalanceResult result = helper.BalanceTeams();
+                try
+                {
+                    BalanceResult result = helper.BalanceTeams();
 
-                if (result.Swaps.Count == 0)
-                {
-                    lSwap1.Text = "Teams are Balanced";
-                }
-                else if (result.Swaps.Count == 1)
-                {
-                    lSwap1.Text = "Swap " + result.Swaps[0].Item1.Name + " and " + result.Swaps[0].Item2.Name;
-                    Swaps = result;
-                }
-                else
-                {
-                    lSwap1.Text = "Swap " + result.Swaps[0].Item1.Name + " and " + result.Swaps[0].Item2.Name;
-                    lSwap2.Text = "Swap " + result.Swaps[1].Item1.Name + " and " + result.Swaps[1].Item2.Name;
-                    Swaps = result;
-                }
+                    if (result.Swaps.Count == 0)
+                    {
+                        lSwap1.Text = "Teams are Balanced";
+                    }
+                    else if (result.Swaps.Count == 1)
+                    {
+                        lSwap1.Text = "Swap " + result.Swaps[0].Item1.Name + " and " + result.Swaps[0].Item2.Name;
+                        Swaps = result;
 
-                lRatingDifference.ForeColor = System.Drawing.Color.Black;
-                lRatingDifference.Text = "Rating Difference: " + result.RatingDifference;
+                        changeBalanceButton(false);
+                    }
+                    else
+                    {
+                        lSwap1.Text = "Swap " + result.Swaps[0].Item1.Name + " and " + result.Swaps[0].Item2.Name;
+                        lSwap2.Text = "Swap " + result.Swaps[1].Item1.Name + " and " + result.Swaps[1].Item2.Name;
+                        Swaps = result;
+
+                        changeBalanceButton(false);
+                    }
+
+                    lRatingDifference.ForeColor = System.Drawing.Color.Black;
+                    lRatingDifference.Text = "Rating Difference: " + result.RatingDifference;
+                }
+                catch (ArgumentException ex)
+                {
+                    lRatingDifference.ForeColor = System.Drawing.Color.Red;
+                    lRatingDifference.Text = ex.Message;
+                }
             }
-            catch(ArgumentException ex)
+            else
             {
-                lRatingDifference.ForeColor = System.Drawing.Color.Red;
-                lRatingDifference.Text = ex.Message;
+                //Swap players and remove swap messages
+
+                lSwap1.Text = "";
+                lSwap2.Text = "";
+
+                if (Swaps != null)
+                {
+                    List<Tuple<int, int>> uiSwaps = helper.PerformSwaps(Swaps);
+
+                    foreach (Tuple<int, int> swap in uiSwaps)
+                    {
+                        PlayerPanels[swap.Item1].Swap(PlayerPanels[swap.Item2]);
+                    }
+
+                    Swaps = null;
+                }
+
+                changeBalanceButton(true);
             }
+            
         }
 
         private void btnGameToggle_Click(object sender, EventArgs e)
@@ -115,24 +148,6 @@ namespace Matt.Mih.Helper
                 {
                     pPanel.Enabled = false;
                 }
-
-                //Swap players and remove swap messages
-
-                lSwap1.Text = "";
-                lSwap2.Text = "";
-
-                if(Swaps != null)
-                {
-                    List<Tuple<int, int>> uiSwaps = helper.PerformSwaps(Swaps);
-
-                    foreach (Tuple<int, int> swap in uiSwaps)
-                    {
-                        PlayerPanels[swap.Item1].Swap(PlayerPanels[swap.Item2]);
-                    }
-
-                    Swaps = null;
-                }
-                
             }
             else
             {
@@ -157,6 +172,21 @@ namespace Matt.Mih.Helper
                 Swaps = null;
                 pPanel.Clear();
                 helper.ClearPlayers();
+                changeBalanceButton(false);
+            }
+        }
+
+        private void changeBalanceButton(bool balance)
+        {
+            Balancing = balance;
+
+            if(balance)
+            {
+                btnBalance.Text = "Balance Teams";
+            }
+            else
+            {
+                btnBalance.Text = "Swap Players";
             }
         }
     }
