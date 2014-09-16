@@ -21,7 +21,7 @@ namespace Matt.Mih.Helper
         {
             AutoCompleteNames = new AutoCompleteStringCollection();
 
-            try
+            if(File.Exists(xmlFile))
             {
                 NamesXml = XDocument.Load(xmlFile);
 
@@ -30,7 +30,7 @@ namespace Matt.Mih.Helper
 
                 AutoCompleteNames.AddRange(names);
             }
-            catch (FileNotFoundException)
+            else
             {
                 NamesXml = new XDocument(new XDeclaration("1.0", "utf-8", "yes"), new XElement("SummonerNames"));
                 NamesXml.Save(xmlFile);

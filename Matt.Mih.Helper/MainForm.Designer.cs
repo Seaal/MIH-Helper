@@ -33,11 +33,12 @@
             this.lSwap1 = new System.Windows.Forms.Label();
             this.lSwap2 = new System.Windows.Forms.Label();
             this.lRatingDifference = new System.Windows.Forms.Label();
+            this.btnClear = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnBalance
             // 
-            this.btnBalance.Location = new System.Drawing.Point(342, 527);
+            this.btnBalance.Location = new System.Drawing.Point(342, 514);
             this.btnBalance.Name = "btnBalance";
             this.btnBalance.Size = new System.Drawing.Size(100, 23);
             this.btnBalance.TabIndex = 20;
@@ -47,7 +48,7 @@
             // 
             // btnGameToggle
             // 
-            this.btnGameToggle.Location = new System.Drawing.Point(342, 556);
+            this.btnGameToggle.Location = new System.Drawing.Point(342, 543);
             this.btnGameToggle.Name = "btnGameToggle";
             this.btnGameToggle.Size = new System.Drawing.Size(100, 23);
             this.btnGameToggle.TabIndex = 21;
@@ -73,17 +74,28 @@
             // 
             // lRatingDifference
             // 
-            this.lRatingDifference.Location = new System.Drawing.Point(0, 505);
+            this.lRatingDifference.Location = new System.Drawing.Point(0, 492);
             this.lRatingDifference.Name = "lRatingDifference";
             this.lRatingDifference.Size = new System.Drawing.Size(784, 13);
             this.lRatingDifference.TabIndex = 0;
             this.lRatingDifference.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // btnClear
+            // 
+            this.btnClear.Location = new System.Drawing.Point(342, 572);
+            this.btnClear.Name = "btnClear";
+            this.btnClear.Size = new System.Drawing.Size(100, 23);
+            this.btnClear.TabIndex = 22;
+            this.btnClear.Text = "Clear All";
+            this.btnClear.UseVisualStyleBackColor = true;
+            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 602);
+            this.Controls.Add(this.btnClear);
             this.Controls.Add(this.lSwap2);
             this.Controls.Add(this.lSwap1);
             this.Controls.Add(this.btnGameToggle);
@@ -102,6 +114,7 @@
         private System.Windows.Forms.Label lSwap1;
         private System.Windows.Forms.Label lSwap2;
         private System.Windows.Forms.Label lRatingDifference;
+        private System.Windows.Forms.Button btnClear;
     }
 }
 
