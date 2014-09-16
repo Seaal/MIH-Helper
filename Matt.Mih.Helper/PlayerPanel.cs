@@ -14,6 +14,7 @@ namespace Matt.Mih.Helper
         private Label lError;
         private TextBox tbPlayer;
         private ComboBox cbChampions;
+        private PictureBox pbChampion;
         private readonly Helper helper;
 
         public int PlayerNumber { get; set; }

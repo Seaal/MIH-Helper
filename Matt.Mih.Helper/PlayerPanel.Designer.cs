@@ -15,9 +15,11 @@ namespace Matt.Mih.Helper
             this.tbPlayer = new System.Windows.Forms.TextBox();
             Label lChampion = new System.Windows.Forms.Label();
             this.cbChampions = new System.Windows.Forms.ComboBox();
+            this.pbChampion = new System.Windows.Forms.PictureBox();
             Label lRankedElo = new System.Windows.Forms.Label();
             this.tbElo = new System.Windows.Forms.TextBox();
             this.lError = new System.Windows.Forms.Label();
+            
             this.SuspendLayout();
 
             // Player Name Label
@@ -56,6 +58,13 @@ namespace Matt.Mih.Helper
             this.cbChampions.ValueMember = "Key";
             this.cbChampions.DropDownStyle = ComboBoxStyle.DropDownList;
 
+            // Champion Picture Box
+            this.pbChampion.Name = "pbChampion";
+            this.pbChampion.Size = new System.Drawing.Size(50, 50);
+            this.pbChampion.Location = new System.Drawing.Point(200, 0);
+            this.pbChampion.ImageLocation = @"C:\Riot Games\League of Legends\RADS\projects\lol_air_client\releases\0.0.1.108\deploy\assets\images\champions\MonkeyKing_Square_0.png";
+            this.pbChampion.SizeMode = PictureBoxSizeMode.StretchImage;
+
             // Ranked Elo Label
             lRankedElo.AutoSize = true;
             lRankedElo.Location = new System.Drawing.Point(4, 63);
@@ -82,6 +91,7 @@ namespace Matt.Mih.Helper
             Controls.Add(tbPlayer);
             Controls.Add(lChampion);
             Controls.Add(cbChampions);
+            Controls.Add(pbChampion);
             Controls.Add(lRankedElo);
             Controls.Add(tbElo);
             Controls.Add(lError);
