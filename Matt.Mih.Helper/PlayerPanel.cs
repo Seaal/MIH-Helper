@@ -11,7 +11,7 @@ namespace Matt.Mih.Helper
     public partial class PlayerPanel : Panel
     {
         private readonly string LEAGUE_FOLDER_LOCATION = @"C:\Riot Games\League of Legends\";
-        private readonly string CHAMP_IMAGES_LOCATION = @"RADS\projects\lol_air_client\releases\0.0.1.108\deploy\assets\images\champions\";
+        private readonly string CHAMP_IMAGES_LOCATION = @"RADS\projects\lol_air_client\releases\0.0.1.109\deploy\assets\images\champions\";
         private readonly string CHAMP_IMAGE_SUFFIX = "_Square_0.png";
 
         private TextBox tbElo;
