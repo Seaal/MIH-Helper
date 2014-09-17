@@ -172,7 +172,7 @@ namespace Matt.Mih.Helper
                 Swaps = null;
                 pPanel.Clear();
                 helper.ClearPlayers();
-                changeBalanceButton(false);
+                changeBalanceButton(true);
             }
         }
 

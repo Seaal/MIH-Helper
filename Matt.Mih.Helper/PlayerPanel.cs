@@ -10,6 +10,10 @@ namespace Matt.Mih.Helper
 {
     public partial class PlayerPanel : Panel
     {
+        private readonly string LEAGUE_FOLDER_LOCATION = @"C:\Riot Games\League of Legends\";
+        private readonly string CHAMP_IMAGES_LOCATION = @"RADS\projects\lol_air_client\releases\0.0.1.108\deploy\assets\images\champions\";
+        private readonly string CHAMP_IMAGE_SUFFIX = "_Square_0.png";
+
         private TextBox tbElo;
         private Label lError;
         private TextBox tbPlayer;
@@ -86,6 +90,13 @@ namespace Matt.Mih.Helper
             }
         }
 
+        private void changeChampionPicture(object sender, EventArgs e)
+        {
+            string champName = ((KeyValuePair<string, Champion>)cbChampions.SelectedItem).Key;
+
+            pbChampion.ImageLocation = LEAGUE_FOLDER_LOCATION + CHAMP_IMAGES_LOCATION + champName + CHAMP_IMAGE_SUFFIX;
+        }
+
         public void Swap(PlayerPanel otherPanel)
         {
             string tempName = otherPanel.tbPlayer.Text;
@@ -110,6 +121,7 @@ namespace Matt.Mih.Helper
             tbElo.Text = "";
             cbChampions.SelectedIndex = 0;
             lError.Text = "";
+            pbChampion.ImageLocation = "";
         }
     }
 }

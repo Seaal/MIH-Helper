@@ -22,15 +22,18 @@ namespace Matt.Mih.Helper
             
             this.SuspendLayout();
 
+            int inputsX = 55;
+            int inputsY = 5;
+
             // Player Name Label
             lPlayerName.AutoSize = true;
-            lPlayerName.Location = new System.Drawing.Point(0, 9);
+            lPlayerName.Location = new System.Drawing.Point(inputsX, inputsY + 4);
             lPlayerName.Name = "label";
             lPlayerName.Size = new System.Drawing.Size(70, 13);
             lPlayerName.Text = "Player Name:";
 
             // Player Name Texbox
-            this.tbPlayer.Location = new System.Drawing.Point(73, 5);
+            this.tbPlayer.Location = new System.Drawing.Point(inputsX + 73, inputsY);
             this.tbPlayer.Name = "tbPlayer";
             this.tbPlayer.Size = new System.Drawing.Size(100, 20);
             this.tbPlayer.TabIndex = 0;
@@ -41,14 +44,14 @@ namespace Matt.Mih.Helper
 
             // Champion Label
             lChampion.AutoSize = true;
-            lChampion.Location = new System.Drawing.Point(13, 35);
+            lChampion.Location = new System.Drawing.Point(inputsX + 13, inputsY + 30);
             lChampion.Name = "lChampion";
             lChampion.Size = new System.Drawing.Size(57, 13);
             lChampion.Text = "Champion:";
 
             // Champion Combo Box
             this.cbChampions.FormattingEnabled = true;
-            this.cbChampions.Location = new System.Drawing.Point(73, 31);
+            this.cbChampions.Location = new System.Drawing.Point(inputsX + 73, inputsY + 26);
             this.cbChampions.Name = "cbChampions";
             this.cbChampions.Size = new System.Drawing.Size(121, 21);
             this.cbChampions.Sorted = true;
@@ -57,23 +60,24 @@ namespace Matt.Mih.Helper
             this.cbChampions.DisplayMember = "Value";
             this.cbChampions.ValueMember = "Key";
             this.cbChampions.DropDownStyle = ComboBoxStyle.DropDownList;
+            this.cbChampions.SelectionChangeCommitted += new System.EventHandler(this.changeChampionPicture);
 
             // Champion Picture Box
             this.pbChampion.Name = "pbChampion";
             this.pbChampion.Size = new System.Drawing.Size(50, 50);
-            this.pbChampion.Location = new System.Drawing.Point(200, 0);
-            this.pbChampion.ImageLocation = @"C:\Riot Games\League of Legends\RADS\projects\lol_air_client\releases\0.0.1.108\deploy\assets\images\champions\MonkeyKing_Square_0.png";
+            this.pbChampion.Location = new System.Drawing.Point(5, 5);
             this.pbChampion.SizeMode = PictureBoxSizeMode.StretchImage;
+            this.pbChampion.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 
             // Ranked Elo Label
             lRankedElo.AutoSize = true;
-            lRankedElo.Location = new System.Drawing.Point(4, 63);
+            lRankedElo.Location = new System.Drawing.Point(inputsX + 4, inputsY + 58);
             lRankedElo.Name = "lRankedElo";
             lRankedElo.Size = new System.Drawing.Size(66, 13);
             lRankedElo.Text = "Ranked Elo:";
 
             // Ranked Elo Textbox
-            this.tbElo.Location = new System.Drawing.Point(73, 59);
+            this.tbElo.Location = new System.Drawing.Point(inputsX + 73, inputsY + 54);
             this.tbElo.Name = "tbElo";
             this.tbElo.ReadOnly = true;
             this.tbElo.Size = new System.Drawing.Size(100, 20);
@@ -81,7 +85,7 @@ namespace Matt.Mih.Helper
 
             // Error Label
             this.lError.ForeColor = System.Drawing.Color.Red;
-            this.lError.Location = new System.Drawing.Point(0, 86);
+            this.lError.Location = new System.Drawing.Point(inputsX, inputsY + 81);
             this.lError.Name = "lError";
             this.lError.Size = new System.Drawing.Size(200, 18);
             this.lError.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
