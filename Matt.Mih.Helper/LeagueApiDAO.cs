@@ -11,7 +11,12 @@ namespace Matt.Mih.Helper
 {
     public class LeagueApiDAO : ILeagueDAO
     {
-        static readonly string API_KEY = "63965c03-965b-4cfb-bb3e-e8b0a0601bd1";
+        public SettingsHandler Settings { get; set; }
+
+        public LeagueApiDAO(SettingsHandler settings)
+        {
+            Settings = settings;
+        }
 
         public ChampionDTO GetChampions()
         {
@@ -57,7 +62,7 @@ namespace Matt.Mih.Helper
 
         private string MakeRequest(string resource)
         {
-            String urlRequest = "https://na.api.pvp.net/api/lol/" + resource + "?api_key=" + API_KEY;
+            String urlRequest = "https://na.api.pvp.net/api/lol/" + resource + "?api_key=" + Settings.Get().ApiKey;
             HttpWebRequest myReq = (HttpWebRequest)WebRequest.Create(urlRequest);
             Stream response = null;
 

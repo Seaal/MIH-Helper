@@ -80,6 +80,14 @@
     <Compile Include="Rune.cs" />
     <Compile Include="Runepage.cs" />
     <Compile Include="RunepageDTO.cs" />
+    <Compile Include="Settings.cs" />
+    <Compile Include="SettingsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SettingsForm.Designer.cs">
+      <DependentUpon>SettingsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SettingsHandler.cs" />
     <Compile Include="Summoner.cs" />
     <Compile Include="SummonerDTO.cs" />
     <EmbeddedResource Include="MainForm.resx">
@@ -98,6 +106,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="SettingsForm.resx">
+      <DependentUpon>SettingsForm.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

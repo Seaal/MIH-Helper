@@ -36,11 +36,11 @@
             this.btnClear = new System.Windows.Forms.Button();
             this.mainMenu = new System.Windows.Forms.MenuStrip();
             this.itSettings = new System.Windows.Forms.ToolStripMenuItem();
+            this.itAbout = new System.Windows.Forms.ToolStripMenuItem();
+            this.itHelp = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripTextBox1 = new System.Windows.Forms.ToolStripTextBox();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
-            this.itAbout = new System.Windows.Forms.ToolStripMenuItem();
-            this.itHelp = new System.Windows.Forms.ToolStripMenuItem();
             this.mainMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -116,6 +116,19 @@
             this.itSettings.Name = "itSettings";
             this.itSettings.Size = new System.Drawing.Size(61, 20);
             this.itSettings.Text = "Settings";
+            this.itSettings.Click += new System.EventHandler(this.itSettings_Click);
+            // 
+            // itAbout
+            // 
+            this.itAbout.Name = "itAbout";
+            this.itAbout.Size = new System.Drawing.Size(52, 20);
+            this.itAbout.Text = "About";
+            // 
+            // itHelp
+            // 
+            this.itHelp.Name = "itHelp";
+            this.itHelp.Size = new System.Drawing.Size(44, 20);
+            this.itHelp.Text = "Help";
             // 
             // toolStripTextBox1
             // 
@@ -131,18 +144,6 @@
             // 
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
             this.toolStripMenuItem3.Size = new System.Drawing.Size(32, 19);
-            // 
-            // itAbout
-            // 
-            this.itAbout.Name = "itAbout";
-            this.itAbout.Size = new System.Drawing.Size(52, 20);
-            this.itAbout.Text = "About";
-            // 
-            // itHelp
-            // 
-            this.itHelp.Name = "itHelp";
-            this.itHelp.Size = new System.Drawing.Size(44, 20);
-            this.itHelp.Text = "Help";
             // 
             // MainForm
             // 

@@ -19,6 +19,8 @@ namespace Matt.Mih.Helper
 
         public NameHandler Names { get; set; }
 
+        public SettingsHandler Settings { get; set; }
+
         private Dictionary<string, Champion> _champions;
         public Dictionary<string, Champion> Champions
         {
@@ -33,12 +35,13 @@ namespace Matt.Mih.Helper
             }
         }
 
-        public Helper(ILeagueDAO leagueDao, NameHandler names)
+        public Helper(ILeagueDAO leagueDao, NameHandler names, SettingsHandler settings)
         {
             Players = new Summoner[10];
             GameInProgress = false;
             LeagueDao = leagueDao;
             Names = names;
+            Settings = settings;
         }
 
         public Summoner GetSummoner(string name, int playerNumber)

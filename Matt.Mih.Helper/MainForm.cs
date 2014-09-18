@@ -29,12 +29,13 @@ namespace Matt.Mih.Helper
         {
             InitializeComponent();
 
-            LeagueApiDAO leagueApi = new LeagueApiDAO();
+            SettingsHandler settings = new SettingsHandler();
+
+            LeagueApiDAO leagueApi = new LeagueApiDAO(settings);
 
             NameHandler names = new NameHandler();
 
-            helper = new Helper(leagueApi, names);
-
+            helper = new Helper(leagueApi, names, settings);
             Balancing = true;
 
             PlayerPanels = new List<PlayerPanel>(10);
@@ -188,6 +189,12 @@ namespace Matt.Mih.Helper
             {
                 btnBalance.Text = "Swap Players";
             }
+        }
+
+        private void itSettings_Click(object sender, EventArgs e)
+        {
+            Form settings = new SettingsForm(helper.Settings);
+            settings.ShowDialog();
         }
     }
 }

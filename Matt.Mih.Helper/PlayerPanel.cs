@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -10,8 +11,8 @@ namespace Matt.Mih.Helper
 {
     public partial class PlayerPanel : Panel
     {
-        private readonly string LEAGUE_FOLDER_LOCATION = @"C:\Riot Games\League of Legends\";
-        private readonly string CHAMP_IMAGES_LOCATION = @"RADS\projects\lol_air_client\releases\0.0.1.109\deploy\assets\images\champions\";
+        private readonly string CHAMP_IMAGES_LOCATION_PRE_RELEASES = @"\RADS\projects\lol_air_client\releases\";
+        private readonly string CHAMP_IMAGES_LOCATION_POST_RELEASES = @"\deploy\assets\images\champions\";
         private readonly string CHAMP_IMAGE_SUFFIX = "_Square_0.png";
 
         private TextBox tbElo;
@@ -94,7 +95,26 @@ namespace Matt.Mih.Helper
         {
             string champName = ((KeyValuePair<string, Champion>)cbChampions.SelectedItem).Key;
 
-            pbChampion.ImageLocation = LEAGUE_FOLDER_LOCATION + CHAMP_IMAGES_LOCATION + champName + CHAMP_IMAGE_SUFFIX;
+            string leagueFolder = helper.Settings.Get().LeagueFolder;
+
+            pbChampion.ImageLocation = getChampImagesLocation(leagueFolder) + champName + CHAMP_IMAGE_SUFFIX;
+        }
+
+        private string getChampImagesLocation(string leagueFolder)
+        {
+            List<string> folders = Directory.GetDirectories(leagueFolder + CHAMP_IMAGES_LOCATION_PRE_RELEASES).ToList();
+
+            string pattern = "\\d+.\\d+.\\d+.\\d+";
+
+            foreach(string folder in folders)
+            {
+                if(System.Text.RegularExpressions.Regex.IsMatch(folder.Remove(0, leagueFolder.Length + CHAMP_IMAGES_LOCATION_PRE_RELEASES.Length), pattern))
+                {
+                    return folder + CHAMP_IMAGES_LOCATION_POST_RELEASES;
+                }
+            }
+
+            return "";
         }
 
         public void Swap(PlayerPanel otherPanel)
