@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Matt.Mih.Helper.LeagueApi;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -31,12 +32,17 @@ namespace Matt.Mih.Helper
 
             SettingsHandler settings = new SettingsHandler();
 
-            LeagueApiDAO leagueApi = new LeagueApiDAO(settings);
+            LeagueApiDAO leagueApi = new LeagueApiDAO(settings.Get().ApiKey);
+
+
+            
 
             NameHandler names = new NameHandler();
 
             helper = new Helper(leagueApi, names, settings);
             Balancing = true;
+
+            helper.GetRunepage(0);
 
             PlayerPanels = new List<PlayerPanel>(10);
 
@@ -193,8 +199,11 @@ namespace Matt.Mih.Helper
 
         private void itSettings_Click(object sender, EventArgs e)
         {
-            Form settings = new SettingsForm(helper.Settings);
+            SettingsForm settings = new SettingsForm(helper.Settings);
+
             settings.ShowDialog();
+
+            helper.LeagueDao.ApiKey = settings.SHandler.Get().ApiKey;
         }
     }
 }

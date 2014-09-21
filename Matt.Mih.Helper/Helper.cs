@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Matt.Mih.Helper.LeagueApi;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -32,6 +33,30 @@ namespace Matt.Mih.Helper
                 }
 
                 return _champions;
+            }
+        }
+
+        private List<Rune> _runes;
+
+        public List<Rune> Runes
+        {
+            get
+            {
+                if(_runes == null)
+                {
+                    RuneListDTO runeListDto = LeagueDao.GetRunes();
+
+                    List<Rune> runes = new List<Rune>(runeListDto.data.Count);
+
+                    foreach (RuneDTO dto in runeListDto.data.Values)
+                    {
+                        runes.Add(new Rune(dto));
+                    }
+
+                    _runes = runes;
+                }
+
+                return _runes;
             }
         }
 
@@ -89,6 +114,26 @@ namespace Matt.Mih.Helper
             Names.Add(Players[playerNumber].Name);
 
             return Players[playerNumber];
+        }
+
+        public Runepage GetRunepage(int playerNumber)
+        {
+            Summoner seaal = GetSummoner("Seaal", 0);
+            RunepageDTO runepageDto = LeagueDao.GetCurrentRunepage(seaal.Id);
+
+            List<Rune> runesUsed = new List<Rune>(30);
+
+            foreach(RuneSlotDTO slot in runepageDto.slots)
+            {
+                runesUsed.Add(getRuneFromSlot(slot));
+            }
+
+            return new Runepage(runepageDto, runesUsed);
+        }
+
+        private Rune getRuneFromSlot(RuneSlotDTO slot)
+        {
+            return Runes.Where(o => o.Id == slot.runeId).First();
         }
 
         public BalanceResult BalanceTeams()

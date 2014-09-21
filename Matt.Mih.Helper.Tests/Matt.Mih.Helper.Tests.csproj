@@ -55,6 +55,10 @@
     <Compile Include="TestSummonerRating.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Matt.Mih.Helper.LeagueApi\Matt.Mih.Helper.LeagueApi.csproj">
+      <Project>{98f32981-82c6-4dce-93aa-50d5dbf2bb6d}</Project>
+      <Name>Matt.Mih.Helper.LeagueApi</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Matt.Mih.Helper\Matt.Mih.Helper.csproj">
       <Project>{1d96ba43-3f10-4119-8d3e-1cf22217d6dd}</Project>
       <Name>Matt.Mih.Helper</Name>

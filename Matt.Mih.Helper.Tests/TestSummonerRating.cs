@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
+using Matt.Mih.Helper.LeagueApi;
 
 namespace Matt.Mih.Helper.Tests
 {
