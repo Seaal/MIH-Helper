@@ -20,6 +20,8 @@ namespace Matt.Mih.Helper
 
         public SettingsHandler SHandler { get; set; }
 
+
+
         public SettingsForm(SettingsHandler sHandler)
         {
             InitializeComponent();
@@ -28,8 +30,31 @@ namespace Matt.Mih.Helper
 
             Settings settings = SHandler.Get();
 
+            cbRegion.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbRegion.DataSource = getRegions();
+            cbRegion.DisplayMember = "Value";
+            cbRegion.ValueMember = "Key";
+
             tbApiKey.Text = settings.ApiKey;
             tbLeagueFolder.Text = settings.LeagueFolder;
+            cbRegion.SelectedValue = settings.Region;
+        }
+
+        private BindingSource getRegions()
+        {
+            Dictionary<string, string> regions = new Dictionary<string, string>();
+            regions.Add("na", "North America");
+            regions.Add("euw", "Europe West");
+            regions.Add("eune", "Europe North & East");
+            regions.Add("ru", "Russia");
+            regions.Add("tr", "Turkey");
+            regions.Add("kr", "Korea");
+            regions.Add("oce", "Oceania");
+            regions.Add("br", "Brazil");
+            regions.Add("lan", "Latin America North");
+            regions.Add("las", "Latin America South");
+
+            return new BindingSource(regions, null);         
         }
 
         private void btnLeagueFolder_Click(object sender, EventArgs e)
@@ -52,7 +77,8 @@ namespace Matt.Mih.Helper
             Settings settings = new Settings()
             {
                 ApiKey = tbApiKey.Text,
-                LeagueFolder = tbLeagueFolder.Text
+                LeagueFolder = tbLeagueFolder.Text,
+                Region = (string)cbRegion.SelectedValue
             };
 
             SHandler.Save(settings);

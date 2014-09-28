@@ -32,16 +32,16 @@ namespace Matt.Mih.Helper
 
             SettingsHandler settings = new SettingsHandler();
 
-            LeagueApiDAO leagueApi = new LeagueApiDAO(settings.Get().ApiKey);
+            LeagueApiDAO leagueApi = new LeagueApiDAO(settings.Get().ApiKey, settings.Get().Region);
 
             NameHandler names = new NameHandler();
 
             helper = new Helper(leagueApi, names, settings);
             Balancing = true;
 
-            Runepage page = helper.GetRunepage(0);
+            /*Runepage page = helper.GetRunepage(0);
 
-            RunepageStats stats = helper.GetRunepageStats(page);
+            RunepageStats stats = helper.GetRunepageStats(page);*/
 
             PlayerPanels = new List<PlayerPanel>(10);
 
@@ -203,6 +203,7 @@ namespace Matt.Mih.Helper
             settings.ShowDialog();
 
             helper.LeagueDao.ApiKey = settings.SHandler.Get().ApiKey;
+            helper.LeagueDao.Region = settings.SHandler.Get().Region;
         }
     }
 }

@@ -95,7 +95,7 @@ namespace Matt.Mih.Helper
 
             try
             {
-                LeagueInfoDTO leagueDto = LeagueDao.GetLeagueInfo(summonerDto.id);
+                LeagueInfoDTO leagueDto = LeagueDao.GetSoloQueueLeagueInfo(summonerDto.id);
 
                 Players[playerNumber] = new Summoner(summonerDto, leagueDto);
             }
@@ -109,6 +109,10 @@ namespace Matt.Mih.Helper
                 {
                     throw;
                 }
+            }
+            catch(InvalidOperationException)
+            {
+                Players[playerNumber] = new Summoner(summonerDto);
             }
 
             Names.Add(Players[playerNumber].Name);

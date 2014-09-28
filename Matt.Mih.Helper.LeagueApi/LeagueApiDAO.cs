@@ -13,39 +13,42 @@ namespace Matt.Mih.Helper.LeagueApi
     {
         public string ApiKey { get; set; }
 
-        public LeagueApiDAO(string apiKey)
+        public string Region { get; set; }
+
+        public LeagueApiDAO(string apiKey, string region)
         {
             ApiKey = apiKey;
+            Region = region;
         }
 
         public ChampionDTO GetChampions()
         {
-            string json = MakeRequest("static-data/na/v1.2/champion");
+            string json = MakeRequest("static-data/na/v1.2/champion", "na");
 
             return JsonConvert.DeserializeObject<ChampionDTO>(json);
         }
 
         public SummonerDTO GetSummoner(string summonerName)
         {
-            string json = MakeRequest("na/v1.4/summoner/by-name/"+summonerName);
+            string json = MakeRequest(Region + "/v1.4/summoner/by-name/" + summonerName, Region);
 
             Dictionary<string, SummonerDTO> sumDto = JsonConvert.DeserializeObject<Dictionary<string, SummonerDTO>>(json);
 
             return sumDto.FirstOrDefault().Value;
         }
 
-        public LeagueInfoDTO GetLeagueInfo(int id)
+        public LeagueInfoDTO GetSoloQueueLeagueInfo(int id)
         {
-            string json = MakeRequest("na/v2.4/league/by-summoner/" + id + "/entry");
+            string json = MakeRequest(Region + "/v2.4/league/by-summoner/" + id + "/entry", Region);
             
             Dictionary<string, List<LeagueInfoDTO>> leagueDto = JsonConvert.DeserializeObject<Dictionary<string, List<LeagueInfoDTO>>>(json);
 
-            return leagueDto.FirstOrDefault().Value.FirstOrDefault();
+            return leagueDto.FirstOrDefault().Value.Where(o => o.queue == "RANKED_SOLO_5X5").First();
         }
 
         public RunepageDTO GetCurrentRunepage(int id)
         {
-            string json = MakeRequest("na/v1.4/summoner/" + id + "/runes");
+            string json = MakeRequest(Region + "/v1.4/summoner/" + id + "/runes", Region);
 
             Dictionary<string, RunepageListDTO> runeDto = JsonConvert.DeserializeObject<Dictionary<string, RunepageListDTO>>(json);
 
@@ -54,16 +57,16 @@ namespace Matt.Mih.Helper.LeagueApi
 
         public RuneListDTO GetRunes()
         {
-            string json = MakeRequest("static-data/na/v1.2/rune?runeListData=stats");
+            string json = MakeRequest("static-data/na/v1.2/rune?runeListData=stats", "na");
 
             return JsonConvert.DeserializeObject<RuneListDTO>(json);
         }
 
-        private string MakeRequest(string resource)
+        private string MakeRequest(string resource, string region)
         {
             string keySeparator = resource.Contains("?") ? "&" : "?";
 
-            String urlRequest = "https://na.api.pvp.net/api/lol/" + resource + keySeparator + "api_key=" + ApiKey;
+            String urlRequest = "https://" + region + ".api.pvp.net/api/lol/" + resource + keySeparator + "api_key=" + ApiKey;
             HttpWebRequest myReq = (HttpWebRequest)WebRequest.Create(urlRequest);
             Stream response = null;
 

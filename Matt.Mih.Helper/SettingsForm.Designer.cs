@@ -18,6 +18,8 @@ namespace Matt.Mih.Helper
             this.btnLeagueFolder = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
+            this.lRegion = new System.Windows.Forms.Label();
+            this.cbRegion = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // tbApiKey
@@ -87,9 +89,27 @@ namespace Matt.Mih.Helper
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
+            // lRegion
+            // 
+            this.lRegion.AutoSize = true;
+            this.lRegion.Location = new System.Drawing.Point(29, 108);
+            this.lRegion.Name = "lRegion";
+            this.lRegion.Size = new System.Drawing.Size(44, 13);
+            this.lRegion.TabIndex = 7;
+            this.lRegion.Text = "Region:";
+            // 
+            // cbRegion
+            // 
+            this.cbRegion.Location = new System.Drawing.Point(80, 104);
+            this.cbRegion.Name = "cbRegion";
+            this.cbRegion.Size = new System.Drawing.Size(121, 21);
+            this.cbRegion.TabIndex = 0;
+            // 
             // SettingsForm
             // 
             this.ClientSize = new System.Drawing.Size(391, 346);
+            this.Controls.Add(this.cbRegion);
+            this.Controls.Add(this.lRegion);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.btnLeagueFolder);
@@ -103,5 +123,7 @@ namespace Matt.Mih.Helper
             this.PerformLayout();
 
         }
+        private System.Windows.Forms.ComboBox cbRegion;
+        private System.Windows.Forms.Label lRegion;
     }
 }

@@ -15,5 +15,8 @@ namespace Matt.Mih.Helper
 
         [XmlElement("LeagueFolder")]
         public string LeagueFolder { get; set; }
+
+        [XmlElement("Region")]
+        public string Region { get; set; }
     }
 }

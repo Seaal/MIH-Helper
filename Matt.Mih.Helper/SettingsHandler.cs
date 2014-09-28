@@ -37,7 +37,8 @@ namespace Matt.Mih.Helper
                 return new Settings()
                     {
                         ApiKey = "",
-                        LeagueFolder = ""
+                        LeagueFolder = "",
+                        Region = "na"
                     };
             }
         }
