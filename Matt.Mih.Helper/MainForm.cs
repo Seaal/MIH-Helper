@@ -34,15 +34,14 @@ namespace Matt.Mih.Helper
 
             LeagueApiDAO leagueApi = new LeagueApiDAO(settings.Get().ApiKey);
 
-
-            
-
             NameHandler names = new NameHandler();
 
             helper = new Helper(leagueApi, names, settings);
             Balancing = true;
 
-            helper.GetRunepage(0);
+            Runepage page = helper.GetRunepage(0);
+
+            RunepageStats stats = helper.GetRunepageStats(page);
 
             PlayerPanels = new List<PlayerPanel>(10);
 

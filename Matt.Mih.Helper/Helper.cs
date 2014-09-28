@@ -136,6 +136,25 @@ namespace Matt.Mih.Helper
             return Runes.Where(o => o.Id == slot.runeId).First();
         }
 
+        public RunepageStats GetRunepageStats(Runepage runepage)
+        {
+            RunepageStats stats = new RunepageStats();
+
+            foreach (RuneType type in Enum.GetValues(typeof(RuneType)))
+            {
+                foreach(Rune rune in runepage.Runes.Where(o => o.Type == type))
+                {
+                    foreach(RuneStat stat in rune.Stats)
+                    {
+                        stats.AddStat(type, stat);
+                    }
+                    
+                }
+            }
+
+            return stats;
+        }
+
         public BalanceResult BalanceTeams()
         {
             IBalancingStrategy strat = new BruteForceBalancingStrategy();

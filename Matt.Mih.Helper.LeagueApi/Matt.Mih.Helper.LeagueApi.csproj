@@ -58,6 +58,7 @@
     <Compile Include="RuneSlotDTO.cs" />
     <Compile Include="RunepageDTO.cs" />
     <Compile Include="RunepageListDTO.cs" />
+    <Compile Include="RuneStat.cs" />
     <Compile Include="Summoner.cs" />
     <Compile Include="SummonerDTO.cs" />
   </ItemGroup>

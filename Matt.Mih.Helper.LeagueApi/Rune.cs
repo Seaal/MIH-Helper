@@ -17,9 +17,7 @@ namespace Matt.Mih.Helper.LeagueApi
 
         public string Name { get; set; }
 
-        public string Description { get; set; }
-
-        public double IncreasedStat { get; set; }
+        public List<RuneStat> Stats { get; set; }
 
         public string Tier { get; set; }
 
@@ -31,9 +29,22 @@ namespace Matt.Mih.Helper.LeagueApi
 
             Name = dto.name;
 
-            Description = dto.description;
+            Stats = new List<RuneStat>(2);
 
-            IncreasedStat = dto.stats.Values.FirstOrDefault();
+            char positivity = dto.description[0];
+
+            string[] descriptions = dto.description.Split(positivity);
+
+            List<double> statValues = dto.stats.Values.ToList();
+
+            List<string> statNames = dto.stats.Keys.ToList();
+
+            for (int i = 0; i < dto.stats.Count; i++)
+            {
+                Stats.Add(new RuneStat(statValues[i], getDescriptionText(descriptions[i+1]), statNames[i]));
+            }
+
+            string description = getDescriptionText(dto.description);
 
             Tier = dto.rune.tier;
 
@@ -55,6 +66,29 @@ namespace Matt.Mih.Helper.LeagueApi
                     Type = RuneType.Unknown;
                     break;
             }
+        }
+
+        private string getDescriptionText(string description)
+        {
+            string[] parts = description.Split(null);
+
+            int partsToCombine = 1;
+
+            bool reachedBracketOrSlash = false;
+
+            while(!reachedBracketOrSlash && partsToCombine < parts.Length)
+            {
+                if (parts[partsToCombine].StartsWith("(") || parts[partsToCombine].StartsWith("/"))
+                {
+                    reachedBracketOrSlash = true;
+                }
+                else
+                {
+                    partsToCombine++;
+                }
+            }
+
+            return string.Join(" ", parts, 1, partsToCombine - 1);
         }
     }
 }
