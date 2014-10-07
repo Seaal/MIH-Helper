@@ -39,6 +39,14 @@ namespace Matt.Mih.Helper
             helper = new Helper(leagueApi, names, settings);
             Balancing = true;
 
+            if(Properties.Settings.Default.firstRun)
+            {
+                itSettings.PerformClick();
+
+                Properties.Settings.Default.firstRun = false;
+                Properties.Settings.Default.Save();
+            }
+
             /*Runepage page = helper.GetRunepage(0);
 
             RunepageStats stats = helper.GetRunepageStats(page);*/
