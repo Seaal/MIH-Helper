@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Matt.Mih.Helper.LeagueApi
 {
-    public class LeagueApiDAO : ILeagueDAO
+    public class LeagueApiDAO
     {
         public string ApiKey { get; set; }
 
@@ -43,7 +43,7 @@ namespace Matt.Mih.Helper.LeagueApi
             
             Dictionary<string, List<LeagueInfoDTO>> leagueDto = JsonConvert.DeserializeObject<Dictionary<string, List<LeagueInfoDTO>>>(json);
 
-            return leagueDto.FirstOrDefault().Value.Where(o => o.queue == "RANKED_SOLO_5X5").First();
+            return leagueDto.FirstOrDefault().Value.Where(o => o.queue == "RANKED_SOLO_5x5").First();
         }
 
         public RunepageDTO GetCurrentRunepage(int id)

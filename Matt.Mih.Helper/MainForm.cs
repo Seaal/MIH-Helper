@@ -32,11 +32,11 @@ namespace Matt.Mih.Helper
 
             SettingsHandler settings = new SettingsHandler();
 
-            LeagueApiDAO leagueApi = new LeagueApiDAO(settings.Get().ApiKey, settings.Get().Region);
+            LeagueRepository leagueRepository = new LeagueRepository(settings.Get().ApiKey, settings.Get().Region);
 
             NameHandler names = new NameHandler();
 
-            helper = new Helper(leagueApi, names, settings);
+            helper = new Helper(leagueRepository, names, settings);
             Balancing = true;
 
             if(Properties.Settings.Default.firstRun)
@@ -210,8 +210,8 @@ namespace Matt.Mih.Helper
 
             settings.ShowDialog();
 
-            helper.LeagueDao.ApiKey = settings.SHandler.Get().ApiKey;
-            helper.LeagueDao.Region = settings.SHandler.Get().Region;
+            helper.LeagueRepository.ApiKey = settings.SHandler.Get().ApiKey;
+            helper.LeagueRepository.Region = settings.SHandler.Get().Region;
         }
     }
 }
