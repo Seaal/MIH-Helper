@@ -18,11 +18,11 @@ namespace Matt.Mih.Helper
         private Button btnCancel;
         private Label lApiKey;
 
-        public SettingsHandler SHandler { get; set; }
+        public SettingsManager SHandler { get; set; }
 
 
 
-        public SettingsForm(SettingsHandler sHandler)
+        public SettingsForm(SettingsManager sHandler)
         {
             InitializeComponent();
 

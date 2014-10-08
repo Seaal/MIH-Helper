@@ -30,11 +30,11 @@ namespace Matt.Mih.Helper
         {
             InitializeComponent();
 
-            SettingsHandler settings = new SettingsHandler();
+            SettingsManager settings = new SettingsManager();
 
             LeagueRepository leagueRepository = new LeagueRepository(settings.Get().ApiKey, settings.Get().Region);
 
-            NameHandler names = new NameHandler();
+            NameManager names = new NameManager();
 
             helper = new Helper(leagueRepository, names, settings);
             Balancing = true;
