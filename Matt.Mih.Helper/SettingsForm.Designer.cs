@@ -12,7 +12,6 @@ namespace Matt.Mih.Helper
         {
             this.tbApiKey = new System.Windows.Forms.TextBox();
             this.lApiKey = new System.Windows.Forms.Label();
-            this.fbLeagueFolder = new System.Windows.Forms.FolderBrowserDialog();
             this.tbLeagueFolder = new System.Windows.Forms.TextBox();
             this.lLeagueFolder = new System.Windows.Forms.Label();
             this.btnLeagueFolder = new System.Windows.Forms.Button();
@@ -38,11 +37,6 @@ namespace Matt.Mih.Helper
             this.lApiKey.TabIndex = 1;
             this.lApiKey.Text = "API Key:";
             // 
-            // fbLeagueFolder
-            // 
-            this.fbLeagueFolder.RootFolder = System.Environment.SpecialFolder.MyComputer;
-            this.fbLeagueFolder.ShowNewFolderButton = false;
-            // 
             // tbLeagueFolder
             // 
             this.tbLeagueFolder.Location = new System.Drawing.Point(79, 77);
@@ -67,7 +61,6 @@ namespace Matt.Mih.Helper
             this.btnLeagueFolder.TabIndex = 4;
             this.btnLeagueFolder.Text = "Find";
             this.btnLeagueFolder.UseVisualStyleBackColor = true;
-            this.btnLeagueFolder.Click += new System.EventHandler(this.btnLeagueFolder_Click);
             // 
             // btnSave
             // 
@@ -77,17 +70,16 @@ namespace Matt.Mih.Helper
             this.btnSave.TabIndex = 5;
             this.btnSave.Text = "Save Changes";
             this.btnSave.UseVisualStyleBackColor = true;
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // btnCancel
             // 
+            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancel.Location = new System.Drawing.Point(243, 302);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 6;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // lRegion
             // 
@@ -100,13 +92,18 @@ namespace Matt.Mih.Helper
             // 
             // cbRegion
             // 
+            this.cbRegion.DisplayMember = "Value";
+            this.cbRegion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbRegion.Location = new System.Drawing.Point(80, 104);
             this.cbRegion.Name = "cbRegion";
             this.cbRegion.Size = new System.Drawing.Size(121, 21);
             this.cbRegion.TabIndex = 0;
+            this.cbRegion.ValueMember = "Key";
             // 
             // SettingsForm
             // 
+            this.AcceptButton = this.btnSave;
+            this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(391, 346);
             this.Controls.Add(this.cbRegion);
             this.Controls.Add(this.lRegion);
@@ -123,6 +120,7 @@ namespace Matt.Mih.Helper
             this.PerformLayout();
 
         }
+
         private System.Windows.Forms.ComboBox cbRegion;
         private System.Windows.Forms.Label lRegion;
     }

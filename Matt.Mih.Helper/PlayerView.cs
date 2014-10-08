@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace Matt.Mih.Helper
 {
-    public partial class PlayerPanel : Panel
+    public partial class PlayerView : UserControl
     {
         private readonly string CHAMP_IMAGES_LOCATION_PRE_RELEASES = @"\RADS\projects\lol_air_client\releases\";
         private readonly string CHAMP_IMAGES_LOCATION_POST_RELEASES = @"\deploy\assets\images\champions\";
@@ -25,7 +25,7 @@ namespace Matt.Mih.Helper
 
         public int PlayerNumber { get; set; }
 
-        public PlayerPanel(int playerNumber, Helper helper, Dictionary<String, Champion> champsList, AutoCompleteStringCollection summonerNamesAutoComplete)
+        public PlayerView(int playerNumber, Helper helper, Dictionary<String, Champion> champsList, AutoCompleteStringCollection summonerNamesAutoComplete)
         {
             Name = "PlayerPanel" + playerNumber;
             InitializeComponent(champsList, summonerNamesAutoComplete);
@@ -118,7 +118,7 @@ namespace Matt.Mih.Helper
             return "";
         }
 
-        public void Swap(PlayerPanel otherPanel)
+        public void Swap(PlayerView otherPanel)
         {
             string tempName = otherPanel.tbPlayer.Text;
             string tempElo = otherPanel.tbElo.Text;

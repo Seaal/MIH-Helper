@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace Matt.Mih.Helper
 {
-    partial class PlayerPanel
+    partial class PlayerView
     {
         private void InitializeComponent(Dictionary<String, Champion> champsList, AutoCompleteStringCollection summonerNamesAutoComplete)
         {
