@@ -26,7 +26,7 @@ namespace Matt.Mih.Helper
             // lPlayerName
             // 
             this.lPlayerName.AutoSize = true;
-            this.lPlayerName.Location = new System.Drawing.Point(55, 5);
+            this.lPlayerName.Location = new System.Drawing.Point(61, 9);
             this.lPlayerName.Name = "lPlayerName";
             this.lPlayerName.Size = new System.Drawing.Size(70, 13);
             this.lPlayerName.TabIndex = 0;
@@ -36,7 +36,7 @@ namespace Matt.Mih.Helper
             // 
             this.tbPlayer.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             this.tbPlayer.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.tbPlayer.Location = new System.Drawing.Point(55, 5);
+            this.tbPlayer.Location = new System.Drawing.Point(137, 5);
             this.tbPlayer.Name = "tbPlayer";
             this.tbPlayer.Size = new System.Drawing.Size(100, 20);
             this.tbPlayer.TabIndex = 0;
@@ -44,7 +44,7 @@ namespace Matt.Mih.Helper
             // lChampion
             // 
             this.lChampion.AutoSize = true;
-            this.lChampion.Location = new System.Drawing.Point(55, 5);
+            this.lChampion.Location = new System.Drawing.Point(74, 35);
             this.lChampion.Name = "lChampion";
             this.lChampion.Size = new System.Drawing.Size(57, 13);
             this.lChampion.TabIndex = 1;
@@ -55,7 +55,7 @@ namespace Matt.Mih.Helper
             this.cbChampions.DisplayMember = "name";
             this.cbChampions.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbChampions.FormattingEnabled = true;
-            this.cbChampions.Location = new System.Drawing.Point(55, 5);
+            this.cbChampions.Location = new System.Drawing.Point(137, 31);
             this.cbChampions.Name = "cbChampions";
             this.cbChampions.Size = new System.Drawing.Size(121, 21);
             this.cbChampions.Sorted = true;
@@ -75,7 +75,7 @@ namespace Matt.Mih.Helper
             // lRankedElo
             // 
             this.lRankedElo.AutoSize = true;
-            this.lRankedElo.Location = new System.Drawing.Point(55, 5);
+            this.lRankedElo.Location = new System.Drawing.Point(65, 61);
             this.lRankedElo.Name = "lRankedElo";
             this.lRankedElo.Size = new System.Drawing.Size(66, 13);
             this.lRankedElo.TabIndex = 4;
@@ -83,7 +83,7 @@ namespace Matt.Mih.Helper
             // 
             // tbElo
             // 
-            this.tbElo.Location = new System.Drawing.Point(55, 5);
+            this.tbElo.Location = new System.Drawing.Point(137, 57);
             this.tbElo.Name = "tbElo";
             this.tbElo.ReadOnly = true;
             this.tbElo.Size = new System.Drawing.Size(100, 20);
@@ -93,10 +93,11 @@ namespace Matt.Mih.Helper
             // lError
             // 
             this.lError.ForeColor = System.Drawing.Color.Red;
-            this.lError.Location = new System.Drawing.Point(55, 5);
+            this.lError.Location = new System.Drawing.Point(32, 87);
             this.lError.Name = "lError";
             this.lError.Size = new System.Drawing.Size(200, 18);
             this.lError.TabIndex = 6;
+            this.lError.Text = "{{Error Label}}";
             this.lError.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // PlayerView
@@ -110,6 +111,7 @@ namespace Matt.Mih.Helper
             this.Controls.Add(this.tbElo);
             this.Controls.Add(this.lError);
             this.Name = "PlayerView";
+            this.Size = new System.Drawing.Size(264, 113);
             ((System.ComponentModel.ISupportInitialize)(this.pbChampion)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

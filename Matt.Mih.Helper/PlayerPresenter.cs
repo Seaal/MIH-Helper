@@ -29,6 +29,7 @@ namespace Matt.Mih.Helper
 
             PlayerView.Champions = new List<Champion>(champions);
             PlayerView.ExistingNames = names;
+            PlayerView.Error = "";
 
             PlayerView.PlayerNameTextboxLeave += new EventHandler(OnPlayerNameChange);
             PlayerView.ChampionSelectedChanged += new EventHandler(OnSelectedChampionChange);
