@@ -23,7 +23,7 @@ namespace Matt.Mih.Helper
             NameManager nameManager = new NameManager();
             Helper helper = new Helper(leagueRepository, nameManager, settingsManager);
             MainForm mainForm = new MainForm();
-            MainPresenter mainPresenter = new MainPresenter(mainForm, helper);
+            MainFormPresenter mainPresenter = new MainFormPresenter(mainForm, helper);
 
             Application.Run(mainForm);
         }

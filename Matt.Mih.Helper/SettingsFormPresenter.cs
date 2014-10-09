@@ -7,13 +7,13 @@ using System.Windows.Forms;
 
 namespace Matt.Mih.Helper
 {
-    class SettingsPresenter
+    class SettingsFormPresenter
     {
         private readonly ISettingsFormView SettingsView;
         private readonly SettingsManager SettingsManager;
         private readonly FolderBrowserDialog fbFindLeagueFolder;
 
-        public SettingsPresenter(ISettingsFormView settingsView, SettingsManager settingsManager)
+        public SettingsFormPresenter(ISettingsFormView settingsView, SettingsManager settingsManager)
         {
             SettingsView = settingsView;
             SettingsManager = settingsManager;

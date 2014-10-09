@@ -9,7 +9,9 @@ namespace Matt.Mih.Helper
 {
     interface IMainFormView
     {
-        List<IPlayerView> Players { get; }
+        List<IPlayerView> PlayersView { get; }
+        IMainMenuView MainMenuView { get; }
+
         string Swap1 { set; }
         string Swap2 { set; }
         string RatingDifference { set; }

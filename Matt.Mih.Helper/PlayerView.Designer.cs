@@ -12,91 +12,112 @@ namespace Matt.Mih.Helper
     {
         private void InitializeComponent()
         {
-            Label lPlayerName = new System.Windows.Forms.Label();
+            this.lPlayerName = new System.Windows.Forms.Label();
             this.tbPlayer = new System.Windows.Forms.TextBox();
-            Label lChampion = new System.Windows.Forms.Label();
+            this.lChampion = new System.Windows.Forms.Label();
             this.cbChampions = new System.Windows.Forms.ComboBox();
             this.pbChampion = new System.Windows.Forms.PictureBox();
-            Label lRankedElo = new System.Windows.Forms.Label();
+            this.lRankedElo = new System.Windows.Forms.Label();
             this.tbElo = new System.Windows.Forms.TextBox();
             this.lError = new System.Windows.Forms.Label();
-            
+            ((System.ComponentModel.ISupportInitialize)(this.pbChampion)).BeginInit();
             this.SuspendLayout();
-
-            int inputsX = 55;
-            int inputsY = 5;
-
-            // Player Name Label
-            lPlayerName.AutoSize = true;
-            lPlayerName.Location = new System.Drawing.Point(inputsX, inputsY + 4);
-            lPlayerName.Name = "label";
-            lPlayerName.Size = new System.Drawing.Size(70, 13);
-            lPlayerName.Text = "Player Name:";
-
-            // Player Name Texbox
-            this.tbPlayer.Location = new System.Drawing.Point(inputsX + 73, inputsY);
+            // 
+            // lPlayerName
+            // 
+            this.lPlayerName.AutoSize = true;
+            this.lPlayerName.Location = new System.Drawing.Point(55, 5);
+            this.lPlayerName.Name = "lPlayerName";
+            this.lPlayerName.Size = new System.Drawing.Size(70, 13);
+            this.lPlayerName.TabIndex = 0;
+            this.lPlayerName.Text = "Player Name:";
+            // 
+            // tbPlayer
+            // 
+            this.tbPlayer.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.tbPlayer.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.tbPlayer.Location = new System.Drawing.Point(55, 5);
             this.tbPlayer.Name = "tbPlayer";
             this.tbPlayer.Size = new System.Drawing.Size(100, 20);
             this.tbPlayer.TabIndex = 0;
-            this.tbPlayer.AutoCompleteMode = AutoCompleteMode.Append;
-            this.tbPlayer.AutoCompleteSource = AutoCompleteSource.CustomSource;
-
-            // Champion Label
-            lChampion.AutoSize = true;
-            lChampion.Location = new System.Drawing.Point(inputsX + 13, inputsY + 30);
-            lChampion.Name = "lChampion";
-            lChampion.Size = new System.Drawing.Size(57, 13);
-            lChampion.Text = "Champion:";
-
-            // Champion Combo Box
+            // 
+            // lChampion
+            // 
+            this.lChampion.AutoSize = true;
+            this.lChampion.Location = new System.Drawing.Point(55, 5);
+            this.lChampion.Name = "lChampion";
+            this.lChampion.Size = new System.Drawing.Size(57, 13);
+            this.lChampion.TabIndex = 1;
+            this.lChampion.Text = "Champion:";
+            // 
+            // cbChampions
+            // 
+            this.cbChampions.DisplayMember = "name";
+            this.cbChampions.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbChampions.FormattingEnabled = true;
-            this.cbChampions.Location = new System.Drawing.Point(inputsX + 73, inputsY + 26);
+            this.cbChampions.Location = new System.Drawing.Point(55, 5);
             this.cbChampions.Name = "cbChampions";
             this.cbChampions.Size = new System.Drawing.Size(121, 21);
             this.cbChampions.Sorted = true;
+            this.cbChampions.TabIndex = 2;
             this.cbChampions.TabStop = false;
-            this.cbChampions.DisplayMember = "name";
-            this.cbChampions.DropDownStyle = ComboBoxStyle.DropDownList;
-
-            // Champion Picture Box
+            // 
+            // pbChampion
+            // 
+            this.pbChampion.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pbChampion.Location = new System.Drawing.Point(5, 5);
             this.pbChampion.Name = "pbChampion";
             this.pbChampion.Size = new System.Drawing.Size(50, 50);
-            this.pbChampion.Location = new System.Drawing.Point(5, 5);
-            this.pbChampion.SizeMode = PictureBoxSizeMode.StretchImage;
-            this.pbChampion.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-
-            // Ranked Elo Label
-            lRankedElo.AutoSize = true;
-            lRankedElo.Location = new System.Drawing.Point(inputsX + 4, inputsY + 58);
-            lRankedElo.Name = "lRankedElo";
-            lRankedElo.Size = new System.Drawing.Size(66, 13);
-            lRankedElo.Text = "Ranked Elo:";
-
-            // Ranked Elo Textbox
-            this.tbElo.Location = new System.Drawing.Point(inputsX + 73, inputsY + 54);
+            this.pbChampion.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbChampion.TabIndex = 3;
+            this.pbChampion.TabStop = false;
+            // 
+            // lRankedElo
+            // 
+            this.lRankedElo.AutoSize = true;
+            this.lRankedElo.Location = new System.Drawing.Point(55, 5);
+            this.lRankedElo.Name = "lRankedElo";
+            this.lRankedElo.Size = new System.Drawing.Size(66, 13);
+            this.lRankedElo.TabIndex = 4;
+            this.lRankedElo.Text = "Ranked Elo:";
+            // 
+            // tbElo
+            // 
+            this.tbElo.Location = new System.Drawing.Point(55, 5);
             this.tbElo.Name = "tbElo";
             this.tbElo.ReadOnly = true;
             this.tbElo.Size = new System.Drawing.Size(100, 20);
+            this.tbElo.TabIndex = 5;
             this.tbElo.TabStop = false;
-
-            // Error Label
+            // 
+            // lError
+            // 
             this.lError.ForeColor = System.Drawing.Color.Red;
-            this.lError.Location = new System.Drawing.Point(inputsX, inputsY + 81);
+            this.lError.Location = new System.Drawing.Point(55, 5);
             this.lError.Name = "lError";
             this.lError.Size = new System.Drawing.Size(200, 18);
+            this.lError.TabIndex = 6;
             this.lError.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-
-            //Add to Controls
-            Controls.Add(lPlayerName);
-            Controls.Add(tbPlayer);
-            Controls.Add(lChampion);
-            Controls.Add(cbChampions);
-            Controls.Add(pbChampion);
-            Controls.Add(lRankedElo);
-            Controls.Add(tbElo);
-            Controls.Add(lError);
-
+            // 
+            // PlayerView
+            // 
+            this.Controls.Add(this.lPlayerName);
+            this.Controls.Add(this.tbPlayer);
+            this.Controls.Add(this.lChampion);
+            this.Controls.Add(this.cbChampions);
+            this.Controls.Add(this.pbChampion);
+            this.Controls.Add(this.lRankedElo);
+            this.Controls.Add(this.tbElo);
+            this.Controls.Add(this.lError);
+            this.Name = "PlayerView";
+            ((System.ComponentModel.ISupportInitialize)(this.pbChampion)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
+
         }
+
+        private Label lPlayerName;
+        private Label lChampion;
+        private Label lRankedElo;
     }
 }

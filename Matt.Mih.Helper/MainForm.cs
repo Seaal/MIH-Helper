@@ -19,18 +19,15 @@ namespace Matt.Mih.Helper
     public partial class MainForm : Form, IMainFormView
     {
         private readonly List<IPlayerView> PlayerViews;
+        private readonly MainMenuView MainMenu;
 
         public MainForm()
         {
+            MainMenu = new MainMenuView();
+
             InitializeComponent();
 
-            if(Properties.Settings.Default.firstRun)
-            {
-                itSettings.PerformClick();
-
-                Properties.Settings.Default.firstRun = false;
-                Properties.Settings.Default.Save();
-            }
+            Controls.Add(MainMenu);
 
             PlayerViews = new List<IPlayerView>(10);
 
@@ -74,9 +71,14 @@ namespace Matt.Mih.Helper
             return panel;
         }
 
-        public List<IPlayerView> Players
+        public List<IPlayerView> PlayersView
         {
             get { return PlayerViews; }
+        }
+
+        public IMainMenuView MainMenuView
+        {
+            get { return MainMenu; }
         }
 
         public string Swap1
@@ -135,18 +137,6 @@ namespace Matt.Mih.Helper
         {
             add { btnClear.Click += value; }
             remove { btnClear.Click -= value; }
-        }
-
-        private void itSettings_Click(object sender, EventArgs e)
-        {
-            SettingsForm settingsForm = new SettingsForm();
-            SettingsManager settingsManager = new SettingsManager();
-            SettingsPresenter settingsPresenter = new SettingsPresenter(settingsForm, settingsManager);
-
-            settingsForm.ShowDialog();
-
-            //helper.LeagueRepository.ApiKey = settingsManager.Get().ApiKey;
-            //helper.LeagueRepository.Region = settingsManager.Get().Region;
         }
     }
 }

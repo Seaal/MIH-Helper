@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace Matt.Mih.Helper
 {
-    class MainPresenter
+    class MainFormPresenter
     {
         private readonly IMainFormView MainView;
         private readonly Helper Helper;
@@ -19,19 +19,21 @@ namespace Matt.Mih.Helper
 
         public List<PlayerPresenter> PlayerPresenters { get; set; }
 
-        public MainPresenter(IMainFormView mainView, Helper helper)
+        public MainFormPresenter(IMainFormView mainView, Helper helper)
         {
             MainView = mainView;
             Helper = helper;
 
             PlayerPresenters = new List<PlayerPresenter>(10);
 
+            MainMenuPresenter mainMenuPresenter = new MainMenuPresenter(MainView.MainMenuView, Helper);
+
             List<Champion> champions = Helper.Champions;
             AutoCompleteStringCollection names = Helper.NameManager.AutoCompleteNames;
 
             for(int i=0; i<10; i++)
             {
-                IPlayerView playerView = MainView.Players[i];
+                IPlayerView playerView = MainView.PlayersView[i];
                 PlayerPresenter presenter = new PlayerPresenter(playerView, Helper, champions, names, i);
 
                 PlayerPresenters.Add(presenter);
@@ -42,6 +44,14 @@ namespace Matt.Mih.Helper
             MainView.BalanceTeamsClick += new EventHandler(OnBalanceButtonClick);
             MainView.GameToggleClick += new EventHandler(OnGameToggleButtonClick);
             MainView.ClearAllClick += new EventHandler(OnClearAllButtonClick);
+
+            if (Properties.Settings.Default.firstRun)
+            {
+                mainMenuPresenter.ShowSettingsForm();
+
+                Properties.Settings.Default.firstRun = false;
+                Properties.Settings.Default.Save();
+            }
         }
 
         private void OnBalanceButtonClick(object sender, EventArgs e)

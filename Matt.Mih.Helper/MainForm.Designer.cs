@@ -34,14 +34,9 @@
             this.lSwap2 = new System.Windows.Forms.Label();
             this.lRatingDifference = new System.Windows.Forms.Label();
             this.btnClear = new System.Windows.Forms.Button();
-            this.mainMenu = new System.Windows.Forms.MenuStrip();
-            this.itSettings = new System.Windows.Forms.ToolStripMenuItem();
-            this.itAbout = new System.Windows.Forms.ToolStripMenuItem();
-            this.itHelp = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripTextBox1 = new System.Windows.Forms.ToolStripTextBox();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
-            this.mainMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnBalance
@@ -95,41 +90,6 @@
             this.btnClear.Text = "Clear All";
             this.btnClear.UseVisualStyleBackColor = true;
             // 
-            // mainMenu
-            // 
-            this.mainMenu.BackColor = System.Drawing.SystemColors.MenuBar;
-            this.mainMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.itSettings,
-            this.itAbout,
-            this.itHelp});
-            this.mainMenu.Location = new System.Drawing.Point(0, 0);
-            this.mainMenu.Name = "mainMenu";
-            this.mainMenu.Size = new System.Drawing.Size(784, 24);
-            this.mainMenu.TabIndex = 23;
-            this.mainMenu.Text = "mainMenu";
-            // 
-            // itSettings
-            // 
-            this.itSettings.Name = "itSettings";
-            this.itSettings.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.itSettings.Size = new System.Drawing.Size(61, 20);
-            this.itSettings.Text = "Settings";
-            this.itSettings.Click += new System.EventHandler(this.itSettings_Click);
-            // 
-            // itAbout
-            // 
-            this.itAbout.Name = "itAbout";
-            this.itAbout.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.A)));
-            this.itAbout.Size = new System.Drawing.Size(52, 20);
-            this.itAbout.Text = "About";
-            // 
-            // itHelp
-            // 
-            this.itHelp.Name = "itHelp";
-            this.itHelp.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.H)));
-            this.itHelp.Size = new System.Drawing.Size(44, 20);
-            this.itHelp.Text = "Help";
-            // 
             // toolStripTextBox1
             // 
             this.toolStripTextBox1.Name = "toolStripTextBox1";
@@ -157,14 +117,9 @@
             this.Controls.Add(this.btnGameToggle);
             this.Controls.Add(this.btnBalance);
             this.Controls.Add(this.lRatingDifference);
-            this.Controls.Add(this.mainMenu);
-            this.MainMenuStrip = this.mainMenu;
             this.Name = "MainForm";
             this.Text = "Mentored Inhouse Helper";
-            this.mainMenu.ResumeLayout(false);
-            this.mainMenu.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -176,13 +131,9 @@
         private System.Windows.Forms.Label lSwap2;
         private System.Windows.Forms.Label lRatingDifference;
         private System.Windows.Forms.Button btnClear;
-        private System.Windows.Forms.MenuStrip mainMenu;
-        private System.Windows.Forms.ToolStripMenuItem itSettings;
         private System.Windows.Forms.ToolStripTextBox toolStripTextBox1;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3;
-        private System.Windows.Forms.ToolStripMenuItem itAbout;
-        private System.Windows.Forms.ToolStripMenuItem itHelp;
     }
 }
 
