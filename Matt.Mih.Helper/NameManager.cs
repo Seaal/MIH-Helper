@@ -9,7 +9,7 @@ using System.Xml.Linq;
 
 namespace Matt.Mih.Helper
 {
-    public class NameHandler
+    public class NameManager
     {
         public XDocument NamesXml { get; set; }
 
@@ -17,7 +17,7 @@ namespace Matt.Mih.Helper
 
         private static readonly string xmlFile = "names.xml";
 
-        public NameHandler()
+        public NameManager()
         {
             AutoCompleteNames = new AutoCompleteStringCollection();
 

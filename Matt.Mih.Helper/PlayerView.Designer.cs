@@ -8,9 +8,9 @@ using System.Windows.Forms;
 
 namespace Matt.Mih.Helper
 {
-    partial class PlayerPanel
+    partial class PlayerView
     {
-        private void InitializeComponent(Dictionary<String, Champion> champsList, AutoCompleteStringCollection summonerNamesAutoComplete)
+        private void InitializeComponent()
         {
             Label lPlayerName = new System.Windows.Forms.Label();
             this.tbPlayer = new System.Windows.Forms.TextBox();
@@ -38,10 +38,8 @@ namespace Matt.Mih.Helper
             this.tbPlayer.Name = "tbPlayer";
             this.tbPlayer.Size = new System.Drawing.Size(100, 20);
             this.tbPlayer.TabIndex = 0;
-            this.tbPlayer.Leave += new System.EventHandler(this.getPlayerSummoner);
             this.tbPlayer.AutoCompleteMode = AutoCompleteMode.Append;
             this.tbPlayer.AutoCompleteSource = AutoCompleteSource.CustomSource;
-            this.tbPlayer.AutoCompleteCustomSource = summonerNamesAutoComplete;
 
             // Champion Label
             lChampion.AutoSize = true;
@@ -57,11 +55,8 @@ namespace Matt.Mih.Helper
             this.cbChampions.Size = new System.Drawing.Size(121, 21);
             this.cbChampions.Sorted = true;
             this.cbChampions.TabStop = false;
-            this.cbChampions.DataSource = new BindingSource(champsList, null);
-            this.cbChampions.DisplayMember = "Value";
-            this.cbChampions.ValueMember = "Key";
+            this.cbChampions.DisplayMember = "name";
             this.cbChampions.DropDownStyle = ComboBoxStyle.DropDownList;
-            this.cbChampions.SelectionChangeCommitted += new System.EventHandler(this.changeChampionPicture);
 
             // Champion Picture Box
             this.pbChampion.Name = "pbChampion";

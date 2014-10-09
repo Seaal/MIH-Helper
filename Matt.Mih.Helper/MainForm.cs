@@ -20,7 +20,7 @@ namespace Matt.Mih.Helper
     {
         private readonly Helper helper;
 
-        public List<PlayerPanel> PlayerPanels { get; set; }
+        public List<PlayerPresenter> PlayerPresenters { get; set; }
 
         public BalanceResult Swaps { get; set; }
 
@@ -30,45 +30,63 @@ namespace Matt.Mih.Helper
         {
             InitializeComponent();
 
-            SettingsHandler settings = new SettingsHandler();
+            SettingsManager settings = new SettingsManager();
 
-            LeagueApiDAO leagueApi = new LeagueApiDAO(settings.Get().ApiKey, settings.Get().Region);
+            LeagueRepository leagueRepository = new LeagueRepository(settings.Get().ApiKey, settings.Get().Region);
 
-            NameHandler names = new NameHandler();
+            NameManager nameManager = new NameManager();
 
-            helper = new Helper(leagueApi, names, settings);
+            helper = new Helper(leagueRepository, nameManager, settings);
             Balancing = true;
+
+            if(Properties.Settings.Default.firstRun)
+            {
+                itSettings.PerformClick();
+
+                Properties.Settings.Default.firstRun = false;
+                Properties.Settings.Default.Save();
+            }
 
             /*Runepage page = helper.GetRunepage(0);
 
             RunepageStats stats = helper.GetRunepageStats(page);*/
 
-            PlayerPanels = new List<PlayerPanel>(10);
+            PlayerPresenters = new List<PlayerPresenter>(10);
 
-            Dictionary<string, Champion> champList = helper.Champions;
+            List<Champion> champList = helper.Champions;
+
+            int playerViewHeight = 110;
+
+            Size playerViewSize = new Size(150, playerViewHeight);
 
             for(int i=0;i<5;i++)
             {
-                PlayerPanel panel = new PlayerPanel(i, helper, champList, names.AutoCompleteNames);
-                panel.Location = new System.Drawing.Point(20, i * 115 + 44);
+                PlayerView panel = new PlayerView();
+                PlayerPresenter presenter = new PlayerPresenter(panel, helper, champList, nameManager.AutoCompleteNames, i);
+                panel.Size = playerViewSize;
+                panel.Location = new System.Drawing.Point(20, i * (playerViewHeight + 5) + 40);
+                
                 panel.AutoSize = true;
                 panel.ResumeLayout(false);
                 panel.PerformLayout();
 
                 Controls.Add(panel);
-                PlayerPanels.Add(panel);
+                PlayerPresenters.Add(presenter);
             }
 
             for (int i = 5; i < 10; i++)
             {
-                PlayerPanel panel = new PlayerPanel(i, helper, champList, names.AutoCompleteNames);
-                panel.Location = new System.Drawing.Point(505, i * 115 - 531);
+                PlayerView panel = new PlayerView();
+                PlayerPresenter presenter = new PlayerPresenter(panel, helper, champList, nameManager.AutoCompleteNames, i);
+                panel.Size = playerViewSize;
+                panel.Location = new System.Drawing.Point(505, i * (playerViewHeight + 5) - (playerViewHeight + 5) * 5 + 40);
+
                 panel.AutoSize = true;
                 panel.ResumeLayout(false);
                 panel.PerformLayout();
 
                 Controls.Add(panel);
-                PlayerPanels.Add(panel);
+                PlayerPresenters.Add(presenter);
             }
 
             lSwap1.SendToBack();
@@ -130,7 +148,7 @@ namespace Matt.Mih.Helper
 
                     foreach (Tuple<int, int> swap in uiSwaps)
                     {
-                        PlayerPanels[swap.Item1].Swap(PlayerPanels[swap.Item2]);
+                        PlayerPresenters[swap.Item1].Swap(PlayerPresenters[swap.Item2]);
                     }
 
                     Swaps = null;
@@ -150,9 +168,9 @@ namespace Matt.Mih.Helper
                 btnBalance.Enabled = false;
                 helper.GameInProgress = true;
 
-                foreach(PlayerPanel pPanel in PlayerPanels)
+                foreach(PlayerPresenter pPresenter in PlayerPresenters)
                 {
-                    pPanel.Enabled = false;
+                    pPresenter.Enabled = false;
                 }
             }
             else
@@ -161,7 +179,7 @@ namespace Matt.Mih.Helper
                 btnBalance.Enabled = true;
                 helper.GameInProgress = false;
 
-                foreach (PlayerPanel pPanel in PlayerPanels)
+                foreach (PlayerPresenter pPanel in PlayerPresenters)
                 {
                     pPanel.Enabled = true;
                 }
@@ -170,13 +188,14 @@ namespace Matt.Mih.Helper
 
         private void btnClear_Click(object sender, EventArgs e)
         {
-            foreach (PlayerPanel pPanel in PlayerPanels)
+            lSwap1.Text = "";
+            lSwap2.Text = "";
+            lRatingDifference.Text = "";
+
+            foreach (PlayerPresenter pPresenter in PlayerPresenters)
             {
-                lSwap1.Text = "";
-                lSwap2.Text = "";
-                lRatingDifference.Text = "";
                 Swaps = null;
-                pPanel.Clear();
+                pPresenter.Clear();
                 helper.ClearPlayers();
                 changeBalanceButton(true);
             }
@@ -198,12 +217,14 @@ namespace Matt.Mih.Helper
 
         private void itSettings_Click(object sender, EventArgs e)
         {
-            SettingsForm settings = new SettingsForm(helper.Settings);
+            SettingsForm settingsForm = new SettingsForm();
+            SettingsManager settingsManager = new SettingsManager();
+            SettingsPresenter settingsPresenter = new SettingsPresenter(settingsForm, settingsManager);
 
-            settings.ShowDialog();
+            settingsForm.ShowDialog();
 
-            helper.LeagueDao.ApiKey = settings.SHandler.Get().ApiKey;
-            helper.LeagueDao.Region = settings.SHandler.Get().Region;
+            helper.LeagueRepository.ApiKey = settingsManager.Get().ApiKey;
+            helper.LeagueRepository.Region = settingsManager.Get().Region;
         }
     }
 }

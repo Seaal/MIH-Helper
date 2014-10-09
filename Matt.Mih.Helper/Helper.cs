@@ -16,55 +16,33 @@ namespace Matt.Mih.Helper
 
         public bool GameInProgress { get; set; }
 
-        public ILeagueDAO LeagueDao { get; private set; }
+        public ILeagueRepository LeagueRepository { get; private set; }
 
-        public NameHandler Names { get; set; }
+        public NameManager Names { get; set; }
 
-        public SettingsHandler Settings { get; set; }
+        public SettingsManager Settings { get; set; }
 
-        private Dictionary<string, Champion> _champions;
-        public Dictionary<string, Champion> Champions
+        public List<Champion> Champions
         {
             get
             {
-                if (_champions == null)
-                {
-                    _champions = LeagueDao.GetChampions().data;
-                }
-
-                return _champions;
+                return LeagueRepository.GetChampions();
             }
         }
-
-        private List<Rune> _runes;
 
         public List<Rune> Runes
         {
             get
             {
-                if(_runes == null)
-                {
-                    RuneListDTO runeListDto = LeagueDao.GetRunes();
-
-                    List<Rune> runes = new List<Rune>(runeListDto.data.Count);
-
-                    foreach (RuneDTO dto in runeListDto.data.Values)
-                    {
-                        runes.Add(new Rune(dto));
-                    }
-
-                    _runes = runes;
-                }
-
-                return _runes;
+                return LeagueRepository.GetRunes();
             }
         }
 
-        public Helper(ILeagueDAO leagueDao, NameHandler names, SettingsHandler settings)
+        public Helper(ILeagueRepository leagueRepository, NameManager names, SettingsManager settings)
         {
             Players = new Summoner[10];
             GameInProgress = false;
-            LeagueDao = leagueDao;
+            LeagueRepository = leagueRepository;
             Names = names;
             Settings = settings;
         }
@@ -91,29 +69,7 @@ namespace Matt.Mih.Helper
                 }
             }
 
-            SummonerDTO summonerDto = LeagueDao.GetSummoner(name);
-
-            try
-            {
-                LeagueInfoDTO leagueDto = LeagueDao.GetSoloQueueLeagueInfo(summonerDto.id);
-
-                Players[playerNumber] = new Summoner(summonerDto, leagueDto);
-            }
-            catch (WebException exception)
-            {
-                if (exception.Status == WebExceptionStatus.ProtocolError && ((HttpWebResponse)exception.Response).StatusCode == HttpStatusCode.NotFound)
-                {
-                    Players[playerNumber] = new Summoner(summonerDto);
-                }
-                else
-                {
-                    throw;
-                }
-            }
-            catch(InvalidOperationException)
-            {
-                Players[playerNumber] = new Summoner(summonerDto);
-            }
+            Players[playerNumber] = LeagueRepository.GetSummoner(name);
 
             Names.Add(Players[playerNumber].Name);
 
@@ -123,21 +79,8 @@ namespace Matt.Mih.Helper
         public Runepage GetRunepage(int playerNumber)
         {
             Summoner seaal = GetSummoner("Seaal", 0);
-            RunepageDTO runepageDto = LeagueDao.GetCurrentRunepage(seaal.Id);
 
-            List<Rune> runesUsed = new List<Rune>(30);
-
-            foreach(RuneSlotDTO slot in runepageDto.slots)
-            {
-                runesUsed.Add(getRuneFromSlot(slot));
-            }
-
-            return new Runepage(runepageDto, runesUsed);
-        }
-
-        private Rune getRuneFromSlot(RuneSlotDTO slot)
-        {
-            return Runes.Where(o => o.Id == slot.runeId).First();
+            return LeagueRepository.GetCurrentRunepage(seaal.Id);
         }
 
         public RunepageStats GetRunepageStats(Runepage runepage)

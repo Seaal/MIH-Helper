@@ -10,13 +10,13 @@ using System.Xml.Serialization;
 
 namespace Matt.Mih.Helper
 {
-    public class SettingsHandler
+    public class SettingsManager
     {
         public XDocument SettingsXml { get; set; }
 
         private static readonly string xmlFile = "settings.xml";
 
-        public SettingsHandler()
+        public SettingsManager()
         {
             if (File.Exists(xmlFile))
             {
