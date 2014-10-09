@@ -100,13 +100,21 @@ namespace Matt.Mih.Helper.LeagueApi
             {
                 LeagueInfoDTO leagueDto = dao.GetSoloQueueLeagueInfo(summonerDto.id);
 
-                return new Summoner(summonerDto, leagueDto);
+                Summoner summoner = new Summoner(summonerDto, leagueDto);
+
+                summonerCache.Add(summoner);
+
+                return summoner;
             }
             catch (WebException exception)
             {
                 if (exception.Status == WebExceptionStatus.ProtocolError && ((HttpWebResponse)exception.Response).StatusCode == HttpStatusCode.NotFound)
                 {
-                    return new Summoner(summonerDto);
+                    Summoner summoner = new Summoner(summonerDto);
+
+                    summonerCache.Add(summoner);
+
+                    return summoner;
                 }
                 else
                 {
@@ -115,7 +123,11 @@ namespace Matt.Mih.Helper.LeagueApi
             }
             catch (InvalidOperationException)
             {
-                return new Summoner(summonerDto);
+                Summoner summoner = new Summoner(summonerDto);
+
+                summonerCache.Add(summoner);
+
+                return summoner;
             }
         }
     }
