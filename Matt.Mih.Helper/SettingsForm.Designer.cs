@@ -81,6 +81,7 @@ namespace Matt.Mih.Helper
             // 
             // btnCancel
             // 
+            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancel.Location = new System.Drawing.Point(243, 302);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
@@ -107,6 +108,8 @@ namespace Matt.Mih.Helper
             // 
             // SettingsForm
             // 
+            this.AcceptButton = this.btnSave;
+            this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(391, 346);
             this.Controls.Add(this.cbRegion);
             this.Controls.Add(this.lRegion);
@@ -117,7 +120,12 @@ namespace Matt.Mih.Helper
             this.Controls.Add(this.tbLeagueFolder);
             this.Controls.Add(this.lApiKey);
             this.Controls.Add(this.tbApiKey);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "SettingsForm";
+            this.ShowInTaskbar = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Settings";
             this.ResumeLayout(false);
             this.PerformLayout();

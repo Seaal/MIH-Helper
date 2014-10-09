@@ -114,6 +114,7 @@
             // itSettings
             // 
             this.itSettings.Name = "itSettings";
+            this.itSettings.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
             this.itSettings.Size = new System.Drawing.Size(61, 20);
             this.itSettings.Text = "Settings";
             this.itSettings.Click += new System.EventHandler(this.itSettings_Click);
@@ -121,12 +122,14 @@
             // itAbout
             // 
             this.itAbout.Name = "itAbout";
+            this.itAbout.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.A)));
             this.itAbout.Size = new System.Drawing.Size(52, 20);
             this.itAbout.Text = "About";
             // 
             // itHelp
             // 
             this.itHelp.Name = "itHelp";
+            this.itHelp.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.H)));
             this.itHelp.Size = new System.Drawing.Size(44, 20);
             this.itHelp.Text = "Help";
             // 
