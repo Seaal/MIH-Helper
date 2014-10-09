@@ -52,7 +52,6 @@
             this.btnBalance.TabIndex = 20;
             this.btnBalance.Text = "Balance Teams";
             this.btnBalance.UseVisualStyleBackColor = true;
-            this.btnBalance.Click += new System.EventHandler(this.btnBalance_Click);
             // 
             // btnGameToggle
             // 
@@ -62,7 +61,6 @@
             this.btnGameToggle.TabIndex = 21;
             this.btnGameToggle.Text = "Game Started";
             this.btnGameToggle.UseVisualStyleBackColor = true;
-            this.btnGameToggle.Click += new System.EventHandler(this.btnGameToggle_Click);
             // 
             // lSwap1
             // 
@@ -96,7 +94,6 @@
             this.btnClear.TabIndex = 22;
             this.btnClear.Text = "Clear All";
             this.btnClear.UseVisualStyleBackColor = true;
-            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
             // mainMenu
             // 

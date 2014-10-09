@@ -16,28 +16,13 @@ using System.Xml.Linq;
 
 namespace Matt.Mih.Helper
 {
-    public partial class MainForm : Form
+    public partial class MainForm : Form, IMainFormView
     {
-        private readonly Helper helper;
-
-        public List<PlayerPresenter> PlayerPresenters { get; set; }
-
-        public BalanceResult Swaps { get; set; }
-
-        public bool Balancing { get; set; }
+        private readonly List<IPlayerView> PlayerViews;
 
         public MainForm()
         {
             InitializeComponent();
-
-            SettingsManager settings = new SettingsManager();
-
-            LeagueRepository leagueRepository = new LeagueRepository(settings.Get().ApiKey, settings.Get().Region);
-
-            NameManager nameManager = new NameManager();
-
-            helper = new Helper(leagueRepository, nameManager, settings);
-            Balancing = true;
 
             if(Properties.Settings.Default.firstRun)
             {
@@ -47,13 +32,7 @@ namespace Matt.Mih.Helper
                 Properties.Settings.Default.Save();
             }
 
-            /*Runepage page = helper.GetRunepage(0);
-
-            RunepageStats stats = helper.GetRunepageStats(page);*/
-
-            PlayerPresenters = new List<PlayerPresenter>(10);
-
-            List<Champion> champList = helper.Champions;
+            PlayerViews = new List<IPlayerView>(10);
 
             int playerViewHeight = 110;
 
@@ -61,32 +40,16 @@ namespace Matt.Mih.Helper
 
             for(int i=0;i<5;i++)
             {
-                PlayerView panel = new PlayerView();
-                PlayerPresenter presenter = new PlayerPresenter(panel, helper, champList, nameManager.AutoCompleteNames, i);
-                panel.Size = playerViewSize;
-                panel.Location = new System.Drawing.Point(20, i * (playerViewHeight + 5) + 40);
-                
-                panel.AutoSize = true;
-                panel.ResumeLayout(false);
-                panel.PerformLayout();
-
+                PlayerView panel = getPlayerView(20, i * (playerViewHeight + 5) + 40, playerViewSize);
+                PlayerViews.Add(panel);
                 Controls.Add(panel);
-                PlayerPresenters.Add(presenter);
             }
 
             for (int i = 5; i < 10; i++)
             {
-                PlayerView panel = new PlayerView();
-                PlayerPresenter presenter = new PlayerPresenter(panel, helper, champList, nameManager.AutoCompleteNames, i);
-                panel.Size = playerViewSize;
-                panel.Location = new System.Drawing.Point(505, i * (playerViewHeight + 5) - (playerViewHeight + 5) * 5 + 40);
-
-                panel.AutoSize = true;
-                panel.ResumeLayout(false);
-                panel.PerformLayout();
-
+                PlayerView panel = getPlayerView(505, i * (playerViewHeight + 5) - (playerViewHeight + 5) * 5 + 40, playerViewSize);
+                PlayerViews.Add(panel);
                 Controls.Add(panel);
-                PlayerPresenters.Add(presenter);
             }
 
             lSwap1.SendToBack();
@@ -98,121 +61,80 @@ namespace Matt.Mih.Helper
             this.PerformLayout();
         }
 
-        private void btnBalance_Click(object sender, EventArgs e)
+        private PlayerView getPlayerView(int x, int y, Size size)
         {
-            if(Balancing == true)
-            {
-                try
-                {
-                    BalanceResult result = helper.BalanceTeams();
+            PlayerView panel = new PlayerView();
+            panel.Size = size;
+            panel.Location = new System.Drawing.Point(x, y);
 
-                    if (result.Swaps.Count == 0)
-                    {
-                        lSwap1.Text = "Teams are Balanced";
-                    }
-                    else if (result.Swaps.Count == 1)
-                    {
-                        lSwap1.Text = "Swap " + result.Swaps[0].Item1.Name + " and " + result.Swaps[0].Item2.Name;
-                        Swaps = result;
+            panel.AutoSize = true;
+            panel.ResumeLayout(false);
+            panel.PerformLayout();
 
-                        changeBalanceButton(false);
-                    }
-                    else
-                    {
-                        lSwap1.Text = "Swap " + result.Swaps[0].Item1.Name + " and " + result.Swaps[0].Item2.Name;
-                        lSwap2.Text = "Swap " + result.Swaps[1].Item1.Name + " and " + result.Swaps[1].Item2.Name;
-                        Swaps = result;
-
-                        changeBalanceButton(false);
-                    }
-
-                    lRatingDifference.ForeColor = System.Drawing.Color.Black;
-                    lRatingDifference.Text = "Rating Difference: " + result.RatingDifference;
-                }
-                catch (ArgumentException ex)
-                {
-                    lRatingDifference.ForeColor = System.Drawing.Color.Red;
-                    lRatingDifference.Text = ex.Message;
-                }
-            }
-            else
-            {
-                //Swap players and remove swap messages
-
-                lSwap1.Text = "";
-                lSwap2.Text = "";
-
-                if (Swaps != null)
-                {
-                    List<Tuple<int, int>> uiSwaps = helper.PerformSwaps(Swaps);
-
-                    foreach (Tuple<int, int> swap in uiSwaps)
-                    {
-                        PlayerPresenters[swap.Item1].Swap(PlayerPresenters[swap.Item2]);
-                    }
-
-                    Swaps = null;
-                }
-
-                changeBalanceButton(true);
-            }
-            
+            return panel;
         }
 
-        private void btnGameToggle_Click(object sender, EventArgs e)
+        public List<IPlayerView> Players
         {
-            if (helper.GameInProgress == false)
-            {
-                //Disable UI parts
-                btnGameToggle.Text = "Game Ended";
-                btnBalance.Enabled = false;
-                helper.GameInProgress = true;
-
-                foreach(PlayerPresenter pPresenter in PlayerPresenters)
-                {
-                    pPresenter.Enabled = false;
-                }
-            }
-            else
-            {
-                btnGameToggle.Text = "Game Started";
-                btnBalance.Enabled = true;
-                helper.GameInProgress = false;
-
-                foreach (PlayerPresenter pPanel in PlayerPresenters)
-                {
-                    pPanel.Enabled = true;
-                }
-            }
+            get { return PlayerViews; }
         }
 
-        private void btnClear_Click(object sender, EventArgs e)
+        public string Swap1
         {
-            lSwap1.Text = "";
-            lSwap2.Text = "";
-            lRatingDifference.Text = "";
-
-            foreach (PlayerPresenter pPresenter in PlayerPresenters)
-            {
-                Swaps = null;
-                pPresenter.Clear();
-                helper.ClearPlayers();
-                changeBalanceButton(true);
-            }
+            set { lSwap1.Text = value; }
         }
 
-        private void changeBalanceButton(bool balance)
+        public string Swap2
         {
-            Balancing = balance;
+            set { lSwap2.Text = value; }
+        }
 
-            if(balance)
-            {
-                btnBalance.Text = "Balance Teams";
-            }
-            else
-            {
-                btnBalance.Text = "Swap Players";
-            }
+        public string RatingDifference
+        {
+            set { lRatingDifference.Text = value; }
+        }
+
+        public Color RatingDifferenceTextColor
+        {
+            set { lRatingDifference.ForeColor = value; }
+        }
+
+        public string BalanceButtonText
+        {
+            set { btnBalance.Text = value; }
+        }
+
+        public bool BalanceButtonEnabled
+        {
+            set { btnBalance.Enabled = value; }
+        }
+
+        public string GameToggleButtonText
+        {
+            set { btnBalance.Text = value; }
+        }
+
+        public bool ClearAllButtonEnabled
+        {
+            set { btnClear.Enabled = value; }
+        }
+
+        public event EventHandler BalanceTeamsClick
+        {
+            add { btnBalance.Click += value; }
+            remove { btnBalance.Click -= value; }
+        }
+
+        public event EventHandler GameToggleClick
+        {
+            add { btnGameToggle.Click += value; }
+            remove { btnGameToggle.Click -= value; }
+        }
+
+        public event EventHandler ClearAllClick
+        {
+            add { btnClear.Click += value; }
+            remove { btnClear.Click -= value; }
         }
 
         private void itSettings_Click(object sender, EventArgs e)
@@ -223,8 +145,8 @@ namespace Matt.Mih.Helper
 
             settingsForm.ShowDialog();
 
-            helper.LeagueRepository.ApiKey = settingsManager.Get().ApiKey;
-            helper.LeagueRepository.Region = settingsManager.Get().Region;
+            //helper.LeagueRepository.ApiKey = settingsManager.Get().ApiKey;
+            //helper.LeagueRepository.Region = settingsManager.Get().Region;
         }
     }
 }

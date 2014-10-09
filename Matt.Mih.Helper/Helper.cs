@@ -18,9 +18,9 @@ namespace Matt.Mih.Helper
 
         public ILeagueRepository LeagueRepository { get; private set; }
 
-        public NameManager Names { get; set; }
+        public NameManager NameManager { get; set; }
 
-        public SettingsManager Settings { get; set; }
+        public SettingsManager SettingsManager { get; set; }
 
         public List<Champion> Champions
         {
@@ -43,8 +43,8 @@ namespace Matt.Mih.Helper
             Players = new Summoner[10];
             GameInProgress = false;
             LeagueRepository = leagueRepository;
-            Names = names;
-            Settings = settings;
+            NameManager = names;
+            SettingsManager = settings;
         }
 
         public Summoner GetSummoner(string name, int playerNumber)
@@ -71,7 +71,7 @@ namespace Matt.Mih.Helper
 
             Players[playerNumber] = LeagueRepository.GetSummoner(name);
 
-            Names.Add(Players[playerNumber].Name);
+            NameManager.Add(Players[playerNumber].Name);
 
             return Players[playerNumber];
         }

@@ -27,7 +27,7 @@ namespace Matt.Mih.Helper
             PlayerNumber = playerNumber;
             this.helper = helper;
 
-            PlayerView.Champions = champions;
+            PlayerView.Champions = new List<Champion>(champions);
             PlayerView.ExistingNames = names;
 
             PlayerView.PlayerNameTextboxLeave += new EventHandler(OnPlayerNameChange);
@@ -102,7 +102,7 @@ namespace Matt.Mih.Helper
         {
             string champName = PlayerView.SelectedChampion.key;
 
-            string leagueFolder = helper.Settings.Get().LeagueFolder;
+            string leagueFolder = helper.SettingsManager.Get().LeagueFolder;
 
             PlayerView.ChampionIconPath = getChampImagesLocation(leagueFolder) + champName + CHAMP_IMAGES_SUFFIX;
         }
