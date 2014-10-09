@@ -10,139 +10,76 @@ using System.Windows.Forms;
 
 namespace Matt.Mih.Helper
 {
-    public partial class PlayerView : UserControl
+    public partial class PlayerView : UserControl, IPlayerView
     {
-        private readonly string CHAMP_IMAGES_LOCATION_PRE_RELEASES = @"\RADS\projects\lol_air_client\releases\";
-        private readonly string CHAMP_IMAGES_LOCATION_POST_RELEASES = @"\deploy\assets\images\champions\";
-        private readonly string CHAMP_IMAGE_SUFFIX = "_Square_0.png";
-
         private TextBox tbElo;
         private Label lError;
         private TextBox tbPlayer;
         private ComboBox cbChampions;
         private PictureBox pbChampion;
-        private readonly Helper helper;
+        private readonly Helper Helper;
 
-        public int PlayerNumber { get; set; }
-
-        public PlayerView(int playerNumber, Helper helper, Dictionary<String, Champion> champsList, AutoCompleteStringCollection summonerNamesAutoComplete)
+        public PlayerView()
         {
-            Name = "PlayerPanel" + playerNumber;
-            InitializeComponent(champsList, summonerNamesAutoComplete);
-            PlayerNumber = playerNumber;
-            this.helper = helper;
+            InitializeComponent();
+
             BorderStyle = BorderStyle.FixedSingle;
         }
 
-        private void getPlayerSummoner(object sender, EventArgs e)
+        public string PlayerName
         {
-            try
-            {
-                Summoner summoner = helper.GetSummoner(tbPlayer.Text, PlayerNumber);
-
-                tbElo.Text = summoner.Tier + " " + summoner.Division;
-
-                if (summoner.Level < 30)
-                {
-                    lError.Text = "Warning: Player is level " + summoner.Level + ".";
-                }
-                else
-                {
-                    lError.Text = "";
-                }
-            }
-            catch (WebException exception)
-            {
-                if (exception.Status == WebExceptionStatus.ProtocolError)
-                {
-                    switch(((HttpWebResponse)exception.Response).StatusCode)
-                    {
-                        case HttpStatusCode.NotFound :
-                            lError.Text = "Player not found.";
-                            break;
-                        case HttpStatusCode.Unauthorized :
-                            lError.Text = "Unauthorized, check your API key.";
-                            break;
-                        case HttpStatusCode.BadRequest :
-                            lError.Text = "Bad Request, try again later.";
-                            break;
-                        case HttpStatusCode.ServiceUnavailable :
-                        case HttpStatusCode.InternalServerError :
-                            lError.Text = "API unavailable, try again later.";
-                            break;
-                        case (HttpStatusCode)429:
-                            lError.Text = "API limit reached, try again.";
-                            break;
-                        default:
-                            lError.Text = "An error has occurred.";
-                            break;
-                    }    
-                }
-                else
-                {
-                    lError.Text = "An error has occurred.";
-                }
-
-                tbElo.Text = "";
-            }
-            catch (ArgumentException exception)
-            {
-                lError.Text = exception.Message;
-                tbElo.Text = "";
-            }
+            get { return tbPlayer.Text; }
+            set { tbPlayer.Text = value; }
         }
 
-        private void changeChampionPicture(object sender, EventArgs e)
+        public AutoCompleteStringCollection ExistingNames
         {
-            string champName = ((KeyValuePair<string, Champion>)cbChampions.SelectedItem).Key;
-
-            string leagueFolder = helper.Settings.Get().LeagueFolder;
-
-            pbChampion.ImageLocation = getChampImagesLocation(leagueFolder) + champName + CHAMP_IMAGE_SUFFIX;
+            set { tbPlayer.AutoCompleteCustomSource = value; }
         }
 
-        private string getChampImagesLocation(string leagueFolder)
+        public string Elo
         {
-            List<string> folders = Directory.GetDirectories(leagueFolder + CHAMP_IMAGES_LOCATION_PRE_RELEASES).ToList();
-
-            string pattern = "\\d+.\\d+.\\d+.\\d+";
-
-            foreach(string folder in folders)
-            {
-                if(System.Text.RegularExpressions.Regex.IsMatch(folder.Remove(0, leagueFolder.Length + CHAMP_IMAGES_LOCATION_PRE_RELEASES.Length), pattern))
-                {
-                    return folder + CHAMP_IMAGES_LOCATION_POST_RELEASES;
-                }
-            }
-
-            return "";
+            get { return tbElo.Text; }
+            set { tbElo.Text = value; }
         }
 
-        public void Swap(PlayerView otherPanel)
+        public List<Champion> Champions
         {
-            string tempName = otherPanel.tbPlayer.Text;
-            string tempElo = otherPanel.tbElo.Text;
-            string tempError = otherPanel.lError.Text;
-            int tempChampIndex = otherPanel.cbChampions.SelectedIndex;
-
-            otherPanel.tbPlayer.Text = tbPlayer.Text;
-            otherPanel.tbElo.Text = tbElo.Text;
-            otherPanel.lError.Text = lError.Text;
-            otherPanel.cbChampions.SelectedIndex = cbChampions.SelectedIndex;
-
-            tbPlayer.Text = tempName;
-            tbElo.Text = tempElo;
-            lError.Text = tempError;
-            cbChampions.SelectedIndex = tempChampIndex;
+            set { cbChampions.DataSource = value; }
         }
 
-        public void Clear()
+        public string ChampionIconPath
         {
-            tbPlayer.Text = "";
-            tbElo.Text = "";
-            cbChampions.SelectedIndex = 0;
-            lError.Text = "";
-            pbChampion.ImageLocation = "";
+            set { pbChampion.ImageLocation = value; }
+        }
+
+        public int SelectedChampionIndex
+        {
+            get { return cbChampions.SelectedIndex; }
+            set { cbChampions.SelectedIndex = value; }
+        }
+
+        public Champion SelectedChampion
+        {
+            get { return (Champion)cbChampions.SelectedItem; }
+        }
+
+        public string Error
+        {
+            get { return lError.Text; }
+            set { lError.Text = value; }
+        }
+
+        public event EventHandler PlayerNameTextboxLeave
+        {
+            add { tbPlayer.Leave += value; }
+            remove { tbPlayer.Leave -= value; }
+        }
+
+        public event EventHandler ChampionSelectedChanged
+        {
+            add { cbChampions.SelectedIndexChanged += value; }
+            remove { cbChampions.SelectedIndexChanged -= value; }
         }
     }
 }

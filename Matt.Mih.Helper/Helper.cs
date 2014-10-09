@@ -22,11 +22,11 @@ namespace Matt.Mih.Helper
 
         public SettingsManager Settings { get; set; }
 
-        public Dictionary<string, Champion> Champions
+        public List<Champion> Champions
         {
             get
             {
-                return LeagueRepository.GetChampions().ToDictionary(o => o.name);
+                return LeagueRepository.GetChampions();
             }
         }
 
