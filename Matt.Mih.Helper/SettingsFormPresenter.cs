@@ -10,10 +10,10 @@ namespace Matt.Mih.Helper
     class SettingsFormPresenter
     {
         private readonly ISettingsFormView SettingsView;
-        private readonly SettingsManager SettingsManager;
+        private readonly ISettingsManager SettingsManager;
         private readonly FolderBrowserDialog fbFindLeagueFolder;
 
-        public SettingsFormPresenter(ISettingsFormView settingsView, SettingsManager settingsManager)
+        public SettingsFormPresenter(ISettingsFormView settingsView, ISettingsManager settingsManager)
         {
             SettingsView = settingsView;
             SettingsManager = settingsManager;

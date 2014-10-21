@@ -10,7 +10,7 @@ using System.Xml.Serialization;
 
 namespace Matt.Mih.Helper
 {
-    public class SettingsManager
+    public class SettingsManager : ISettingsManager
     {
         public XDocument SettingsXml { get; set; }
 

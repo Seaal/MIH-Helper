@@ -41,6 +41,11 @@ namespace Matt.Mih.Helper
             set { PlayerView.Enabled = value; }
         }
 
+        public List<Champion> Champions
+        {
+            set { PlayerView.Champions = value; }
+        }
+
         private void OnPlayerNameChange(object sender, EventArgs e)
         {
             try
@@ -84,6 +89,10 @@ namespace Matt.Mih.Helper
                             PlayerView.Error = "An error has occurred.";
                             break;
                     }
+                }
+                else if(exception.Status == WebExceptionStatus.NameResolutionFailure)
+                {
+                    PlayerView.Error = "Cannot resolve API name.";
                 }
                 else
                 {

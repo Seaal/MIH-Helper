@@ -9,7 +9,7 @@ namespace Matt.Mih.Helper.LeagueApi
         string Region { set; }
         List<Champion> GetChampions();
         List<Rune> GetRunes();
-        Runepage GetCurrentRunepage(int id);
+        Runepage GetCurrentRunepage(int summonerId);
         Summoner GetSummoner(string summonerName);
     }
 }

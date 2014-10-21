@@ -9,7 +9,7 @@ using System.Xml.Linq;
 
 namespace Matt.Mih.Helper
 {
-    public class NameManager
+    public class NameManager : INameManager
     {
         public XDocument NamesXml { get; set; }
 

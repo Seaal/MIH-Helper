@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -28,7 +29,20 @@ namespace Matt.Mih.Helper
 
             MainMenuPresenter mainMenuPresenter = new MainMenuPresenter(MainView.MainMenuView, Helper);
 
-            List<Champion> champions = Helper.Champions;
+            List<Champion> champions = null;
+
+            try
+            {
+                champions = Helper.Champions;
+            }
+            catch(WebException)
+            {
+                champions = new List<Champion>();
+
+                MainView.RatingDifference = "An error has occured";
+                MainView.RatingDifferenceTextColor = System.Drawing.Color.Red;
+            }
+            
             AutoCompleteStringCollection names = Helper.NameManager.AutoCompleteNames;
 
             for(int i=0; i<10; i++)

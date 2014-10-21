@@ -20,7 +20,7 @@ namespace Matt.Mih.Helper
 
         public NameManager NameManager { get; set; }
 
-        public SettingsManager SettingsManager { get; set; }
+        public ISettingsManager SettingsManager { get; set; }
 
         public List<Champion> Champions
         {
@@ -38,7 +38,7 @@ namespace Matt.Mih.Helper
             }
         }
 
-        public Helper(ILeagueRepository leagueRepository, NameManager names, SettingsManager settings)
+        public Helper(ILeagueRepository leagueRepository, NameManager names, ISettingsManager settings)
         {
             Players = new Summoner[10];
             GameInProgress = false;
