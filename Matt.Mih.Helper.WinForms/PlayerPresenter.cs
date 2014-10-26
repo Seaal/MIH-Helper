@@ -12,24 +12,23 @@ namespace Matt.Mih.Helper.WinForms
 {
     public class PlayerPresenter
     {
-        private readonly string CHAMP_IMAGES_LOCATION_PRE_RELEASES = @"\RADS\projects\lol_air_client\releases\";
-        private readonly string CHAMP_IMAGES_LOCATION_POST_RELEASES = @"\deploy\assets\images\champions\";
-        private readonly string CHAMP_IMAGES_SUFFIX = "_Square_0.png";
-
         private readonly IPlayerView PlayerView;
-        private readonly Helper helper;
+        private readonly Helper Helper;
+        private readonly IIconPathManager IconPathManager;
 
         public int PlayerNumber { get; set; }
 
-        public PlayerPresenter(IPlayerView playerView, Helper helper, List<Champion> champions, AutoCompleteStringCollection names, int playerNumber)
+        public PlayerPresenter(IPlayerView playerView, Helper helper, IIconPathManager iconPathManager, List<Champion> champions, AutoCompleteStringCollection names, int playerNumber)
         {
             PlayerView = playerView;
             PlayerNumber = playerNumber;
-            this.helper = helper;
+            Helper = helper;
+            IconPathManager = iconPathManager;
 
             PlayerView.Champions = new List<Champion>(champions);
             PlayerView.ExistingNames = names;
             PlayerView.Error = "";
+            UpdateChampionIcon();
 
             PlayerView.PlayerNameTextboxLeave += new EventHandler(OnPlayerNameChange);
             PlayerView.ChampionSelectedChanged += new EventHandler(OnSelectedChampionChange);
@@ -45,7 +44,7 @@ namespace Matt.Mih.Helper.WinForms
         {
             try
             {
-                Summoner summoner = helper.GetSummoner(PlayerView.PlayerName, PlayerNumber);
+                Summoner summoner = Helper.GetSummoner(PlayerView.PlayerName, PlayerNumber);
 
                 PlayerView.Elo = summoner.Tier + " " + summoner.Division;
 
@@ -101,28 +100,23 @@ namespace Matt.Mih.Helper.WinForms
 
         private void OnSelectedChampionChange(object sender, EventArgs e)
         {
-            string champName = PlayerView.SelectedChampion.key;
-
-            string leagueFolder = helper.SettingsManager.Get().LeagueFolder;
-
-            PlayerView.ChampionIconPath = getChampImagesLocation(leagueFolder) + champName + CHAMP_IMAGES_SUFFIX;
+            UpdateChampionIcon();
         }
 
-        private string getChampImagesLocation(string leagueFolder)
+        private void UpdateChampionIcon()
         {
-            List<string> folders = Directory.GetDirectories(leagueFolder + CHAMP_IMAGES_LOCATION_PRE_RELEASES).ToList();
+            string champName = PlayerView.SelectedChampion.key;
 
-            string pattern = "\\d+.\\d+.\\d+.\\d+";
+            string leagueFolder = Helper.SettingsManager.Get().LeagueFolder;
 
-            foreach (string folder in folders)
+            try
             {
-                if (System.Text.RegularExpressions.Regex.IsMatch(folder.Remove(0, leagueFolder.Length + CHAMP_IMAGES_LOCATION_PRE_RELEASES.Length), pattern))
-                {
-                    return folder + CHAMP_IMAGES_LOCATION_POST_RELEASES;
-                }
+                PlayerView.ChampionIconPath = IconPathManager.GetIconPath(champName, leagueFolder);
             }
-
-            return "";
+            catch (DirectoryNotFoundException)
+            {
+                PlayerView.ChampionIconPath = "";
+            }
         }
 
         public void Swap(PlayerPresenter otherPresenter)
@@ -149,7 +143,7 @@ namespace Matt.Mih.Helper.WinForms
             PlayerView.Elo = "";
             PlayerView.SelectedChampionIndex = 0;
             PlayerView.Error = "";
-            PlayerView.ChampionIconPath = "";
+            UpdateChampionIcon();
         }
 
     }

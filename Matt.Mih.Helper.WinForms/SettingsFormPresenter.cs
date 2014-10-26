@@ -12,12 +12,14 @@ namespace Matt.Mih.Helper.WinForms
         private readonly ISettingsFormView SettingsView;
         private readonly SettingsManager SettingsManager;
         private readonly IFolderBrowserManager FolderBrowserManager;
+        private readonly IIconPathManager IconPathManager;
 
-        public SettingsFormPresenter(ISettingsFormView settingsView, SettingsManager settingsManager, IFolderBrowserManager folderBrowserManager)
+        public SettingsFormPresenter(ISettingsFormView settingsView, SettingsManager settingsManager, IFolderBrowserManager folderBrowserManager, IIconPathManager iconPathManager)
         {
             SettingsView = settingsView;
             SettingsManager = settingsManager;
             FolderBrowserManager = folderBrowserManager;
+            IconPathManager = iconPathManager;
 
             Settings settings = SettingsManager.Get();
 
@@ -25,6 +27,7 @@ namespace Matt.Mih.Helper.WinForms
             SettingsView.LeagueFolder = settings.LeagueFolder;
             SettingsView.Regions = getRegions();
             SettingsView.Region = settings.Region;
+            SettingsView.Error = "";
 
             if(settings.LeagueFolder != "")
             {
@@ -34,6 +37,7 @@ namespace Matt.Mih.Helper.WinForms
             SettingsView.SaveClicked += new EventHandler(OnSaveButtonClicked);
             SettingsView.CancelClicked += new EventHandler(OnCancelButtonClicked);
             SettingsView.FindLeagueFolderClicked += new EventHandler(OnFindLeagueFolderClicked);
+            SettingsView.LeagueFolderChanged += new EventHandler(OnLeagueFolderChanged);
         }
 
         private BindingSource getRegions()
@@ -80,6 +84,18 @@ namespace Matt.Mih.Helper.WinForms
             if (result == DialogResult.OK)
             {
                 SettingsView.LeagueFolder = FolderBrowserManager.SelectedPath;
+            }
+        }
+
+        private void OnLeagueFolderChanged(object sender, EventArgs e)
+        {
+            if(!IconPathManager.IsValidIconPath(SettingsView.LeagueFolder))
+            {
+                SettingsView.Error = "League of Legends Folder is not valid.";
+            }
+            else
+            {
+                SettingsView.Error = "";
             }
         }
 

@@ -19,6 +19,7 @@ namespace Matt.Mih.Helper.WinForms
             this.btnCancel = new System.Windows.Forms.Button();
             this.lRegion = new System.Windows.Forms.Label();
             this.cbRegion = new System.Windows.Forms.ComboBox();
+            this.lError = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // tbApiKey
@@ -100,11 +101,24 @@ namespace Matt.Mih.Helper.WinForms
             this.cbRegion.TabIndex = 0;
             this.cbRegion.ValueMember = "Key";
             // 
+            // lError
+            // 
+            this.lError.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lError.ForeColor = System.Drawing.Color.Red;
+            this.lError.Location = new System.Drawing.Point(-5, 275);
+            this.lError.Name = "lError";
+            this.lError.Size = new System.Drawing.Size(401, 18);
+            this.lError.TabIndex = 8;
+            this.lError.Text = "{{ Error Label }}";
+            this.lError.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // SettingsForm
             // 
             this.AcceptButton = this.btnSave;
             this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(391, 346);
+            this.Controls.Add(this.lError);
             this.Controls.Add(this.cbRegion);
             this.Controls.Add(this.lRegion);
             this.Controls.Add(this.btnCancel);
@@ -128,5 +142,6 @@ namespace Matt.Mih.Helper.WinForms
 
         private System.Windows.Forms.ComboBox cbRegion;
         private System.Windows.Forms.Label lRegion;
+        private System.Windows.Forms.Label lError;
     }
 }

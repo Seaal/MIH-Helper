@@ -13,10 +13,12 @@ namespace Matt.Mih.Helper.WinForms
         string LeagueFolder { get; set; }
         string Region { get; set; }
         BindingSource Regions { set; }
+        string Error { get; set; }
 
         event EventHandler SaveClicked;
         event EventHandler CancelClicked;
         event EventHandler FindLeagueFolderClicked;
+        event EventHandler LeagueFolderChanged;
 
         void Close();
         DialogResult ShowDialog();

@@ -32,10 +32,12 @@ namespace Matt.Mih.Helper.WinForms
             AutoCompleteStringCollection names = new AutoCompleteStringCollection();
             names.AddRange(Helper.NameManager.Names.ToArray());
 
+            IconPathManager IconPathManager = new IconPathManager();
+
             for(int i=0; i<10; i++)
             {
                 IPlayerView playerView = MainView.PlayersView[i];
-                PlayerPresenter presenter = new PlayerPresenter(playerView, Helper, champions, names, i);
+                PlayerPresenter presenter = new PlayerPresenter(playerView, Helper, IconPathManager, champions, names, i);
 
                 PlayerPresenters.Add(presenter);
             }

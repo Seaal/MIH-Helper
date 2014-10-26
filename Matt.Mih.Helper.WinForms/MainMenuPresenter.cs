@@ -30,7 +30,8 @@ namespace Matt.Mih.Helper.WinForms
             ISettingsFormView settingsForm = new SettingsForm();
             SettingsManager settingsManager = Helper.SettingsManager;
             FolderBrowserManager folderBrowserManager = new FolderBrowserManager();
-            SettingsFormPresenter settingsPresenter = new SettingsFormPresenter(settingsForm, settingsManager, folderBrowserManager);
+            IconPathManager iconPathManager = new IconPathManager();
+            SettingsFormPresenter settingsPresenter = new SettingsFormPresenter(settingsForm, settingsManager, folderBrowserManager, iconPathManager);
 
             settingsPresenter.ShowDialog();
 

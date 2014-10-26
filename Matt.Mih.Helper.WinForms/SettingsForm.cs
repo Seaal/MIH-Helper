@@ -45,6 +45,12 @@ namespace Matt.Mih.Helper.WinForms
             set { cbRegion.DataSource = value; }
         }
 
+        public string Error
+        {
+            get { return lError.Text; }
+            set { lError.Text = value; }
+        }
+
         public event EventHandler SaveClicked
         {
             add { btnSave.Click += value; }
@@ -61,6 +67,12 @@ namespace Matt.Mih.Helper.WinForms
         {
             add { btnLeagueFolder.Click += value; }
             remove { btnLeagueFolder.Click -= value; }
+        }
+
+        public event EventHandler LeagueFolderChanged
+        {
+            add { tbLeagueFolder.TextChanged += value; }
+            remove { tbLeagueFolder.TextChanged -= value; }
         }
     }
 }

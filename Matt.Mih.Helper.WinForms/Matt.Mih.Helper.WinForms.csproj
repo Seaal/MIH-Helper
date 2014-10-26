@@ -46,7 +46,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FolderBrowserManager.cs" />
+    <Compile Include="IconPathManager.cs" />
     <Compile Include="IFolderBrowserManager.cs" />
+    <Compile Include="IIconPathManager.cs" />
     <Compile Include="IMainFormView.cs" />
     <Compile Include="IMainMenuView.cs" />
     <Compile Include="IPlayerView.cs" />
