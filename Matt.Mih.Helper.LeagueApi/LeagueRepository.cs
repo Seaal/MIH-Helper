@@ -67,8 +67,7 @@ namespace Matt.Mih.Helper.LeagueApi
 
         public Runepage GetCurrentRunepage(int summonerId)
         {
-            //Summoner seaal = GetSummonerAsync("Seaal");
-            RunepageDTO runepageDto = null;
+            RunepageDTO runepageDto = dao.GetCurrentRunepage(summonerId);
 
             List<Rune> runesUsed = new List<Rune>(30);
 
