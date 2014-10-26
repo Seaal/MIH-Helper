@@ -111,7 +111,7 @@ namespace Matt.Mih.Helper.WinForms
 
         public string GameToggleButtonText
         {
-            set { btnBalance.Text = value; }
+            set { btnGameToggle.Text = value; }
         }
 
         public bool ClearAllButtonEnabled

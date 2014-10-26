@@ -48,7 +48,7 @@ namespace Matt.Mih.Helper.WinForms
             MainView.GameToggleClick += new EventHandler(OnGameToggleButtonClick);
             MainView.ClearAllClick += new EventHandler(OnClearAllButtonClick);
 
-            if (Properties.Settings.Default.firstRun)
+            if(Properties.Settings.Default.firstRun)
             {
                 mainMenuPresenter.ShowSettingsForm();
 
