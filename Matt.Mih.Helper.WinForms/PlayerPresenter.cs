@@ -46,6 +46,7 @@ namespace Matt.Mih.Helper.WinForms
             {
                 Summoner summoner = Helper.GetSummoner(PlayerView.PlayerName, PlayerNumber);
 
+                PlayerView.PlayerName = summoner.Name;
                 PlayerView.Elo = summoner.Tier + " " + summoner.Division;
 
                 if (summoner.Level < 30)

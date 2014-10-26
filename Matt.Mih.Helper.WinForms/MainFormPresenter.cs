@@ -89,24 +89,7 @@ namespace Matt.Mih.Helper.WinForms
             }
             else
             {
-                //Swap players and remove swap messages
-
-                MainView.Swap1 = "";
-                MainView.Swap2 = "";
-
-                if (Swaps != null)
-                {
-                    List<Tuple<int, int>> uiSwaps = Helper.PerformSwaps(Swaps);
-
-                    foreach (Tuple<int, int> swap in uiSwaps)
-                    {
-                        PlayerPresenters[swap.Item1].Swap(PlayerPresenters[swap.Item2]);
-                    }
-
-                    Swaps = null;
-                }
-
-                changeBalanceButton(true);
+                PerformSwaps();
             }
 
         }
@@ -119,6 +102,8 @@ namespace Matt.Mih.Helper.WinForms
                 MainView.GameToggleButtonText = "Game Ended";
                 MainView.BalanceButtonEnabled = false;
                 MainView.ClearAllButtonEnabled = false;
+
+                PerformSwaps();
 
                 Helper.GameInProgress = true;
 
@@ -140,6 +125,28 @@ namespace Matt.Mih.Helper.WinForms
                     pPanel.Enabled = true;
                 }
             }
+        }
+
+        private void PerformSwaps()
+        {
+            //Swap players and remove swap messages
+
+            if (Swaps != null)
+            {
+                MainView.Swap1 = "";
+                MainView.Swap2 = "";
+
+                List<Tuple<int, int>> uiSwaps = Helper.PerformSwaps(Swaps);
+
+                foreach (Tuple<int, int> swap in uiSwaps)
+                {
+                    PlayerPresenters[swap.Item1].Swap(PlayerPresenters[swap.Item2]);
+                }
+
+                Swaps = null;
+            }
+
+            changeBalanceButton(true);
         }
 
         private void OnClearAllButtonClick(object sender, EventArgs e)

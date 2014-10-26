@@ -27,7 +27,7 @@ namespace Matt.Mih.Helper.WinForms
             SettingsView.LeagueFolder = settings.LeagueFolder;
             SettingsView.Regions = getRegions();
             SettingsView.Region = settings.Region;
-            SettingsView.Error = "";
+            CheckLeagueFolderValid();
 
             if(settings.LeagueFolder != "")
             {
@@ -89,7 +89,12 @@ namespace Matt.Mih.Helper.WinForms
 
         private void OnLeagueFolderChanged(object sender, EventArgs e)
         {
-            if(!IconPathManager.IsValidIconPath(SettingsView.LeagueFolder))
+            CheckLeagueFolderValid();
+        }
+
+        private void CheckLeagueFolderValid()
+        {
+            if (!IconPathManager.IsValidIconPath(SettingsView.LeagueFolder))
             {
                 SettingsView.Error = "League of Legends Folder is not valid.";
             }
