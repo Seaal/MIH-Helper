@@ -76,15 +76,12 @@ namespace Matt.Mih.Helper
             return Players[playerNumber];
         }
 
-        public Runepage GetRunepage(int playerNumber)
+        public RunepageStats GetRunepageStats(int playerNumber)
         {
-            Summoner seaal = GetSummoner("Seaal", 0);
+            Summoner player = Players[playerNumber];
 
-            return LeagueRepository.GetCurrentRunepage(seaal.Id);
-        }
+            Runepage runepage = LeagueRepository.GetCurrentRunepage(player.Id);
 
-        public RunepageStats GetRunepageStats(Runepage runepage)
-        {
             RunepageStats stats = new RunepageStats();
 
             foreach (RuneType type in Enum.GetValues(typeof(RuneType)))
@@ -95,7 +92,6 @@ namespace Matt.Mih.Helper
                     {
                         stats.AddStat(type, stat);
                     }
-                    
                 }
             }
 

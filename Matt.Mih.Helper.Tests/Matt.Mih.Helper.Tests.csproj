@@ -59,8 +59,12 @@
       <Project>{98f32981-82c6-4dce-93aa-50d5dbf2bb6d}</Project>
       <Name>Matt.Mih.Helper.LeagueApi</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Matt.Mih.Helper\Matt.Mih.Helper.csproj">
+    <ProjectReference Include="..\Matt.Mih.Helper.WinForms\Matt.Mih.Helper.WinForms.csproj">
       <Project>{1d96ba43-3f10-4119-8d3e-1cf22217d6dd}</Project>
+      <Name>Matt.Mih.Helper.WinForms</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Matt.Mih.Helper\Matt.Mih.Helper.csproj">
+      <Project>{c8e310a3-96a4-4b89-b86b-05ad0eca330a}</Project>
       <Name>Matt.Mih.Helper</Name>
     </ProjectReference>
   </ItemGroup>

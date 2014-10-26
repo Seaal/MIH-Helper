@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Matt.Mih.Helper
+namespace Matt.Mih.Helper.WinForms
 {
     interface IMainFormView
     {

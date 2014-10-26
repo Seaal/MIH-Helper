@@ -5,19 +5,19 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Matt.Mih.Helper
+namespace Matt.Mih.Helper.WinForms
 {
     class SettingsFormPresenter
     {
         private readonly ISettingsFormView SettingsView;
         private readonly SettingsManager SettingsManager;
-        private readonly FolderBrowserDialog fbFindLeagueFolder;
+        private readonly IFolderBrowserManager FolderBrowserManager;
 
-        public SettingsFormPresenter(ISettingsFormView settingsView, SettingsManager settingsManager)
+        public SettingsFormPresenter(ISettingsFormView settingsView, SettingsManager settingsManager, IFolderBrowserManager folderBrowserManager)
         {
             SettingsView = settingsView;
             SettingsManager = settingsManager;
-            fbFindLeagueFolder = getLeagueFolderBrowser();
+            FolderBrowserManager = folderBrowserManager;
 
             Settings settings = SettingsManager.Get();
 
@@ -26,19 +26,14 @@ namespace Matt.Mih.Helper
             SettingsView.Regions = getRegions();
             SettingsView.Region = settings.Region;
 
+            if(settings.LeagueFolder != "")
+            {
+                FolderBrowserManager.SelectedPath = settings.LeagueFolder;
+            }
+
             SettingsView.SaveClicked += new EventHandler(OnSaveButtonClicked);
             SettingsView.CancelClicked += new EventHandler(OnCancelButtonClicked);
             SettingsView.FindLeagueFolderClicked += new EventHandler(OnFindLeagueFolderClicked);
-        }
-
-        private FolderBrowserDialog getLeagueFolderBrowser()
-        {
-            FolderBrowserDialog fbLeagueFolder = new FolderBrowserDialog();
-
-            fbLeagueFolder.RootFolder = System.Environment.SpecialFolder.MyComputer;
-            fbLeagueFolder.ShowNewFolderButton = false;
-
-            return fbLeagueFolder;
         }
 
         private BindingSource getRegions()
@@ -80,12 +75,17 @@ namespace Matt.Mih.Helper
 
         private void OnFindLeagueFolderClicked(object sender, EventArgs e)
         {
-            DialogResult result = fbFindLeagueFolder.ShowDialog();
+            DialogResult result = FolderBrowserManager.ShowDialog();
 
             if (result == DialogResult.OK)
             {
-                SettingsView.LeagueFolder = fbFindLeagueFolder.SelectedPath;
+                SettingsView.LeagueFolder = FolderBrowserManager.SelectedPath;
             }
+        }
+
+        public void ShowDialog()
+        {
+            SettingsView.ShowDialog();
         }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using Matt.Mih.Helper.LeagueApi;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,7 +13,7 @@ using System.Web.Script.Serialization;
 using System.Windows.Forms;
 using System.Xml.Linq;
 
-namespace Matt.Mih.Helper
+namespace Matt.Mih.Helper.WinForms
 {
     public partial class MainForm : Form, IMainFormView
     {
@@ -24,10 +23,9 @@ namespace Matt.Mih.Helper
         public MainForm()
         {
             MainMenu = new MainMenuView();
+            Controls.Add(MainMenu);
 
             InitializeComponent();
-
-            Controls.Add(MainMenu);
 
             PlayerViews = new List<IPlayerView>(10);
 

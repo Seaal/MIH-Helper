@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Matt.Mih.Helper
+namespace Matt.Mih.Helper.WinForms
 {
     class MainFormPresenter
     {
@@ -29,7 +29,8 @@ namespace Matt.Mih.Helper
             MainMenuPresenter mainMenuPresenter = new MainMenuPresenter(MainView.MainMenuView, Helper);
 
             List<Champion> champions = Helper.Champions;
-            AutoCompleteStringCollection names = Helper.NameManager.AutoCompleteNames;
+            AutoCompleteStringCollection names = new AutoCompleteStringCollection();
+            names.AddRange(Helper.NameManager.Names.ToArray());
 
             for(int i=0; i<10; i++)
             {

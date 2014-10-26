@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Matt.Mih.Helper
+namespace Matt.Mih.Helper.WinForms
 {
     class MainMenuPresenter
     {
@@ -17,6 +17,7 @@ namespace Matt.Mih.Helper
             Helper = helper;
 
             MainMenuView.SettingsClick += new EventHandler(OnSettingsItemClick);
+            MainMenuView.AboutClick += new EventHandler(OnAboutItemClick);
 	    }
 
         private void OnSettingsItemClick(object sender, EventArgs e)
@@ -26,14 +27,20 @@ namespace Matt.Mih.Helper
 
         public void ShowSettingsForm()
         {
-            SettingsForm settingsForm = new SettingsForm();
+            ISettingsFormView settingsForm = new SettingsForm();
             SettingsManager settingsManager = Helper.SettingsManager;
-            SettingsFormPresenter settingsPresenter = new SettingsFormPresenter(settingsForm, settingsManager);
+            FolderBrowserManager folderBrowserManager = new FolderBrowserManager();
+            SettingsFormPresenter settingsPresenter = new SettingsFormPresenter(settingsForm, settingsManager, folderBrowserManager);
 
-            settingsForm.ShowDialog();
+            settingsPresenter.ShowDialog();
 
             Helper.LeagueRepository.ApiKey = settingsManager.Get().ApiKey;
             Helper.LeagueRepository.Region = settingsManager.Get().Region;
+        }
+
+        public void OnAboutItemClick(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Matt.Mih.Helper
+namespace Matt.Mih.Helper.WinForms
 {
     public partial class SettingsForm : Form, ISettingsFormView
     {
@@ -34,7 +34,7 @@ namespace Matt.Mih.Helper
             set { tbLeagueFolder.Text = value; }
         }
 
-        public string Region
+        public new string Region
         {
             get { return (string)cbRegion.SelectedValue; }
             set { cbRegion.SelectedValue = value; }

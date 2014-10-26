@@ -1,4 +1,4 @@
-﻿namespace Matt.Mih.Helper
+﻿namespace Matt.Mih.Helper.WinForms
 {
     partial class MainMenuView
     {

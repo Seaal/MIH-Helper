@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Matt.Mih.Helper
+namespace Matt.Mih.Helper.WinForms
 {
     public interface ISettingsFormView
     {
@@ -19,5 +19,6 @@ namespace Matt.Mih.Helper
         event EventHandler FindLeagueFolderClicked;
 
         void Close();
+        DialogResult ShowDialog();
     }
 }
