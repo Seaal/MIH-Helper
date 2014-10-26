@@ -40,12 +40,12 @@ namespace Matt.Mih.Helper.WinForms
             set { PlayerView.Enabled = value; }
         }
 
-        private void OnPlayerNameChange(object sender, EventArgs e)
+        private async void OnPlayerNameChange(object sender, EventArgs e)
         {
             try
             {
-                Summoner summoner = Helper.GetSummoner(PlayerView.PlayerName, PlayerNumber);
-
+                Summoner summoner = await Helper.GetSummonerAsync(PlayerView.PlayerName, PlayerNumber);
+                
                 PlayerView.PlayerName = summoner.Name;
                 PlayerView.Elo = summoner.Tier + " " + summoner.Division;
 

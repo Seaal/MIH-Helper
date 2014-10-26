@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Matt.Mih.Helper.LeagueApi
 {
@@ -10,6 +11,6 @@ namespace Matt.Mih.Helper.LeagueApi
         List<Champion> GetChampions();
         List<Rune> GetRunes();
         Runepage GetCurrentRunepage(int id);
-        Summoner GetSummoner(string summonerName);
+        Task<Summoner> GetSummonerAsync(string summonerName);
     }
 }

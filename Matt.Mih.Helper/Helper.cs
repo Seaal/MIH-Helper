@@ -69,7 +69,36 @@ namespace Matt.Mih.Helper
                 }
             }
 
-            Players[playerNumber] = LeagueRepository.GetSummoner(name);
+            //Players[playerNumber] = LeagueRepository.GetSummonerAsync(name);
+
+            NameManager.Add(Players[playerNumber].Name);
+
+            return Players[playerNumber];
+        }
+
+        public async Task<Summoner> GetSummonerAsync(string name, int playerNumber)
+        {
+            if (name == "")
+            {
+                Players[playerNumber] = null;
+
+                throw new ArgumentException("Player name cannot be empty.");
+            }
+
+            if (Players[playerNumber] != null && Players[playerNumber].Name.ToLower() == name.ToLower())
+            {
+                return Players[playerNumber];
+            }
+
+            for (int i = 0; i < 10; i++)
+            {
+                if (i != playerNumber && Players[i] != null && Players[i].Name.ToLower() == name.ToLower())
+                {
+                    throw new ArgumentException("Player already exists.");
+                }
+            }
+
+            Players[playerNumber] = await LeagueRepository.GetSummonerAsync(name);
 
             NameManager.Add(Players[playerNumber].Name);
 
