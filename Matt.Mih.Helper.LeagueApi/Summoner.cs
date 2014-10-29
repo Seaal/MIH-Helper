@@ -75,6 +75,7 @@ namespace Matt.Mih.Helper.LeagueApi
                 case "DIAMOND":
                     rating = 2000;
                     break;
+                case "MASTER":
                 case "CHALLENGER":
                     rating = 2100;
                     break;

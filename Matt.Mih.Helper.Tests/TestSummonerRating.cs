@@ -57,6 +57,14 @@ namespace Matt.Mih.Helper.Tests
         }
 
         [TestMethod]
+        public void TestMasterIRating()
+        {
+            Summoner summ = summonerHelper("MASTER", "I", 0);
+
+            Assert.IsTrue(summ.GetRating() == 2500);
+        }
+
+        [TestMethod]
         public void TestChallengerIRating()
         {
             Summoner summ = summonerHelper("CHALLENGER", "I", 0);

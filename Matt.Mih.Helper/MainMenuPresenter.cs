@@ -27,7 +27,7 @@ namespace Matt.Mih.Helper
         public void ShowSettingsForm()
         {
             SettingsForm settingsForm = new SettingsForm();
-            SettingsManager settingsManager = Helper.SettingsManager;
+            ISettingsManager settingsManager = Helper.SettingsManager;
             SettingsFormPresenter settingsPresenter = new SettingsFormPresenter(settingsForm, settingsManager);
 
             settingsForm.ShowDialog();

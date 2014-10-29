@@ -31,7 +31,7 @@ namespace Matt.Mih.Helper
             IList<Summoner> finalTeam1 = null;
             IList<Summoner> finalTeam2 = null;
             
-            Combinations<Summoner> combinations = new Combinations<Summoner>(players,5);
+            Combinations<Summoner> combinations = new Combinations<Summoner>(players, 5);
 
             foreach(IList<Summoner> team1 in combinations)
             {

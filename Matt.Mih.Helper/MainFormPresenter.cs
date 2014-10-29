@@ -39,7 +39,7 @@ namespace Matt.Mih.Helper
             {
                 champions = new List<Champion>();
 
-                MainView.RatingDifference = "An error has occured";
+                MainView.RatingDifference = "An error has occurred";
                 MainView.RatingDifferenceTextColor = System.Drawing.Color.Red;
             }
             

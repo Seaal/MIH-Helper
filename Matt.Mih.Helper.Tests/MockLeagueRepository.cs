@@ -9,9 +9,9 @@ namespace Matt.Mih.Helper.Tests
 {
     class MockLeagueRepository : ILeagueRepository
     {
-        public string ApiKey { set; }
+        public string ApiKey { get; set; }
 
-        public string Region { set; }
+        public string Region { get; set; }
 
         public List<Champion> Champions { get; set; }
 
