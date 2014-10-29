@@ -28,18 +28,18 @@ namespace Matt.Mih.Helper.LeagueApi
             return JsonConvert.DeserializeObject<ChampionDTO>(json);
         }
 
-        public SummonerDTO GetSummoner(string summonerName)
+        public async Task<SummonerDTO> GetSummonerAsync(string summonerName)
         {
-            string json = MakeRequest(Region + "/v1.4/summoner/by-name/" + summonerName, Region);
+            string json = await MakeRequestAsync(Region + "/v1.4/summoner/by-name/" + summonerName, Region);
 
             Dictionary<string, SummonerDTO> sumDto = JsonConvert.DeserializeObject<Dictionary<string, SummonerDTO>>(json);
 
             return sumDto.FirstOrDefault().Value;
         }
 
-        public LeagueInfoDTO GetSoloQueueLeagueInfo(int id)
+        public async Task<LeagueInfoDTO> GetSoloQueueLeagueInfoAsync(int id)
         {
-            string json = MakeRequest(Region + "/v2.4/league/by-summoner/" + id + "/entry", Region);
+            string json = await MakeRequestAsync(Region + "/v2.4/league/by-summoner/" + id + "/entry", Region);
             
             Dictionary<string, List<LeagueInfoDTO>> leagueDto = JsonConvert.DeserializeObject<Dictionary<string, List<LeagueInfoDTO>>>(json);
 
@@ -64,14 +64,37 @@ namespace Matt.Mih.Helper.LeagueApi
 
         private string MakeRequest(string resource, string region)
         {
-            string keySeparator = resource.Contains("?") ? "&" : "?";
-
-            String urlRequest = "https://" + region + ".api.pvp.net/api/lol/" + resource + keySeparator + "api_key=" + ApiKey;
-            HttpWebRequest myReq = (HttpWebRequest)WebRequest.Create(urlRequest);
-            Stream response = null;
+            HttpWebRequest myReq = GetRequest(resource, region);
 
             // Sends the HttpWebRequest and waits for the response.
             HttpWebResponse myHttpWebResponse = myReq.GetResponse() as HttpWebResponse;
+
+            return GetJsonResponse(myHttpWebResponse);
+        }
+
+        private async Task<string> MakeRequestAsync(string resource, string region)
+        {
+            HttpWebRequest myReq = GetRequest(resource, region);
+
+            // Sends the HttpWebRequest and waits for the response.
+            HttpWebResponse myHttpWebResponse = await myReq.GetResponseAsync() as HttpWebResponse;
+
+            return GetJsonResponse(myHttpWebResponse);
+        }
+
+        private HttpWebRequest GetRequest(string resource, string region)
+        {
+            string keySeparator = resource.Contains("?") ? "&" : "?";
+
+            string urlRequest = "https://" + region + ".api.pvp.net/api/lol/" + resource + keySeparator + "api_key=" + ApiKey;
+
+            return (HttpWebRequest)WebRequest.Create(urlRequest);
+        }
+
+        private string GetJsonResponse(HttpWebResponse myHttpWebResponse)
+        {
+            Stream response = null;
+
             try
             {
                 response = myHttpWebResponse.GetResponseStream();

@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{C8E310A3-96A4-4B89-B86B-05AD0ECA330A}</ProjectGuid>
+    <ProjectGuid>{1D96BA43-3F10-4119-8D3E-1CF22217D6DD}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Matt.Mih.Helper</RootNamespace>
-    <AssemblyName>Matt.Mih.Helper</AssemblyName>
+    <RootNamespace>Matt.Mih.Helper.WinForms</RootNamespace>
+    <AssemblyName>Matt.Mih.Helper.WinForms</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -32,13 +32,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Combinatorics">
-      <HintPath>..\packages\Combinatorics.1.0.3.2\lib\net40\Combinatorics.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Newtonsoft.Json.6.0.5\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web.Extensions" />
@@ -52,16 +45,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Helper.cs" />
-    <Compile Include="BalanceResult.cs" />
-    <Compile Include="BruteForceBalancingStrategy.cs" />
-    <Compile Include="IBalancingStrategy.cs" />
+    <Compile Include="FolderBrowserManager.cs" />
+    <Compile Include="IconPathManager.cs" />
+    <Compile Include="IFolderBrowserManager.cs" />
+    <Compile Include="IIconPathManager.cs" />
     <Compile Include="IMainFormView.cs" />
     <Compile Include="IMainMenuView.cs" />
-    <Compile Include="INameManager.cs" />
     <Compile Include="IPlayerView.cs" />
     <Compile Include="ISettingsFormView.cs" />
-    <Compile Include="ISettingsManager.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -76,7 +67,6 @@
       <DependentUpon>MainMenuView.cs</DependentUpon>
     </Compile>
     <Compile Include="MainFormPresenter.cs" />
-    <Compile Include="NameManager.cs" />
     <Compile Include="PlayerPresenter.cs" />
     <Compile Include="PlayerView.cs">
       <SubType>UserControl</SubType>
@@ -86,16 +76,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RunepageStats.cs" />
-    <Compile Include="RuneStatCollection.cs" />
-    <Compile Include="Settings.cs" />
     <Compile Include="SettingsForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="SettingsForm.Designer.cs">
       <DependentUpon>SettingsForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="SettingsManager.cs" />
     <Compile Include="SettingsFormPresenter.cs" />
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
@@ -140,6 +126,10 @@
     <ProjectReference Include="..\Matt.Mih.Helper.LeagueApi\Matt.Mih.Helper.LeagueApi.csproj">
       <Project>{98f32981-82c6-4dce-93aa-50d5dbf2bb6d}</Project>
       <Name>Matt.Mih.Helper.LeagueApi</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Matt.Mih.Helper\Matt.Mih.Helper.csproj">
+      <Project>{c8e310a3-96a4-4b89-b86b-05ad0eca330a}</Project>
+      <Name>Matt.Mih.Helper</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

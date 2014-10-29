@@ -4,7 +4,6 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Forms;
 using System.Xml.Linq;
 
 namespace Matt.Mih.Helper
@@ -13,13 +12,13 @@ namespace Matt.Mih.Helper
     {
         public XDocument NamesXml { get; set; }
 
-        public AutoCompleteStringCollection AutoCompleteNames { get; set; }
+        public List<String> Names { get; set; }
 
         private static readonly string xmlFile = "names.xml";
 
         public NameManager()
         {
-            AutoCompleteNames = new AutoCompleteStringCollection();
+            Names = new List<String>();
 
             if(File.Exists(xmlFile))
             {
@@ -28,7 +27,7 @@ namespace Matt.Mih.Helper
                 String[] names = (from name in NamesXml.Descendants("Name")
                                   select (string)name).ToArray();
 
-                AutoCompleteNames.AddRange(names);
+                Names.AddRange(names);
             }
             else
             {
@@ -47,7 +46,7 @@ namespace Matt.Mih.Helper
 
                 NamesXml.Element("SummonerNames").Add(newName);
 
-                AutoCompleteNames.Add(name);
+                Names.Add(name);
 
                 NamesXml.Save(xmlFile);
             }

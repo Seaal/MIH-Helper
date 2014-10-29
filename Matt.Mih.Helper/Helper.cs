@@ -47,7 +47,7 @@ namespace Matt.Mih.Helper
             SettingsManager = settings;
         }
 
-        public Summoner GetSummoner(string name, int playerNumber)
+        public async Task<Summoner> GetSummonerAsync(string name, int playerNumber)
         {
             if (name == "")
             {
@@ -61,30 +61,27 @@ namespace Matt.Mih.Helper
                 return Players[playerNumber];
             }
 
-            for(int i=0;i<10;i++)
+            for (int i = 0; i < 10; i++)
             {
-                if(i != playerNumber && Players[i] != null && Players[i].Name.ToLower() == name.ToLower())
+                if (i != playerNumber && Players[i] != null && Players[i].Name.ToLower() == name.ToLower())
                 {
                     throw new ArgumentException("Player already exists.");
                 }
             }
 
-            Players[playerNumber] = LeagueRepository.GetSummoner(name);
+            Players[playerNumber] = await LeagueRepository.GetSummonerAsync(name);
 
             NameManager.Add(Players[playerNumber].Name);
 
             return Players[playerNumber];
         }
 
-        public Runepage GetRunepage(int playerNumber)
+        public RunepageStats GetRunepageStats(int playerNumber)
         {
-            Summoner seaal = GetSummoner("Seaal", 0);
+            Summoner player = Players[playerNumber];
 
-            return LeagueRepository.GetCurrentRunepage(seaal.Id);
-        }
+            Runepage runepage = LeagueRepository.GetCurrentRunepage(player.Id);
 
-        public RunepageStats GetRunepageStats(Runepage runepage)
-        {
             RunepageStats stats = new RunepageStats();
 
             foreach (RuneType type in Enum.GetValues(typeof(RuneType)))
@@ -95,7 +92,6 @@ namespace Matt.Mih.Helper
                     {
                         stats.AddStat(type, stat);
                     }
-                    
                 }
             }
 

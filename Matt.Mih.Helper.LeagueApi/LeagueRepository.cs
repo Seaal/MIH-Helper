@@ -67,8 +67,7 @@ namespace Matt.Mih.Helper.LeagueApi
 
         public Runepage GetCurrentRunepage(int summonerId)
         {
-            Summoner seaal = GetSummoner("Seaal");
-            RunepageDTO runepageDto = dao.GetCurrentRunepage(seaal.Id);
+            RunepageDTO runepageDto = dao.GetCurrentRunepage(summonerId);
 
             List<Rune> runesUsed = new List<Rune>(30);
 
@@ -85,7 +84,7 @@ namespace Matt.Mih.Helper.LeagueApi
             return GetRunes().Where(o => o.Id == slot.runeId).First();
         }
 
-        public Summoner GetSummoner(string summonerName)
+        public async Task<Summoner> GetSummonerAsync(string summonerName)
         {
             Summoner summonerFromCache = summonerCache.FirstOrDefault(o => o.Name == summonerName);
 
@@ -94,11 +93,11 @@ namespace Matt.Mih.Helper.LeagueApi
                 return summonerFromCache;
             }
 
-            SummonerDTO summonerDto = dao.GetSummoner(summonerName);
+            SummonerDTO summonerDto = await dao.GetSummonerAsync(summonerName);
 
             try
             {
-                LeagueInfoDTO leagueDto = dao.GetSoloQueueLeagueInfo(summonerDto.id);
+                LeagueInfoDTO leagueDto = await dao.GetSoloQueueLeagueInfoAsync(summonerDto.id);
 
                 Summoner summoner = new Summoner(summonerDto, leagueDto);
 
