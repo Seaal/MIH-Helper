@@ -13,7 +13,7 @@ namespace Matt.Mih.Helper.WinForms
         string PlayerName { get; set; }
         AutoCompleteStringCollection ExistingNames { set; }
         string Elo { get; set; }
-        List<Champion> Champions { set; }
+        List<Champion> Champions { get; set; }
         string ChampionIconPath { set; }
         int SelectedChampionIndex { get; set; }
         Champion SelectedChampion { get; }

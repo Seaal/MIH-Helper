@@ -42,7 +42,14 @@ namespace Matt.Mih.Helper.WinForms
 
         public List<Champion> Champions
         {
-            set { PlayerView.Champions = value; }
+            get { return PlayerView.Champions; }
+            set
+            {
+                if(Champions.Count == 0)
+                {
+                    PlayerView.Champions = new List<Champion>(value);
+                }
+            }
         }
 
         private async void OnPlayerNameChange(object sender, EventArgs e)
@@ -115,18 +122,21 @@ namespace Matt.Mih.Helper.WinForms
 
         private void UpdateChampionIcon()
         {
-            string champName = PlayerView.SelectedChampion.key;
-
-            string leagueFolder = Helper.SettingsManager.Get().LeagueFolder;
-
-            try
-                {
-                PlayerView.ChampionIconPath = IconPathManager.GetIconPath(champName, leagueFolder);
-                }
-            catch (DirectoryNotFoundException)
+            if(PlayerView.SelectedChampion != null)
             {
-                PlayerView.ChampionIconPath = "";
-            }
+                string champName = PlayerView.SelectedChampion.key;
+
+                string leagueFolder = Helper.SettingsManager.Get().LeagueFolder;
+
+                try
+                {
+                    PlayerView.ChampionIconPath = IconPathManager.GetIconPath(champName, leagueFolder);
+                }
+                catch (DirectoryNotFoundException)
+                {
+                    PlayerView.ChampionIconPath = "";
+                }
+            } 
         }
 
         public void Swap(PlayerPresenter otherPresenter)

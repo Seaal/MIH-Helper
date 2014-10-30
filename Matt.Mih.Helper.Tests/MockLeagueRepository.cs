@@ -32,7 +32,7 @@ namespace Matt.Mih.Helper.Tests
             throw new NotImplementedException();
         }
 
-        public Summoner GetSummoner(string summonerName)
+        public Task<Summoner> GetSummonerAsync(string summonerName)
         {
             throw new NotImplementedException();
         }

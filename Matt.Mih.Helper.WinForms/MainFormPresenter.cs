@@ -27,7 +27,7 @@ namespace Matt.Mih.Helper.WinForms
 
             PlayerPresenters = new List<PlayerPresenter>(10);
 
-            MainMenuPresenter mainMenuPresenter = new MainMenuPresenter(MainView.MainMenuView, Helper);
+            MainMenuPresenter mainMenuPresenter = new MainMenuPresenter(MainView.MainMenuView, Helper, PlayerPresenters);
 
             List<Champion> champions = null;
 
@@ -42,8 +42,9 @@ namespace Matt.Mih.Helper.WinForms
                 MainView.RatingDifference = "An error has occurred";
                 MainView.RatingDifferenceTextColor = System.Drawing.Color.Red;
             }
-            
-            AutoCompleteStringCollection names = Helper.NameManager.AutoCompleteNames;
+
+            AutoCompleteStringCollection names = new AutoCompleteStringCollection();
+            names.AddRange(Helper.NameManager.Names.ToArray());
 
             IconPathManager IconPathManager = new IconPathManager();
 
@@ -63,7 +64,7 @@ namespace Matt.Mih.Helper.WinForms
 
             if(Properties.Settings.Default.firstRun)
             {
-                mainMenuPresenter.ShowSettingsForm();
+                mainMenuPresenter.ShowSettingsForm(true);
 
                 Properties.Settings.Default.firstRun = false;
                 Properties.Settings.Default.Save();

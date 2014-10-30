@@ -14,6 +14,7 @@ namespace Matt.Mih.Helper.WinForms
         string Region { get; set; }
         BindingSource Regions { set; }
         string Error { get; set; }
+        bool ShowInTaskbar { get; set; }
 
         event EventHandler SaveClicked;
         event EventHandler CancelClicked;

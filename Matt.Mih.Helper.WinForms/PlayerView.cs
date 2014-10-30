@@ -44,6 +44,7 @@ namespace Matt.Mih.Helper.WinForms
 
         public List<Champion> Champions
         {
+            get { return (List<Champion>)cbChampions.DataSource; }
             set { cbChampions.DataSource = value; }
         }
 
