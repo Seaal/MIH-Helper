@@ -27,21 +27,7 @@ namespace Matt.Mih.Helper.WinForms
 
             PlayerPresenters = new List<PlayerPresenter>(10);
 
-            MainMenuPresenter mainMenuPresenter = new MainMenuPresenter(MainView.MainMenuView, Helper, PlayerPresenters);
-
-            List<Champion> champions = null;
-
-            try
-            {
-                champions = Helper.Champions;
-            }
-            catch(WebException)
-            {
-                champions = new List<Champion>();
-
-                MainView.RatingDifference = "An error has occurred";
-                MainView.RatingDifferenceTextColor = System.Drawing.Color.Red;
-            }
+            MainMenuPresenter mainMenuPresenter = new MainMenuPresenter(MainView.MainMenuView, Helper, this);
 
             AutoCompleteStringCollection names = Helper.NameManager.Names;
 
@@ -50,7 +36,7 @@ namespace Matt.Mih.Helper.WinForms
             for(int i=0; i<10; i++)
             {
                 IPlayerView playerView = MainView.PlayersView[i];
-                PlayerPresenter presenter = new PlayerPresenter(playerView, Helper, IconPathManager, champions, names, i);
+                PlayerPresenter presenter = new PlayerPresenter(playerView, Helper, IconPathManager, names, i);
 
                 PlayerPresenters.Add(presenter);
             }
@@ -68,6 +54,8 @@ namespace Matt.Mih.Helper.WinForms
                 Properties.Settings.Default.firstRun = false;
                 Properties.Settings.Default.Save();
             }
+
+            SetChampions();
         }
 
         private void OnBalanceButtonClick(object sender, EventArgs e)
@@ -188,6 +176,26 @@ namespace Matt.Mih.Helper.WinForms
             else
             {
                 MainView.BalanceButtonText = "Swap Players";
+            }
+        }
+
+        public void SetChampions()
+        {
+            try
+            {
+                List<Champion> champions = Helper.Champions;
+
+                foreach(PlayerPresenter presenter in PlayerPresenters)
+                {
+                    presenter.Champions = champions;
+                }
+            }
+            catch (WebException wex)
+            {
+                WebExceptionManager wexManager = new WebExceptionManager();
+
+                MainView.RatingDifferenceTextColor = System.Drawing.Color.Red;
+                MainView.RatingDifference = wexManager.Handle(wex);
             }
         }
     }

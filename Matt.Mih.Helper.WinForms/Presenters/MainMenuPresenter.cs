@@ -10,14 +10,13 @@ namespace Matt.Mih.Helper.WinForms
     {
         private readonly IMainMenuView MainMenuView;
         private readonly Helper Helper;
+        private readonly MainFormPresenter MainFormPresenter;
 
-        public List<PlayerPresenter> PlayerPresenters { get; set; }
-
-        public MainMenuPresenter (IMainMenuView mainMenuView, Helper helper, List<PlayerPresenter> playerPresenters)
+        public MainMenuPresenter(IMainMenuView mainMenuView, Helper helper, MainFormPresenter mainFormPresenter)
 	    {
             MainMenuView = mainMenuView;
             Helper = helper;
-            PlayerPresenters = playerPresenters;
+            MainFormPresenter = mainFormPresenter;
 
             MainMenuView.SettingsClick += new EventHandler(OnSettingsItemClick);
             MainMenuView.AboutClick += new EventHandler(OnAboutItemClick);
@@ -42,13 +41,7 @@ namespace Matt.Mih.Helper.WinForms
             Helper.LeagueRepository.ApiKey = settingsManager.Get().ApiKey;
             Helper.LeagueRepository.Region = settingsManager.Get().Region;
 
-            if(Helper.Champions.Count != 0)
-            {
-                foreach(PlayerPresenter presenter in PlayerPresenters)
-                {
-                    presenter.Champions = Helper.Champions;
-                }
-            }
+            MainFormPresenter.SetChampions();
         }
 
         public void OnAboutItemClick(object sender, EventArgs e)

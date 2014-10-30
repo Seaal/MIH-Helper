@@ -18,14 +18,14 @@ namespace Matt.Mih.Helper.WinForms
 
         public int PlayerNumber { get; set; }
 
-        public PlayerPresenter(IPlayerView playerView, Helper helper, IIconPathManager iconPathManager, List<Champion> champions, AutoCompleteStringCollection names, int playerNumber)
+        public PlayerPresenter(IPlayerView playerView, Helper helper, IIconPathManager iconPathManager, AutoCompleteStringCollection names, int playerNumber)
         {
             PlayerView = playerView;
             PlayerNumber = playerNumber;
             Helper = helper;
             IconPathManager = iconPathManager;
 
-            PlayerView.Champions = new List<Champion>(champions);
+            PlayerView.Champions = new List<Champion>();
             PlayerView.ExistingNames = names;
             PlayerView.Error = "";
             UpdateChampionIcon();
@@ -72,40 +72,9 @@ namespace Matt.Mih.Helper.WinForms
             }
             catch (WebException exception)
             {
-                if (exception.Status == WebExceptionStatus.ProtocolError)
-                {
-                    switch (((HttpWebResponse)exception.Response).StatusCode)
-                    {
-                        case HttpStatusCode.NotFound:
-                            PlayerView.Error = "Player not found.";
-                            break;
-                        case HttpStatusCode.Unauthorized:
-                            PlayerView.Error = "Unauthorized, check your API key.";
-                            break;
-                        case HttpStatusCode.BadRequest:
-                            PlayerView.Error = "Bad Request, try again later.";
-                            break;
-                        case HttpStatusCode.ServiceUnavailable:
-                        case HttpStatusCode.InternalServerError:
-                            PlayerView.Error = "API unavailable, try again later.";
-                            break;
-                        case (HttpStatusCode)429:
-                            PlayerView.Error = "API limit reached, try again.";
-                            break;
-                        default:
-                            PlayerView.Error = "An error has occurred.";
-                            break;
-                    }
-                }
-                else if(exception.Status == WebExceptionStatus.NameResolutionFailure)
-                {
-                    PlayerView.Error = "Cannot resolve API name.";
-                }
-                else
-                {
-                    PlayerView.Error = "An error has occurred.";
-                }
+                WebExceptionManager wexManager = new WebExceptionManager();
 
+                PlayerView.Error = wexManager.Handle(exception);
                 PlayerView.Elo = "";
             }
             catch (ArgumentException exception)
