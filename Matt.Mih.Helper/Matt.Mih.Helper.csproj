@@ -55,6 +55,8 @@
     <Compile Include="BalanceResult.cs" />
     <Compile Include="BruteForceBalancingStrategy.cs" />
     <Compile Include="IBalancingStrategy.cs" />
+    <Compile Include="IconPathManager.cs" />
+    <Compile Include="IIconPathManager.cs" />
     <Compile Include="INameManager.cs" />
     <Compile Include="ISettingsManager.cs" />
     <Compile Include="NameManager.cs" />

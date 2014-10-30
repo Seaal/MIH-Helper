@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Matt.Mih.Helper.WinForms
+namespace Matt.Mih.Helper
 {
-    class IconPathManager : IIconPathManager
+    public class IconPathManager : IIconPathManager
     {
         private readonly string CHAMP_IMAGES_LOCATION_PRE_RELEASES = @"\RADS\projects\lol_air_client\releases\";
         private readonly string CHAMP_IMAGES_LOCATION_POST_RELEASES = @"\deploy\assets\images\champions\";
@@ -43,7 +43,7 @@ namespace Matt.Mih.Helper.WinForms
 
             string pattern = "\\d+.\\d+.\\d+.\\d+";
 
-            foreach (string folder in folders)
+            foreach(string folder in folders)
             {
                 if (System.Text.RegularExpressions.Regex.IsMatch(folder.Remove(0, leagueFolder.Length + CHAMP_IMAGES_LOCATION_PRE_RELEASES.Length), pattern))
                 {

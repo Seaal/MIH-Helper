@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Matt.Mih.Helper.WinForms
+namespace Matt.Mih.Helper
 {
     public interface IIconPathManager
     {

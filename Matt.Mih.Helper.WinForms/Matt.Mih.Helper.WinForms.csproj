@@ -45,53 +45,42 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FolderBrowserManager.cs" />
-    <Compile Include="IconPathManager.cs" />
-    <Compile Include="IFolderBrowserManager.cs" />
-    <Compile Include="IIconPathManager.cs" />
-    <Compile Include="IMainFormView.cs" />
-    <Compile Include="IMainMenuView.cs" />
-    <Compile Include="IPlayerView.cs" />
-    <Compile Include="ISettingsFormView.cs" />
-    <Compile Include="MainForm.cs">
+    <Compile Include="Managers\FolderBrowserManager.cs" />
+    <Compile Include="Managers\IFolderBrowserManager.cs" />
+    <Compile Include="Views\IMainFormView.cs" />
+    <Compile Include="Views\IMainMenuView.cs" />
+    <Compile Include="Views\IPlayerView.cs" />
+    <Compile Include="Views\ISettingsFormView.cs" />
+    <Compile Include="Views\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainForm.Designer.cs">
+    <Compile Include="Presenters\MainFormPresenter.cs" />
+    <Compile Include="Presenters\MainMenuPresenter.cs" />
+    <Compile Include="Views\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="MainMenuPresenter.cs" />
-    <Compile Include="MainMenuView.cs">
+    <Compile Include="Views\MainMenuView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="MainMenuView.Designer.cs">
+    <Compile Include="Presenters\PlayerPresenter.cs" />
+    <Compile Include="Views\MainMenuView.Designer.cs">
       <DependentUpon>MainMenuView.cs</DependentUpon>
     </Compile>
-    <Compile Include="MainFormPresenter.cs" />
-    <Compile Include="PlayerPresenter.cs" />
-    <Compile Include="PlayerView.cs">
+    <Compile Include="Views\PlayerView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="PlayerView.Designer.cs">
+    <Compile Include="Views\PlayerView.Designer.cs">
       <DependentUpon>PlayerView.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\SettingsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Presenters\SettingsFormPresenter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SettingsForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="SettingsForm.Designer.cs">
+    <Compile Include="Views\SettingsForm.Designer.cs">
       <DependentUpon>SettingsForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="SettingsFormPresenter.cs" />
-    <EmbeddedResource Include="MainForm.resx">
-      <DependentUpon>MainForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="MainMenuView.resx">
-      <DependentUpon>MainMenuView.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PlayerView.resx">
-      <DependentUpon>PlayerView.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -102,7 +91,16 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="SettingsForm.resx">
+    <EmbeddedResource Include="Views\MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\MainMenuView.resx">
+      <DependentUpon>MainMenuView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\PlayerView.resx">
+      <DependentUpon>PlayerView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\SettingsForm.resx">
       <DependentUpon>SettingsForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
@@ -132,6 +130,7 @@
       <Name>Matt.Mih.Helper</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
