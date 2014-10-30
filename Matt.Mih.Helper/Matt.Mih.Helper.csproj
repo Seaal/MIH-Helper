@@ -56,82 +56,15 @@
     <Compile Include="BalanceResult.cs" />
     <Compile Include="BruteForceBalancingStrategy.cs" />
     <Compile Include="IBalancingStrategy.cs" />
-    <Compile Include="IMainFormView.cs" />
-    <Compile Include="IMainMenuView.cs" />
     <Compile Include="INameManager.cs" />
-    <Compile Include="IPlayerView.cs" />
-    <Compile Include="ISettingsFormView.cs" />
     <Compile Include="ISettingsManager.cs" />
-    <Compile Include="MainForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="MainForm.Designer.cs">
-      <DependentUpon>MainForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="MainMenuPresenter.cs" />
-    <Compile Include="MainMenuView.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="MainMenuView.Designer.cs">
-      <DependentUpon>MainMenuView.cs</DependentUpon>
-    </Compile>
-    <Compile Include="MainFormPresenter.cs" />
     <Compile Include="NameManager.cs" />
-    <Compile Include="PlayerPresenter.cs" />
-    <Compile Include="PlayerView.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="PlayerView.Designer.cs">
-      <DependentUpon>PlayerView.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RunepageStats.cs" />
     <Compile Include="RuneStatCollection.cs" />
     <Compile Include="Settings.cs" />
-    <Compile Include="SettingsForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="SettingsForm.Designer.cs">
-      <DependentUpon>SettingsForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="SettingsManager.cs" />
-    <Compile Include="SettingsFormPresenter.cs" />
-    <EmbeddedResource Include="MainForm.resx">
-      <DependentUpon>MainForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="MainMenuView.resx">
-      <DependentUpon>MainMenuView.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PlayerView.resx">
-      <DependentUpon>PlayerView.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <EmbeddedResource Include="SettingsForm.resx">
-      <DependentUpon>SettingsForm.cs</DependentUpon>
-    </EmbeddedResource>
     <None Include="packages.config" />
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Settings.settings</DependentUpon>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
