@@ -43,8 +43,7 @@ namespace Matt.Mih.Helper.WinForms
                 MainView.RatingDifferenceTextColor = System.Drawing.Color.Red;
             }
 
-            AutoCompleteStringCollection names = new AutoCompleteStringCollection();
-            names.AddRange(Helper.NameManager.Names.ToArray());
+            AutoCompleteStringCollection names = Helper.NameManager.Names;
 
             IconPathManager IconPathManager = new IconPathManager();
 

@@ -7,7 +7,7 @@ namespace Matt.Mih.Helper
     public interface INameManager
     {
         void Add(string name);
-        List<String> Names { get; set; }
+        AutoCompleteStringCollection Names { get; set; }
         XDocument NamesXml { get; set; }
     }
 }

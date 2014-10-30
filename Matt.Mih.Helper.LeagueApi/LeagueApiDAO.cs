@@ -39,7 +39,7 @@ namespace Matt.Mih.Helper.LeagueApi
 
         public async Task<LeagueInfoDTO> GetSoloQueueLeagueInfoAsync(int id)
         {
-            string json = await MakeRequestAsync(Region + "/v2.4/league/by-summoner/" + id + "/entry", Region);
+            string json = await MakeRequestAsync(Region + "/v2.5/league/by-summoner/" + id + "/entry", Region);
             
             Dictionary<string, List<LeagueInfoDTO>> leagueDto = JsonConvert.DeserializeObject<Dictionary<string, List<LeagueInfoDTO>>>(json);
 
