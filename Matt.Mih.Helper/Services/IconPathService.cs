@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Matt.Mih.Helper
 {
-    public class IconPathManager : IIconPathManager
+    public class IconPathService : IIconPathService
     {
         private readonly string CHAMP_IMAGES_LOCATION_PRE_RELEASES = @"\RADS\projects\lol_air_client\releases\";
         private readonly string CHAMP_IMAGES_LOCATION_POST_RELEASES = @"\deploy\assets\images\champions\";

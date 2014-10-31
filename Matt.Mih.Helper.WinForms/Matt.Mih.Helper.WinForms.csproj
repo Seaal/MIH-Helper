@@ -48,8 +48,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Managers\FolderBrowserManager.cs" />
-    <Compile Include="Managers\IFolderBrowserManager.cs" />
+    <Compile Include="Bindings.cs" />
+    <Compile Include="Services\FolderBrowserService.cs" />
+    <Compile Include="Services\IFolderBrowserService.cs" />
     <Compile Include="Views\IMainFormView.cs" />
     <Compile Include="Views\IMainMenuView.cs" />
     <Compile Include="Views\IPlayerView.cs" />

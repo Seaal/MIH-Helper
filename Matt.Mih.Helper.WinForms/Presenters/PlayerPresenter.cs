@@ -14,16 +14,16 @@ namespace Matt.Mih.Helper.WinForms
     {
         private readonly IPlayerView PlayerView;
         private readonly Helper Helper;
-        private readonly IIconPathManager IconPathManager;
+        private readonly IIconPathService IconPathService;
 
         public int PlayerNumber { get; set; }
 
-        public PlayerPresenter(IPlayerView playerView, Helper helper, IIconPathManager iconPathManager, AutoCompleteStringCollection names, int playerNumber)
+        public PlayerPresenter(IPlayerView playerView, Helper helper, IIconPathService iconPathService, AutoCompleteStringCollection names, int playerNumber)
         {
             PlayerView = playerView;
             PlayerNumber = playerNumber;
             Helper = helper;
-            IconPathManager = iconPathManager;
+            IconPathService = iconPathService;
 
             PlayerView.Champions = new List<Champion>();
             PlayerView.ExistingNames = names;
@@ -72,9 +72,9 @@ namespace Matt.Mih.Helper.WinForms
             }
             catch (WebException exception)
             {
-                WebExceptionManager wexManager = new WebExceptionManager();
+                WebExceptionService wexService = new WebExceptionService();
 
-                PlayerView.Error = wexManager.Handle(exception);
+                PlayerView.Error = wexService.Handle(exception);
                 PlayerView.Elo = "";
             }
             catch (ArgumentException exception)
@@ -95,11 +95,11 @@ namespace Matt.Mih.Helper.WinForms
             {
                 string champName = PlayerView.SelectedChampion.key;
 
-                string leagueFolder = Helper.SettingsManager.Get().LeagueFolder;
+                string leagueFolder = Helper.SettingsService.Get().LeagueFolder;
 
                 try
                 {
-                    PlayerView.ChampionIconPath = IconPathManager.GetIconPath(champName, leagueFolder);
+                    PlayerView.ChampionIconPath = IconPathService.GetIconPath(champName, leagueFolder);
                 }
                 catch (DirectoryNotFoundException)
                 {

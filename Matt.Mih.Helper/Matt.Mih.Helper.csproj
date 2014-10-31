@@ -55,17 +55,17 @@
     <Compile Include="BalanceResult.cs" />
     <Compile Include="BruteForceBalancingStrategy.cs" />
     <Compile Include="IBalancingStrategy.cs" />
-    <Compile Include="IconPathManager.cs" />
-    <Compile Include="IIconPathManager.cs" />
-    <Compile Include="INameManager.cs" />
-    <Compile Include="ISettingsManager.cs" />
-    <Compile Include="NameManager.cs" />
+    <Compile Include="Services\IconPathService.cs" />
+    <Compile Include="Services\IIconPathService.cs" />
+    <Compile Include="Services\INameService.cs" />
+    <Compile Include="Services\ISettingsService.cs" />
+    <Compile Include="Services\NameService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RunepageStats.cs" />
     <Compile Include="RuneStatCollection.cs" />
     <Compile Include="Settings.cs" />
-    <Compile Include="SettingsManager.cs" />
-    <Compile Include="WebExceptionManager.cs" />
+    <Compile Include="Services\SettingsService.cs" />
+    <Compile Include="Services\WebExceptionService.cs" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

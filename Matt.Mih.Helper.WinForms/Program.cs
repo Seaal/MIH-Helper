@@ -18,10 +18,10 @@ namespace Matt.Mih.Helper.WinForms
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            SettingsManager settingsManager = new SettingsManager();
-            LeagueRepository leagueRepository = new LeagueRepository(settingsManager.Get().ApiKey, settingsManager.Get().Region);
-            NameManager nameManager = new NameManager();
-            Helper helper = new Helper(leagueRepository, nameManager, settingsManager);
+            SettingsService settingsService = new SettingsService();
+            LeagueRepository leagueRepository = new LeagueRepository(settingsService.Get().ApiKey, settingsService.Get().Region);
+            NameService nameService = new NameService();
+            Helper helper = new Helper(leagueRepository, nameService, settingsService);
             MainForm mainForm = new MainForm();
             MainFormPresenter mainPresenter = new MainFormPresenter(mainForm, helper);
 

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Matt.Mih.Helper
 {
-    public class WebExceptionManager
+    public class WebExceptionService
     {
         public string Handle(WebException wex)
         {

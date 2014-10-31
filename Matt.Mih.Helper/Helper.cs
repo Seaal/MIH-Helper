@@ -18,9 +18,9 @@ namespace Matt.Mih.Helper
 
         public ILeagueRepository LeagueRepository { get; private set; }
 
-        public NameManager NameManager { get; set; }
+        public INameService NameService { get; set; }
 
-        public ISettingsManager SettingsManager { get; set; }
+        public ISettingsService SettingsService { get; set; }
 
         public List<Champion> Champions
         {
@@ -38,13 +38,13 @@ namespace Matt.Mih.Helper
             }
         }
 
-        public Helper(ILeagueRepository leagueRepository, NameManager names, ISettingsManager settings)
+        public Helper(ILeagueRepository leagueRepository, INameService names, ISettingsService settings)
         {
             Players = new Summoner[10];
             GameInProgress = false;
             LeagueRepository = leagueRepository;
-            NameManager = names;
-            SettingsManager = settings;
+            NameService = names;
+            SettingsService = settings;
         }
 
         public async Task<Summoner> GetSummonerAsync(string name, int playerNumber)
@@ -71,7 +71,7 @@ namespace Matt.Mih.Helper
 
             Players[playerNumber] = await LeagueRepository.GetSummonerAsync(name);
 
-            NameManager.Add(Players[playerNumber].Name);
+            NameService.Add(Players[playerNumber].Name);
 
             return Players[playerNumber];
         }

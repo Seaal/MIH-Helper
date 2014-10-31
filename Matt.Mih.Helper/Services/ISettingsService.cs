@@ -2,7 +2,7 @@
 using System.Xml.Linq;
 namespace Matt.Mih.Helper
 {
-    public interface ISettingsManager
+    public interface ISettingsService
     {
         Settings Get();
         void Save(Settings settings);

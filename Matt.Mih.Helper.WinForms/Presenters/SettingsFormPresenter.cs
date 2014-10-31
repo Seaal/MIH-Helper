@@ -10,18 +10,18 @@ namespace Matt.Mih.Helper.WinForms
     class SettingsFormPresenter
     {
         private readonly ISettingsFormView SettingsView;
-        private readonly ISettingsManager SettingsManager;
-        private readonly IFolderBrowserManager FolderBrowserManager;
-        private readonly IIconPathManager IconPathManager;
+        private readonly ISettingsService SettingsService;
+        private readonly IFolderBrowserService FolderBrowserService;
+        private readonly IIconPathService IconPathService;
 
-        public SettingsFormPresenter(ISettingsFormView settingsView, ISettingsManager settingsManager, IFolderBrowserManager folderBrowserManager, IIconPathManager iconPathManager)
+        public SettingsFormPresenter(ISettingsFormView settingsView, ISettingsService settingsService, IFolderBrowserService folderBrowserService, IIconPathService iconPathService)
         {
             SettingsView = settingsView;
-            SettingsManager = settingsManager;
-            FolderBrowserManager = folderBrowserManager;
-            IconPathManager = iconPathManager;
+            SettingsService = settingsService;
+            FolderBrowserService = folderBrowserService;
+            IconPathService = iconPathService;
 
-            Settings settings = SettingsManager.Get();
+            Settings settings = SettingsService.Get();
 
             SettingsView.ApiKey = settings.ApiKey;
             SettingsView.LeagueFolder = settings.LeagueFolder;
@@ -31,7 +31,7 @@ namespace Matt.Mih.Helper.WinForms
 
             if(settings.LeagueFolder != "")
             {
-                FolderBrowserManager.SelectedPath = settings.LeagueFolder;
+                FolderBrowserService.SelectedPath = settings.LeagueFolder;
             }
 
             SettingsView.SaveClicked += new EventHandler(OnSaveButtonClicked);
@@ -67,7 +67,7 @@ namespace Matt.Mih.Helper.WinForms
                 Region = SettingsView.Region
             };
 
-            SettingsManager.Save(settings);
+            SettingsService.Save(settings);
 
             SettingsView.Close();
         }
@@ -79,11 +79,11 @@ namespace Matt.Mih.Helper.WinForms
 
         private void OnFindLeagueFolderClicked(object sender, EventArgs e)
         {
-            DialogResult result = FolderBrowserManager.ShowDialog();
+            DialogResult result = FolderBrowserService.ShowDialog();
 
             if (result == DialogResult.OK)
             {
-                SettingsView.LeagueFolder = FolderBrowserManager.SelectedPath;
+                SettingsView.LeagueFolder = FolderBrowserService.SelectedPath;
             }
         }
 
@@ -94,7 +94,7 @@ namespace Matt.Mih.Helper.WinForms
 
         private void CheckLeagueFolderValid()
         {
-            if (!IconPathManager.IsValidIconPath(SettingsView.LeagueFolder))
+            if (!IconPathService.IsValidIconPath(SettingsView.LeagueFolder))
             {
                 SettingsView.Error = "League of Legends Folder is not valid.";
             }

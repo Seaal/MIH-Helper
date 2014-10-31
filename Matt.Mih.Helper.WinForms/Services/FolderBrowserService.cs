@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace Matt.Mih.Helper.WinForms
 {
-    class FolderBrowserManager : IFolderBrowserManager
+    class FolderBrowserService : IFolderBrowserService
     {
         private readonly FolderBrowserDialog FolderBrowserDialog;
 
@@ -17,7 +17,7 @@ namespace Matt.Mih.Helper.WinForms
             get { return FolderBrowserDialog.SelectedPath; }
         }
 
-        public FolderBrowserManager()
+        public FolderBrowserService()
 	    {
             FolderBrowserDialog = new FolderBrowserDialog();
 

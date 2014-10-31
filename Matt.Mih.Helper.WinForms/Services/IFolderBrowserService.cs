@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace Matt.Mih.Helper.WinForms
 {
-    public interface IFolderBrowserManager
+    public interface IFolderBrowserService
     {
         DialogResult ShowDialog();
         string SelectedPath { set; get; }

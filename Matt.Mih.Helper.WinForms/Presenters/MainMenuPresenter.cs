@@ -30,16 +30,16 @@ namespace Matt.Mih.Helper.WinForms
         public void ShowSettingsForm(bool showInTaskbar)
         {
             ISettingsFormView settingsForm = new SettingsForm();
-            ISettingsManager settingsManager = Helper.SettingsManager;
-            FolderBrowserManager folderBrowserManager = new FolderBrowserManager();
-            IconPathManager iconPathManager = new IconPathManager();
-            SettingsFormPresenter settingsPresenter = new SettingsFormPresenter(settingsForm, settingsManager, folderBrowserManager, iconPathManager);
+            ISettingsService settingsService = Helper.SettingsService;
+            FolderBrowserService folderBrowserService = new FolderBrowserService();
+            IconPathService iconPathService = new IconPathService();
+            SettingsFormPresenter settingsPresenter = new SettingsFormPresenter(settingsForm, settingsService, folderBrowserService, iconPathService);
 
             settingsForm.ShowInTaskbar = showInTaskbar;
             settingsPresenter.ShowDialog();
 
-            Helper.LeagueRepository.ApiKey = settingsManager.Get().ApiKey;
-            Helper.LeagueRepository.Region = settingsManager.Get().Region;
+            Helper.LeagueRepository.ApiKey = settingsService.Get().ApiKey;
+            Helper.LeagueRepository.Region = settingsService.Get().Region;
 
             MainFormPresenter.SetChampions();
         }

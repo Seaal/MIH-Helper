@@ -29,14 +29,14 @@ namespace Matt.Mih.Helper.WinForms
 
             MainMenuPresenter mainMenuPresenter = new MainMenuPresenter(MainView.MainMenuView, Helper, this);
 
-            AutoCompleteStringCollection names = Helper.NameManager.Names;
+            AutoCompleteStringCollection names = Helper.NameService.Names;
 
-            IconPathManager IconPathManager = new IconPathManager();
+            IconPathService IconPathService = new IconPathService();
 
             for(int i=0; i<10; i++)
             {
                 IPlayerView playerView = MainView.PlayersView[i];
-                PlayerPresenter presenter = new PlayerPresenter(playerView, Helper, IconPathManager, names, i);
+                PlayerPresenter presenter = new PlayerPresenter(playerView, Helper, IconPathService, names, i);
 
                 PlayerPresenters.Add(presenter);
             }
@@ -192,10 +192,10 @@ namespace Matt.Mih.Helper.WinForms
             }
             catch (WebException wex)
             {
-                WebExceptionManager wexManager = new WebExceptionManager();
+                WebExceptionService wexService = new WebExceptionService();
 
                 MainView.RatingDifferenceTextColor = System.Drawing.Color.Red;
-                MainView.RatingDifference = wexManager.Handle(wex);
+                MainView.RatingDifference = wexService.Handle(wex);
             }
         }
     }

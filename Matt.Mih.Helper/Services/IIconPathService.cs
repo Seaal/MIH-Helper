@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Matt.Mih.Helper
 {
-    public interface IIconPathManager
+    public interface IIconPathService
     {
         string GetIconPath(string champion, string leagueFolder);
         bool IsValidIconPath(string leagueFolder);
