@@ -1,4 +1,6 @@
 ﻿using Matt.Mih.Helper.LeagueApi;
+using Ninject;
+using Ninject.Modules;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,10 +20,14 @@ namespace Matt.Mih.Helper.WinForms
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            SettingsService settingsService = new SettingsService();
-            LeagueRepository leagueRepository = new LeagueRepository(settingsService.Get().ApiKey, settingsService.Get().Region);
-            NameService nameService = new NameService();
-            Helper helper = new Helper(leagueRepository, nameService, settingsService);
+            IKernel Kernel = new StandardKernel();
+            NinjectModule Bindings = new Bindings();
+            Kernel.Load(Bindings);
+
+            ISettingsService settingsService = Kernel.Get<ISettingsService>();
+            Kernel.Bind<ILeagueRepository>().To<LeagueRepository>().InSingletonScope().WithConstructorArgument("apiKey", settingsService.Get().ApiKey).WithConstructorArgument("region", settingsService.Get().Region);
+
+            Helper helper = Kernel.Get<Helper>();
             MainForm mainForm = new MainForm();
             MainFormPresenter mainPresenter = new MainFormPresenter(mainForm, helper);
 
