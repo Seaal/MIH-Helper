@@ -26,7 +26,8 @@ namespace Matt.Mih.Helper.WinForms
 
             ISettingsService settingsService = Kernel.Get<ISettingsService>();
             Kernel.Bind<ILeagueRepository>().To<LeagueRepository>().InSingletonScope().WithConstructorArgument("apiKey", settingsService.Get().ApiKey).WithConstructorArgument("region", settingsService.Get().Region);
-
+            Kernel.Bind<Helper>().To<Helper>().InSingletonScope();
+            
             Helper helper = Kernel.Get<Helper>();
             MainForm mainForm = new MainForm();
             MainFormPresenter mainPresenter = new MainFormPresenter(mainForm, helper);
