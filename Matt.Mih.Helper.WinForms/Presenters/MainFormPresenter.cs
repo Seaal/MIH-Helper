@@ -77,6 +77,8 @@ namespace Matt.Mih.Helper.WinForms
                         Swaps = result;
 
                         changeBalanceButton(false);
+
+                        enablePlayers(false);
                     }
 
                     MainView.RatingDifferenceTextColor = System.Drawing.Color.Black;
@@ -91,9 +93,9 @@ namespace Matt.Mih.Helper.WinForms
             else
             {
                 PerformSwaps();
-                }
-
             }
+
+        }
 
         private void OnGameToggleButtonClick(object sender, EventArgs e)
         {
@@ -108,10 +110,7 @@ namespace Matt.Mih.Helper.WinForms
 
                 Helper.GameInProgress = true;
 
-                foreach (PlayerPresenter pPresenter in PlayerPresenters)
-                {
-                    pPresenter.Enabled = false;
-                }
+                enablePlayers(false);
             }
             else
             {
@@ -121,10 +120,7 @@ namespace Matt.Mih.Helper.WinForms
 
                 Helper.GameInProgress = false;
 
-                foreach (PlayerPresenter pPanel in PlayerPresenters)
-                {
-                    pPanel.Enabled = true;
-                }
+                enablePlayers(true);
             }
         }
 
@@ -145,9 +141,19 @@ namespace Matt.Mih.Helper.WinForms
                 }
 
                 Swaps = null;
+
+                enablePlayers(true);
             }
 
             changeBalanceButton(true);
+        }
+
+        private void enablePlayers(bool enabled)
+        {
+            foreach (PlayerPresenter pPanel in PlayerPresenters)
+            {
+                pPanel.Enabled = enabled;
+            }
         }
 
         private void OnClearAllButtonClick(object sender, EventArgs e)
@@ -156,12 +162,14 @@ namespace Matt.Mih.Helper.WinForms
             MainView.Swap2 = "";
             MainView.RatingDifference = "";
 
+            Swaps = null;
+            Helper.ClearPlayers();
+            changeBalanceButton(true);
+
             foreach (PlayerPresenter pPresenter in PlayerPresenters)
             {
-                Swaps = null;
                 pPresenter.Clear();
-                Helper.ClearPlayers();
-                changeBalanceButton(true);
+                pPresenter.Enabled = true;
             }
         }
 

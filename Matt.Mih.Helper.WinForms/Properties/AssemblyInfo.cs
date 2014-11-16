@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Matt.Mih.Helper")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("Mentored Inhouse Helper")]
+[assembly: AssemblyDescription("An open source project that assists mentors in the running of mentored inhouses. Source: https://github.com/Seaaal/MIH-Helper")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Matt.Mih.Helper")]
-[assembly: AssemblyCopyright("Copyright ©  2014")]
+[assembly: AssemblyProduct("Mentored Inhouse Helper")]
+[assembly: AssemblyCopyright("Copyright ©  2014, Released under the MIT License.")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
