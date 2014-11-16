@@ -31,7 +31,6 @@
             this.mainMenu = new System.Windows.Forms.MenuStrip();
             this.itSettings = new System.Windows.Forms.ToolStripMenuItem();
             this.itAbout = new System.Windows.Forms.ToolStripMenuItem();
-            this.itHelp = new System.Windows.Forms.ToolStripMenuItem();
             this.mainMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -40,8 +39,7 @@
             this.mainMenu.BackColor = System.Drawing.SystemColors.MenuBar;
             this.mainMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.itSettings,
-            this.itAbout,
-            this.itHelp});
+            this.itAbout});
             this.mainMenu.Location = new System.Drawing.Point(0, 0);
             this.mainMenu.Name = "mainMenu";
             this.mainMenu.Size = new System.Drawing.Size(800, 24);
@@ -62,13 +60,6 @@
             this.itAbout.Size = new System.Drawing.Size(52, 20);
             this.itAbout.Text = "About";
             // 
-            // itHelp
-            // 
-            this.itHelp.Name = "itHelp";
-            this.itHelp.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.H)));
-            this.itHelp.Size = new System.Drawing.Size(44, 20);
-            this.itHelp.Text = "Help";
-            // 
             // MainMenuView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -88,6 +79,5 @@
         private System.Windows.Forms.MenuStrip mainMenu;
         private System.Windows.Forms.ToolStripMenuItem itSettings;
         private System.Windows.Forms.ToolStripMenuItem itAbout;
-        private System.Windows.Forms.ToolStripMenuItem itHelp;
     }
 }
