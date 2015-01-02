@@ -1,4 +1,4 @@
-﻿namespace Matt.Mih.Helper.WinForms
+﻿namespace Seaal.Mih.Helper.WinForms
 {
     partial class AboutForm
     {

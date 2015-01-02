@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Matt.Mih.Helper.WinForms
+namespace Seaal.Mih.Helper.WinForms
 {
     interface IAboutFormView
     {
