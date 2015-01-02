@@ -46,7 +46,10 @@ namespace Seaal.Mih.Helper.WinForms
 
         public void OnAboutItemClick(object sender, EventArgs e)
         {
+            IAboutFormView aboutForm = new AboutForm();
+            AboutPresenter aboutPresenter = new AboutPresenter(aboutForm);
 
+            aboutPresenter.ShowDialog();
         }
     }
 }

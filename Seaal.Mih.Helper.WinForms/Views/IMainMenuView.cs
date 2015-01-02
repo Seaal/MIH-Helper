@@ -10,6 +10,5 @@ namespace Seaal.Mih.Helper.WinForms
     {
         event EventHandler SettingsClick;
         event EventHandler AboutClick;
-        event EventHandler HelpClick;
     }
 }

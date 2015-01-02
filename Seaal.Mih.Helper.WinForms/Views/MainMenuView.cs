@@ -28,11 +28,5 @@ namespace Seaal.Mih.Helper.WinForms
             add { itAbout.Click += value; }
             remove { itAbout.Click -= value; }
         }
-
-        public event EventHandler HelpClick
-        {
-            add { itHelp.Click += value; }
-            remove { itHelp.Click -= value; }
-        }
     }
 }
